@@ -1,0 +1,34 @@
+{
+  "name": "theoretical-biophysics-modeling-skills",
+  "version": "0.1.0",
+  "description": "Codex skills for theoretical biophysics schematics, request confirmation, and durable agent guidance.",
+  "author": {
+    "name": "Theoretical Biophysics Modeling Skills contributors"
+  },
+  "license": "MIT",
+  "keywords": [
+    "theoretical-biophysics",
+    "biophysical-modeling",
+    "scientific-figures",
+    "request-clarification",
+    "agent-guidance"
+  ],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Theoretical Biophysics Modeling Skills",
+    "shortDescription": "Figures, request confirmation, and durable guidance",
+    "longDescription": "Three independently triggered skills for scientific figure design, confirmed request restatement, and durable repository agent guidance.",
+    "developerName": "Theoretical Biophysics Modeling Skills contributors",
+    "category": "Productivity",
+    "capabilities": [
+      "Scientific figure design",
+      "Request clarification",
+      "Agent guidance"
+    ],
+    "defaultPrompt": [
+      "Design a scientifically accurate vector figure.",
+      "Restate my request and wait for confirmation.",
+      "Save this feedback as one durable repository rule."
+    ]
+  }
+}

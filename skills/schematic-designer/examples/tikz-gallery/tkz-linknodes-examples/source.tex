@@ -1,0 +1,130 @@
+% Author: Alain Matthes (http://altermundus.com/)
+% Source: https://texample.net/tkz-linknodes-examples/
+\documentclass[a4paper,11pt]{article}
+\usepackage{xcolor}
+\usepackage{amsmath,tkz-linknodes}
+\usepackage{tikz}
+\usepackage[active,tightpage]{preview}
+\PreviewEnvironment{tikzpicture}
+\setlength\PreviewBorder{5pt}%
+
+% Scientific Artist font policy: render TikZ assets with CMU Sans Serif.
+\usepackage{iftex}
+\ifLuaTeX
+  \usepackage{fontspec}
+  \IfFontExistsTF{CMU Sans Serif}
+    {
+      \setmainfont{CMU Sans Serif}
+      \setsansfont{CMU Sans Serif}
+      \renewcommand{\familydefault}{\sfdefault}
+    }
+    {
+      \PackageError{schematic-designer-gallery}
+        {CMU Sans Serif font not found}
+        {Install CMU fonts or make CMU Sans Serif visible to fontconfig/fontspec.}
+    }
+\else\ifXeTeX
+  \usepackage{fontspec}
+  \IfFontExistsTF{CMU Sans Serif}
+    {
+      \setmainfont{CMU Sans Serif}
+      \setsansfont{CMU Sans Serif}
+      \renewcommand{\familydefault}{\sfdefault}
+    }
+    {
+      \PackageError{schematic-designer-gallery}
+        {CMU Sans Serif font not found}
+        {Install CMU fonts or make CMU Sans Serif visible to fontconfig/fontspec.}
+    }
+\else
+  \PackageError{schematic-designer-gallery}
+    {CMU Sans Serif assets require LuaLaTeX or XeLaTeX}
+    {Compile this asset with lualatex or xelatex so fontspec can load CMU Sans Serif.}
+\fi
+\fi
+\usepackage[defaultmathsizes,italic]{mathastext}
+
+\definecolor{saBlue}{HTML}{4C78A8}
+\definecolor{saCyan}{HTML}{72B7B2}
+\definecolor{saAmber}{HTML}{E3A13A}
+\definecolor{saRed}{HTML}{D66B5D}
+\definecolor{saInk}{HTML}{263238}
+\definecolor{saGray}{HTML}{68707A}
+\definecolor{saPanelGray}{HTML}{F6F7F8}
+
+\AtBeginDocument{%
+  \sffamily
+  \color{saInk}
+  \tikzset{
+    every picture/.append style={font=\sffamily},
+    every node/.append style={font=\sffamily},
+    LabelStyle/.append style={text=saGray,font=\sffamily\small}
+  }%
+}
+
+\begin{document}
+
+\parindent=0pt
+\begin{preview}
+\begin{center}
+  \fcolorbox{saGray}{saPanelGray}{%
+  \begin{minipage}{10cm}
+        \begin{NodesList}[margin=2 cm]
+       \begin{align}
+     3\left(x^2-\frac{2}{3}\right) &= 4                             \AddNode\\
+       3x^2-2  &= 4                                                 \AddNode\\
+       3x^2    &= 6                                                 \AddNode\\
+       \intertext{\hfil isolate the term with the variable \hfil}
+        x^2    &= 2                                                 \AddNode\\
+ \sqrt{x^2}    &= \sqrt{2}                                          \AddNode\\
+      |x|      &= \sqrt{2}                                          \AddNode\\
+       x       &= \pm\sqrt{2}                                       \AddNode
+         \end{align}
+ \LinkNodes{expand}%
+ \LinkNodes{$+2$}%
+ \LinkNodes{$\div 3$}
+ \LinkNodes{$\sqrt{\ldots}$}
+ \LinkNodes{$\sqrt{x}=|x|$}
+ \LinkNodes{so that}
+   \end{NodesList}
+  \end{minipage}}
+\end{center}
+
+This example is from MathMode.pdf of Herbert Vo\ss
+
+\begin{NodesList}[margin=1cm]
+  \begin{displaymath}\displaywidth=.2\linewidth
+    \begin{aligned}
+    y &= 2x^2 -3x +5                          \AddNode\\
+  & \hphantom{= \ 2\left(x^2-\frac{3}{2}\,x\right. }%
+      \textcolor{saBlue}{%
+        \overbrace{\hphantom{+\left(\frac{3}{4}\right)^2- %
+          \left(\frac{3}{4}\right)^2}}^{=0}}   \\
+  &= 2\left(\textcolor{saRed}{%
+       \underbrace{%
+           x^2-\frac{3}{2}\,x + \left(\frac{3}{4}\right)^2}%
+   }%
+   \underbrace{%
+        - \left(\frac{3}{4}\right)^2 + \frac{5}{2}}%
+   \right)                                      \AddNode\\
+   &= 2\left(\qquad\textcolor{saRed}{\left(x-\frac{3}{4}\right)^2}
+   \qquad + \ \frac{31}{16}\qquad\right)  \AddNode\\
+y
+   &= 2\left(x\textcolor{saCyan}{-\frac{3}{4}}\right)^2\textcolor{saBlue}{+\frac{31}{8}}\AddNode
+\end{aligned}
+         \end{displaymath}
+{%
+\tikzset{LabelStyle/.append style = {left,text=saRed}}
+    \LinkNodes{%
+    \begin{minipage}{5cm}
+      $2x^2 -3x$ is the beginning of an algebraic identity %
+       (binomial formula)
+      \end{minipage}}
+       \LinkNodes{$(a-b)^2=a^2-2ab+b^2$}
+       \LinkNodes{after simplification, the result is}%
+}
+\end{NodesList}
+\end{preview}
+
+
+\end{document}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Schematic Designer"
+  short_description: "Design accurate PDF and vector-SVG schematics"
+  default_prompt: "Use $schematic-designer to create or redraw an accurate scientific schematic as PDF and outlined-text SVG."

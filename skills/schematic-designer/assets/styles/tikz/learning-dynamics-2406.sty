@@ -1,0 +1,81 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{learning-dynamics-2406}[2026/08/12 schematic-designer profile]
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{xcolor}
+\RequirePackage[no-math]{fontspec}
+\RequirePackage{tikz}
+\usetikzlibrary{arrows.meta}
+
+\IfFontExistsTF{CMU Sans Serif}{
+  \setsansfont{CMU Sans Serif}
+}{
+  \setsansfont{Latin Modern Sans}
+  \PackageWarning{learning-dynamics-2406}
+    {CMU Sans Serif unavailable; using Latin Modern Sans}
+}
+\renewcommand{\familydefault}{\sfdefault}
+
+\definecolor{Canvas}{HTML}{FFFFFF}
+\definecolor{Ink}{HTML}{1A1A1A}
+\definecolor{WarmInk}{HTML}{231F20}
+\definecolor{Muted}{HTML}{4D4D4D}
+\definecolor{Faint}{HTML}{999999}
+\definecolor{NeutralBar}{HTML}{E1E1E1}
+\definecolor{Train}{HTML}{2CA05A}
+\definecolor{TrainBar}{HTML}{C0E3CE}
+\definecolor{Retrieve}{HTML}{A9745C}
+\definecolor{RetrieveBar}{HTML}{EACFC3}
+\definecolor{EntityPurple}{HTML}{8B5EB9}
+\definecolor{EntityPurpleEdge}{HTML}{52386E}
+\definecolor{EntityOrange}{HTML}{E8901A}
+\definecolor{EntityOrangeEdge}{HTML}{8E4D08}
+\definecolor{InteractionBlue}{HTML}{3B8BC3}
+\definecolor{InteractionBlueDark}{HTML}{124984}
+\definecolor{InteractionRed}{HTML}{F24432}
+\definecolor{InteractionRedDark}{HTML}{A52C22}
+\definecolor{HighlightYellow}{HTML}{FFD42A}
+\definecolor{FieldCore}{HTML}{FAD432}
+\definecolor{FieldPale}{HTML}{FBECAE}
+\definecolor{FixedSection}{HTML}{D9E9F3}
+\definecolor{CycleSection}{HTML}{F6DFDB}
+
+% Short aliases retained for compact example source.
+\colorlet{Purple}{EntityPurple}
+\colorlet{PurpleEdge}{EntityPurpleEdge}
+\colorlet{Orange}{EntityOrange}
+\colorlet{OrangeEdge}{EntityOrangeEdge}
+\colorlet{Blue}{InteractionBlue}
+\colorlet{BlueDark}{InteractionBlueDark}
+\colorlet{Red}{InteractionRed}
+\colorlet{Green}{Train}
+\colorlet{Brown}{Retrieve}
+\colorlet{SensingBar}{FixedSection}
+\colorlet{MotionBar}{RetrieveBar}
+
+\tikzset{
+  every node/.append style={font=\sffamily,text=Ink},
+  majorheading/.style={font=\sffamily\bfseries\fontsize{13}{15}\selectfont},
+  sectiontitle/.style={font=\sffamily\bfseries\fontsize{10.5}{12}\selectfont},
+  paneltag/.style={font=\sffamily\bfseries\fontsize{11.5}{12.5}\selectfont},
+  paneltitle/.style={font=\sffamily\bfseries\fontsize{9.5}{11}\selectfont},
+  annotation/.style={font=\sffamily\fontsize{8}{9.5}\selectfont},
+  boldannotation/.style={font=\sffamily\bfseries\fontsize{8}{9.5}\selectfont},
+  mathlabel/.style={font=\fontsize{9}{10.5}\selectfont},
+  ticklabel/.style={font=\sffamily\fontsize{7.5}{9}\selectfont},
+  entityi/.style={circle,draw=EntityPurpleEdge,fill=EntityPurple,
+                  line width=1.1pt,minimum size=6.6mm,inner sep=0pt},
+  entityj/.style={circle,draw=EntityOrangeEdge,fill=EntityOrange,
+                  line width=1.1pt,minimum size=6.6mm,inner sep=0pt},
+  trainarrow/.style={-{Latex[length=2.5mm,width=1.7mm]},draw=Train,
+                     line width=1.6pt},
+  retrievearrow/.style={-{Latex[length=2.8mm,width=1.9mm]},draw=Retrieve,
+                        line width=1.8pt},
+  positive/.style={draw=InteractionBlue,line width=1.45pt},
+  negative/.style={draw=InteractionRed,line width=1.45pt,dashed},
+  axisline/.style={draw=Ink,line width=0.85pt},
+  snapshot/.style={draw=Ink,line width=0.85pt},
+  processarrow/.style={-{Latex[length=2.5mm,width=1.7mm]},line width=1.55pt},
+  thinprocess/.style={-{Latex[length=2.1mm,width=1.4mm]},line width=1.2pt}
+}

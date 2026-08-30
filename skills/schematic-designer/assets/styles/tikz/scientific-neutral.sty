@@ -1,0 +1,315 @@
+\NeedsTeXFormat{LaTeX2e}
+\ProvidesPackage{scientific-neutral}[2026/08/12 schematic-designer neutral styles]
+
+\RequirePackage{amsmath}
+\RequirePackage{amssymb}
+\RequirePackage{iftex}
+\RequirePackage{graphicx}
+\RequirePackage{xcolor}
+\RequirePackage{tikz}
+\RequirePackage{pgfplots}
+
+\ifLuaTeX
+  \RequirePackage{fontspec}
+  \IfFontExistsTF{CMU Sans Serif}
+    {
+      \setsansfont{CMU Sans Serif}
+      \renewcommand{\familydefault}{\sfdefault}
+    }
+    {
+      \setsansfont{Latin Modern Sans}
+      \renewcommand{\familydefault}{\sfdefault}
+      \PackageWarning{scientific-neutral}
+        {CMU Sans Serif unavailable; using Latin Modern Sans}
+    }
+\else\ifXeTeX
+  \RequirePackage{fontspec}
+  \IfFontExistsTF{CMU Sans Serif}
+    {
+      \setsansfont{CMU Sans Serif}
+      \renewcommand{\familydefault}{\sfdefault}
+    }
+    {
+      \setsansfont{Latin Modern Sans}
+      \renewcommand{\familydefault}{\sfdefault}
+      \PackageWarning{scientific-neutral}
+        {CMU Sans Serif unavailable; using Latin Modern Sans}
+    }
+\else
+  \RequirePackage[T1]{fontenc}
+  \RequirePackage{lmodern}
+  \renewcommand{\familydefault}{\sfdefault}
+\fi
+\fi
+
+\pgfplotsset{compat=1.18}
+
+\usetikzlibrary{
+  angles,
+  arrows.meta,
+  backgrounds,
+  calc,
+  decorations.pathmorphing,
+  decorations.pathreplacing,
+  fit,
+  intersections,
+  patterns,
+  positioning,
+  quotes,
+  shapes.geometric
+}
+
+\usepgfplotslibrary{groupplots}
+
+\AtBeginDocument{\sffamily}
+
+\pgfplotsset{
+  every axis/.append style={
+    label style={font=\sffamily},
+    tick label style={font=\sffamily},
+    legend style={font=\sffamily}
+  }
+}
+
+\definecolor{saBlue}{HTML}{3F78A8}
+\definecolor{saCyan}{HTML}{278C8A}
+\definecolor{saGreen}{HTML}{2C8C68}
+\definecolor{saAmber}{HTML}{D88A24}
+\definecolor{saRed}{HTML}{B84B52}
+\definecolor{saViolet}{HTML}{7656A5}
+\definecolor{saInk}{HTML}{202124}
+\definecolor{saGray}{HTML}{5F6368}
+\definecolor{saLightGray}{HTML}{C7CED8}
+\definecolor{saPanelGray}{HTML}{FBFCFD}
+
+\newlength{\saCellWidth}
+\newlength{\saCellHeight}
+\newlength{\saProcessBoxWidth}
+\newlength{\saProcessBoxHeight}
+\newlength{\saChipWidth}
+\newlength{\saChipHeight}
+\newlength{\saZoneWidth}
+\newlength{\saZoneHeight}
+
+\setlength{\saCellWidth}{1.20cm}
+\setlength{\saCellHeight}{0.82cm}
+\setlength{\saProcessBoxWidth}{1.42cm}
+\setlength{\saProcessBoxHeight}{0.50cm}
+\setlength{\saChipWidth}{0.52cm}
+\setlength{\saChipHeight}{0.34cm}
+\setlength{\saZoneWidth}{1.45cm}
+\setlength{\saZoneHeight}{2.55cm}
+
+\newcommand{\saFontPanelLabel}{\sffamily\bfseries\fontsize{12pt}{14pt}\selectfont}
+\newcommand{\saFontTitle}{\sffamily\bfseries\fontsize{9pt}{10.8pt}\selectfont}
+\newcommand{\saFontBody}{\sffamily\fontsize{8pt}{9.6pt}\selectfont}
+\newcommand{\saFontSmall}{\sffamily\fontsize{7pt}{8.4pt}\selectfont}
+\newcommand{\saFontTiny}{\sffamily\fontsize{6pt}{7.2pt}\selectfont}
+\newcommand{\saFontEquation}{\sffamily\fontsize{8pt}{9.8pt}\selectfont}
+
+\tikzset{
+  every picture/.append style={font=\saFontBody},
+  every node/.append style={font=\saFontBody},
+  sa/font panel label/.style={font=\saFontPanelLabel},
+  sa/font title/.style={font=\saFontTitle},
+  sa/font body/.style={font=\saFontBody},
+  sa/font small/.style={font=\saFontSmall},
+  sa/font tiny/.style={font=\saFontTiny},
+  sa/font equation/.style={font=\saFontEquation},
+  sa/panel/.style={
+    draw=saLightGray!80!black,
+    fill=saPanelGray,
+    rounded corners=4pt,
+    line width=0.5pt
+  },
+  sa/panel label/.style={
+    sa/font panel label,
+    text=saInk,
+    anchor=north west
+  },
+  sa/cell/.style={
+    ellipse,
+    draw=saBlue!80!black,
+    fill=saCyan!18,
+    line width=0.8pt,
+    minimum width=\saCellWidth,
+    minimum height=\saCellHeight,
+    align=center,
+    inner sep=1pt
+  },
+  sa/source cell/.style={
+    ellipse,
+    draw=saAmber!80!black,
+    fill=saAmber!22,
+    line width=0.8pt,
+    minimum width=\saCellWidth,
+    minimum height=\saCellHeight,
+    align=center,
+    inner sep=1pt
+  },
+  sa/nucleus/.style={
+    circle,
+    draw=saBlue!70!black,
+    fill=saBlue!18,
+    minimum size=4mm,
+    inner sep=0pt
+  },
+  sa/receptor/.style={
+    draw=saRed!80!black,
+    fill=saRed!50,
+    rounded corners=0.8pt,
+    minimum width=2.8mm,
+    minimum height=1.2mm,
+    inner sep=0pt
+  },
+  sa/matrix node/.style={
+    circle,
+    draw=saInk,
+    fill=white,
+    line width=0.55pt,
+    minimum size=2.4mm,
+    inner sep=0pt
+  },
+  sa/fiber/.style={
+    draw=saGray,
+    line width=0.8pt,
+    line cap=round
+  },
+  sa/active fiber/.style={
+    sa/fiber,
+    draw=saGreen!80!black,
+    line width=1.1pt
+  },
+  sa/buckled fiber/.style={
+    sa/fiber,
+    decorate,
+    decoration={snake, amplitude=0.35mm, segment length=2.2mm}
+  },
+  sa/force arrow/.style={
+    -{Stealth[length=2.5mm]},
+    draw=saRed!85!black,
+    line width=1pt,
+    line cap=round
+  },
+  sa/tension arrow/.style={
+    {Stealth[length=2.2mm]}-{Stealth[length=2.2mm]},
+    draw=saAmber!90!black,
+    line width=0.9pt,
+    line cap=round
+  },
+  sa/displacement arrow/.style={
+    -{Stealth[length=2.3mm]},
+    draw=saGreen!80!black,
+    line width=0.9pt,
+    dashed
+  },
+  sa/gradient arrow/.style={
+    -{Stealth[length=2.5mm]},
+    draw=saAmber!90!black,
+    line width=1pt
+  },
+  sa/torque arrow/.style={
+    -{Stealth[length=2.3mm]},
+    draw=saViolet!90!black,
+    line width=0.9pt
+  },
+  sa/sensing radius/.style={
+    draw=saBlue!65,
+    dashed,
+    line width=0.75pt,
+    opacity=0.8
+  },
+  sa/annotation/.style={
+    draw=saGray!60,
+    fill=white,
+    rounded corners=2pt,
+    inner xsep=4pt,
+    inner ysep=2.5pt,
+    align=center
+  },
+  sa/process box/.style={
+    sa/annotation,
+    minimum width=\saProcessBoxWidth,
+    minimum height=\saProcessBoxHeight,
+    text width=\saProcessBoxWidth,
+    inner xsep=2pt,
+    inner ysep=2pt,
+    sa/font small,
+    align=center
+  },
+  sa/annotation chip/.style={
+    sa/annotation,
+    minimum width=\saChipWidth,
+    minimum height=\saChipHeight,
+    inner xsep=1.5pt,
+    inner ysep=1pt,
+    sa/font tiny,
+    align=center
+  },
+  sa/layout zone/.style={
+    inner sep=0pt,
+    outer sep=0pt,
+    minimum width=\saZoneWidth,
+    minimum height=\saZoneHeight,
+    draw=none,
+    fill=none
+  },
+  sa/layout zone debug/.style={
+    sa/layout zone,
+    draw=saLightGray!80!black,
+    fill=white,
+    opacity=0.35,
+    rounded corners=2pt
+  },
+  sa/annotation arrow/.style={
+    -{Stealth[length=2.2mm]},
+    draw=saInk,
+    line width=0.75pt,
+    line cap=round
+  },
+  sa/imported plot/.style={
+    inner sep=0pt,
+    outer sep=0pt,
+    anchor=south west
+  },
+  sa/plot frame/.style={
+    draw=saLightGray!85!black,
+    fill=none,
+    rounded corners=2pt,
+    line width=0.45pt
+  },
+  sa/equation box/.style={
+    draw=saGray!60,
+    fill=white,
+    rounded corners=3pt,
+    inner xsep=6pt,
+    inner ysep=4pt,
+    sa/font equation,
+    align=center
+  },
+  sa/scale bar/.style={
+    draw=saInk,
+    line width=0.9pt
+  },
+  sa/axis/.style={
+    axis line style={draw=saInk},
+    tick style={draw=saInk},
+    label style={text=saInk},
+    tick label style={text=saInk},
+    grid=major,
+    grid style={draw=saLightGray},
+    legend style={
+      draw=none,
+      fill=none
+    }
+  }
+}
+
+\newcommand{\sapanelLabel}[2]{%
+  \node[sa/panel label] at #1 {#2};%
+}
+
+\newcommand{\sascaleBar}[3]{%
+  \draw[sa/scale bar] #1 -- ++(#2,0)
+    node[midway, below=2pt] {#3};%
+}

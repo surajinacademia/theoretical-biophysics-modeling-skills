@@ -1,0 +1,86 @@
+% Author: Marek Fiser <tikz at marekfiser.cz>
+% MESIF protocol: http://en.wikipedia.org/wiki/MESIF_protocol
+\documentclass[tikz, border=10pt]{standalone}
+\usetikzlibrary{arrows}
+
+% Scientific Artist font policy: render TikZ assets with CMU Sans Serif.
+\usepackage{iftex}
+\ifLuaTeX
+  \usepackage{fontspec}
+  \IfFontExistsTF{CMU Sans Serif}
+    {
+      \setmainfont{CMU Sans Serif}
+      \setsansfont{CMU Sans Serif}
+      \renewcommand{\familydefault}{\sfdefault}
+    }
+    {
+      \PackageError{schematic-designer-gallery}
+        {CMU Sans Serif font not found}
+        {Install CMU fonts or make CMU Sans Serif visible to fontconfig/fontspec.}
+    }
+\else\ifXeTeX
+  \usepackage{fontspec}
+  \IfFontExistsTF{CMU Sans Serif}
+    {
+      \setmainfont{CMU Sans Serif}
+      \setsansfont{CMU Sans Serif}
+      \renewcommand{\familydefault}{\sfdefault}
+    }
+    {
+      \PackageError{schematic-designer-gallery}
+        {CMU Sans Serif font not found}
+        {Install CMU fonts or make CMU Sans Serif visible to fontconfig/fontspec.}
+    }
+\else
+  \PackageError{schematic-designer-gallery}
+    {CMU Sans Serif assets require LuaLaTeX or XeLaTeX}
+    {Compile this asset with lualatex or xelatex so fontspec can load CMU Sans Serif.}
+\fi
+\fi
+\usepackage[defaultmathsizes,italic]{mathastext}
+\AtBeginDocument{%
+  \sffamily
+  \tikzset{
+    every picture/.append style={font=\sffamily},
+    every node/.append style={font=\sffamily}
+  }%
+}
+
+\begin{document}
+\begin{tikzpicture}[->,>=stealth',shorten >=1pt,auto,node distance=3cm,
+  thick,main node/.style={circle,fill=blue!20,draw,
+  font=\sffamily\Large\bfseries,minimum size=15mm}]
+
+  \node[main node] (M) {M};
+  \node[main node] (E) [below of=M] {E};
+  \node[main node] (S) [below of=E] {S};
+  \node[main node] (F) [below of=S] {F};
+  \node[main node] (I) [below of=F] {I};
+
+  \path[every node/.style={font=\sffamily\small,
+          fill=white,inner sep=1pt}]
+      % Right-hand-side arrows rendered from top to bottom to
+      % achieve proper rendering of labels over arrows.
+    (M) edge [loop above] node {PrRd/-, PrWr/-} (M)
+        edge [bend left=60] node[right=1mm] {BusRdX/Flush} (I)
+        edge [bend left=40] node[right=1mm] {BusRd/Flush} (S)
+    (E) edge [loop above] node {PrRd/-} (E)
+        edge [bend left=50] node[right=1mm] {BusRdX/Flush} (I)
+        edge [bend left=30] node[right=1mm] {BusRd/Flush} (S)
+    (S) edge [loop above] node {PrRd/-} (S)
+        edge [loop right] node[right=1mm]  {BusRd/-} (S)
+        edge [bend left=40] node[right=1mm] {BusRdX/Flush} (I)
+    (F) edge [bend left=30] node[right=1mm] {BusRdX/Flush} (I)
+
+      % Left-hand-side arrows rendered from bottom to top to
+      % achieve proper rendering of labels over arrows.
+    (I) edge [bend left=65] node[left=1mm] {PrWr/BusRdX} (M)
+        edge [bend left=55] node[left=1mm] {PrRd/BusRd Ex} (E)
+        edge [bend left=30] node[left=1mm] {PrRd/BusRd} (F)
+    (F) edge [loop above] node {PrRd/-} (F)
+        edge [bend left=50] node[left=1mm] {PrWr/BusRdX} (M)
+        edge [bend left=30] node[left=1mm] {BusRd/Flush} (S)
+    (S) edge [bend left=40] node[left=1mm] {PrWr/BusRdX} (M)
+    (E) edge [bend left=30] node[left=1mm] {PrWr/-} (M);
+\end{tikzpicture}
+\end{document}

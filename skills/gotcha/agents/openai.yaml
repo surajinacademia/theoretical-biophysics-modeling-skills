@@ -1,0 +1,4 @@
+interface:
+  display_name: "Gotcha"
+  short_description: "Save feedback as one durable repository rule"
+  default_prompt: "Use $gotcha to save this feedback as one durable rule in the applicable AGENTS.md."

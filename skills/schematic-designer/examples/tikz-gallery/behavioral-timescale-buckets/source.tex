@@ -1,0 +1,74 @@
+% Adapted from "Behavioral biology diagram" by Izaak Neutelings.
+% https://tikz.net/behavior_sapolsky/
+% Original and this derivative: CC BY-SA 4.0.
+% Inspired by Robert Sapolsky's cross-timescale framework for behavior.
+% Changes: semantic styles, neutral typography, spacing, and label placement.
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{scientific-neutral}
+\usetikzlibrary{arrows.meta,backgrounds,decorations.pathreplacing}
+
+\tikzset{
+  bucket/.style={rounded corners=5pt,line width=0.7pt},
+  branch/.style={draw=saGreen!70!black,line width=0.85pt},
+  timespan/.style={decorate,decoration={brace,amplitude=5pt},line width=0.8pt}
+}
+
+\begin{document}
+\begin{tikzpicture}[x=1.05cm,y=1cm]
+  \begin{scope}[on background layer]
+    \filldraw[bucket,fill=saAmber!8,draw=saAmber!65]
+      (-0.65,-2.35) rectangle (11.35,2.45);
+    \filldraw[bucket,fill=saGreen!10,draw=saGreen!65]
+      (-0.45,0.40) rectangle (4.75,1.90);
+    \filldraw[bucket,fill=saRed!8,draw=saRed!60]
+      (2.95,-1.80) rectangle (7.25,1.78);
+    \filldraw[bucket,fill=saAmber!12,draw=saAmber!70]
+      (6.00,0.38) rectangle (8.35,1.85);
+    \filldraw[bucket,fill=saBlue!10,draw=saBlue!65]
+      (7.35,-1.70) rectangle (9.90,1.75);
+  \end{scope}
+
+  \node[sa/font small,text=saGreen!70!black,anchor=south west] at (-0.35,1.92) {evolution};
+  \node[sa/font small,text=saRed!75!black,anchor=south west] at (3.05,-1.72) {epigenetics};
+  \node[sa/font small,text=saAmber!90!black,anchor=south west] at (6.10,1.88) {endocrinology};
+  \node[sa/font small,text=saBlue!80!black,anchor=south east] at (9.80,1.78) {neurobiology};
+  \node[sa/font small,text=saAmber!90!black,anchor=south east] at (11.25,-2.25) {ethology};
+
+  \draw[-{Stealth[length=3mm]},draw=saGreen!75!black,line width=3.4pt]
+    (0,0) -- (10.25,0) node[right,sa/font title,text=saInk] {behavior};
+
+  \draw[branch] (0.90,0.06) to[out=180,in=-90] ++(-0.48,0.48)
+    node[above,sa/font small,text=saGreen!75!black] {species};
+  \draw[branch] (2.40,0.06) to[out=180,in=-90] ++(-0.48,0.48)
+    node[above,sa/font small,text=saGreen!75!black] {population};
+  \draw[branch] (4.20,0.06) to[out=180,in=-90] ++(-0.50,0.60)
+    node[above,align=center,sa/font small] {individual\\genetics};
+  \draw[branch] (4.85,-0.06) to[out=180,in=90] ++(-0.65,-0.48)
+    node[below left,sa/font small,text=saRed!75!black] {biology};
+  \draw[branch] (5.55,-0.06) to[out=180,in=90] ++(-0.48,-0.48)
+    node[below right,sa/font small,text=saRed!75!black] {environment};
+  \draw[branch] (6.15,0.06) to[out=180,in=-90] ++(-0.60,0.78)
+    node[above,sa/font small] {culture};
+  \draw[branch] (7.22,0.06) to[out=180,in=-90] ++(-0.45,0.50)
+    node[above,sa/font small,text=saAmber!90!black] {chronic};
+  \draw[branch] (8.20,0.06) to[out=180,in=-90] ++(-0.45,0.50)
+    node[above,sa/font small,text=saAmber!90!black] {acute};
+  \draw[branch] (8.95,-0.06) to[out=180,in=90] ++(-0.48,-0.60)
+    node[below,align=center,sa/font small,text=saRed!80!black] {releasing\\stimuli};
+  \draw[branch] (9.42,0.06) to[out=180,in=-90] ++(-0.45,0.60)
+    node[above right,align=center,sa/font small,text=saBlue!80!black] {nervous\\system};
+
+  \draw[timespan,draw=saGreen!75!black]
+    (-0.20,1.04) -- (2.92,1.04)
+    node[midway,above=5pt,sa/font small] {evolutionary time};
+  \draw[timespan,draw=saRed!75!black]
+    (6.15,-1.08) -- (3.40,-1.08)
+    node[midway,below=5pt,sa/font small] {perinatal};
+  \draw[timespan,draw=saAmber!90!black]
+    (6.15,1.04) -- (8.25,1.04)
+    node[midway,above=5pt,sa/font small] {hormones};
+
+  \node[sa/font tiny,text=saGray,anchor=north]
+    at (5.35,-2.48) {nested scientific perspectives across timescales};
+\end{tikzpicture}
+\end{document}

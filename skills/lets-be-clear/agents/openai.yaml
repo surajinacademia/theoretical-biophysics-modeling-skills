@@ -1,0 +1,4 @@
+interface:
+  display_name: "Let’s Be Clear"
+  short_description: "Restate my request and confirm it before acting"
+  default_prompt: "Use $lets-be-clear to restate what I am asking in clear language, then wait for my confirmation before acting."
