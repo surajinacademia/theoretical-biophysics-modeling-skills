@@ -2,10 +2,11 @@
 name: schematic-designer
 description: >
   Generate or reconstruct scientifically faithful figures from specifications,
-  equations, data, or image references. Use for composite publication design,
-  scientific schematics, image reconstruction, or an exact PDF and outlined-SVG
-  contract. Do not use for an ordinary exploratory, diagnostic, comparative, or
-  single scientific data plot; use a direct data-analysis and plotting workflow.
+  equations, data, or image references. Trigger this skill whenever the user asks
+  for composite publication design, a scientific schematic, image reconstruction,
+  or an exact PDF and outlined-SVG contract. Do not use for an ordinary exploratory,
+  diagnostic, comparative, or single scientific data plot; use a direct
+  data-analysis and plotting workflow.
 ---
 
 # Schematic Designer

@@ -3,7 +3,9 @@ name: computational-modeling
 description: >
   Core workflow for implementing, modifying, debugging, validating, or
   reviewing scientific computations, simulations, data analyses, and
-  figure-generation code.
+  figure-generation code. Trigger this skill whenever the user asks to
+  implement, modify, debug, validate, or review scientific computation,
+  simulation, data-analysis, or figure-generation code.
 ---
 
 # Scientific Computing Core Workflow
