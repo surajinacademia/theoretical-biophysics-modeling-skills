@@ -1,6 +1,12 @@
 ---
 name: gotcha
-description: "Turn explicit agent-performance feedback into one durable rule or workflow in the applicable AGENTS.md. Use when a message invokes `/learn`, uses `learn` as a standalone command followed by a concrete agent-behavior lesson, or explicitly asks to save agent guidance in AGENTS.md. Do not use for ordinary requests to learn about a subject, negated requests not to save a rule, or standards destined for another artifact."
+description: >-
+  Turn explicit agent-performance feedback into one durable rule or workflow
+  in the applicable AGENTS.md. Trigger this skill whenever the user asks to
+  save agent guidance in AGENTS.md, invokes `/learn`, or uses `learn` as a
+  standalone command followed by a concrete agent-behavior lesson. Do not use
+  for ordinary requests to learn about a subject, negated requests not to save
+  a rule, or standards destined for another artifact.
 ---
 
 # Gotcha
