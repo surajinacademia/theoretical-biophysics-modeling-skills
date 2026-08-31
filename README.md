@@ -1,6 +1,13 @@
 # Theoretical Biophysics Modeling Skills
 
-This Codex plugin contains four independent skills.
+Four reusable, platform-neutral agent skills.
+
+## Install
+
+- **Codex:** ask `$skill-installer` to install the desired folder under `skills/` from this repository.
+- **Claude Code:** `git clone https://github.com/surajinacademia/theoretical-biophysics-modeling-skills.git ~/.claude/skills/theoretical-biophysics-modeling-skills`
+- **Gemini CLI:** `gemini extensions install https://github.com/surajinacademia/theoretical-biophysics-modeling-skills`
+- **Perplexity Computer:** upload a skill as a ZIP with `SKILL.md` at the ZIP root from **Skills → Create skill → Upload a skill**.
 
 ## `computational-modeling`
 
@@ -31,8 +38,8 @@ Use it to save explicit agent-performance feedback. It finds the applicable
 `AGENTS.md`, adds or revises one durable rule, checks authority and security
 boundaries, and reports the exact change.
 
-Each complete skill is under `skills/`. The plugin manifest is at
-`.codex-plugin/plugin.json`.
+Each complete skill is under `skills/`. Platform manifests are included at the
+repository root.
 
 The main repository uses the MIT license. The TikZ gallery has entry-specific
 terms. See `THIRD_PARTY_NOTICES.md` for all third-party material.
