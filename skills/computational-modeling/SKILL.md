@@ -2,10 +2,10 @@
 name: computational-modeling 
 description: >
   Core workflow for implementing, modifying, debugging, validating, or
-  reviewing scientific computations, simulations, data analyses, and
-  figure-generation code. Trigger this skill whenever the user asks to
-  implement, modify, debug, validate, or review scientific computation,
-  simulation, data-analysis, or figure-generation code.
+  reviewing code for scientific and biophysical models. Trigger this skill
+  whenever the user asks to work on code for a scientific model. Trigger only
+  when the chat is about both coding and modeling. Do not trigger for data
+  analysis, statistics, plotting, or figure generation.
 ---
 
 # Scientific Computing Core Workflow
