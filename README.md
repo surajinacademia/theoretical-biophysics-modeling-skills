@@ -1,6 +1,15 @@
 # Theoretical Biophysics Modeling Skills
 
-This Codex plugin contains three independent skills.
+This Codex plugin contains four independent skills.
+
+## `computational-modeling`
+
+Core workflow for implementing, modifying, debugging, validating, or
+reviewing scientific computations, simulations, data analyses, and
+figure-generation code.
+
+Preserve the stated scientific model, modify the smallest existing pathway,
+validate the exact scientific claim, and stop.
 
 ## `schematic-designer`
 
