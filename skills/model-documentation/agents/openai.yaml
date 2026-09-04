@@ -1,0 +1,4 @@
+interface:
+  display_name: "Model Documentation"
+  short_description: "Plan, approve, write, and verify one model document"
+  default_prompt: "Use $model-documentation to inspect the model and propose the fixed structure, then wait for my approval before writing one document with defined notation, physical rationale, equations, and numerical methods; finish with format verification and independent subagent reviews."

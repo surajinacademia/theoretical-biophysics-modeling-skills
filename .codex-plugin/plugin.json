@@ -1,7 +1,7 @@
 {
   "name": "theoretical-biophysics-modeling-skills",
-  "version": "0.3.0",
-  "description": "Reusable skills for scientific computing, biophysics modeling, figures, clarification, and agent guidance.",
+  "version": "0.4.0",
+  "description": "Reusable skills for scientific computing, model documentation, figures, clarification, and agent guidance.",
   "author": {
     "name": "Theoretical Biophysics Modeling Skills contributors"
   },
@@ -9,6 +9,7 @@
   "keywords": [
     "theoretical-biophysics",
     "biophysical-modeling",
+    "model-documentation",
     "scientific-computing",
     "scientific-figures",
     "request-clarification",
@@ -17,18 +18,20 @@
   "skills": "./skills/",
   "interface": {
     "displayName": "Theoretical Biophysics Modeling Skills",
-    "shortDescription": "Scientific computing, figures, clarification, and guidance",
-    "longDescription": "Four independently triggered skills for scientific computing, scientific figure design, confirmed request restatement, and durable repository agent guidance.",
+    "shortDescription": "Scientific computing, model docs, figures, and workflows",
+    "longDescription": "Five independently triggered skills for scientific computing, physics-focused model documentation, scientific figure design, confirmed request restatement, and durable repository agent guidance.",
     "developerName": "Theoretical Biophysics Modeling Skills contributors",
     "category": "Productivity",
     "capabilities": [
       "Scientific computing",
+      "Model documentation",
       "Scientific figure design",
       "Request clarification",
       "Agent guidance"
     ],
     "defaultPrompt": [
       "Answer the exact scientific question with the smallest correct, readable, reproducible change.",
+      "Plan one physics-focused model document and wait for my approval before writing.",
       "Design a scientifically accurate vector figure.",
       "Restate my request and wait for confirmation.",
       "Save this feedback as one durable repository rule."

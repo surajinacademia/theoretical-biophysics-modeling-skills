@@ -1,5 +1,13 @@
 # Third-Party Notices
 
+## Model documentation resources
+
+The model-documentation template and oscillator example are original material
+under this repository's MIT license. Their references link to external teaching
+resources and scientific explanations; no paper, website text, or external figure
+is redistributed. Linked resources retain their respective licenses. The example
+parameters are illustrative, not literature measurements or experimental results.
+
 ## Learning Dynamics visual profile
 
 The `schematic-designer` skill includes an independently documented visual-

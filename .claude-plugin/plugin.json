@@ -1,7 +1,7 @@
 {
   "name": "theoretical-biophysics-modeling-skills",
-  "description": "Reusable skills for scientific computing, biophysics modeling, figures, clarification, and agent guidance.",
-  "version": "0.3.0",
+  "description": "Reusable skills for scientific computing, model documentation, figures, clarification, and agent guidance.",
+  "version": "0.4.0",
   "author": {
     "name": "Theoretical Biophysics Modeling Skills contributors"
   },

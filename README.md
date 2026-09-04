@@ -1,6 +1,6 @@
 # Theoretical Biophysics Modeling Skills
 
-Four reusable, platform-neutral agent skills.
+Five reusable, platform-neutral agent skills.
 
 ## Install
 
@@ -17,6 +17,19 @@ figure-generation code.
 
 Preserve the stated scientific model, modify the smallest existing pathway,
 validate the exact scientific claim, and stop.
+
+## `model-documentation`
+
+Plan, write, revise, or audit one physics-focused model document from code,
+approved goals, or an existing methods record. It requires approval before
+writing and follows a fixed nine-section structure: physical rationale and
+defined notation first, governing equations next, then reproducible numerical
+methods and an implementation record. It has no dependency on a writing skill.
+
+The skill includes a [fixed template](skills/model-documentation/references/model-document-template.md),
+a [worked oscillator example](skills/model-documentation/examples/overdamped-harmonic-oscillator/model.md),
+and a read-only format checker. Independent verification and scientific review
+remain necessary: a format pass does not establish physical validity.
 
 ## `schematic-designer`
 
@@ -43,3 +56,17 @@ repository root.
 
 The main repository uses the MIT license. The TikZ gallery has entry-specific
 terms. See `THIRD_PARTY_NOTICES.md` for all third-party material.
+
+## Verify Model Documentation
+
+Run the regression tests and adversarial format cases from the repository root:
+
+```bash
+python3 -B -m unittest discover -s tests -v
+python3 -B evals/model-documentation/checker_eval.py
+```
+
+These check format enforcement, checker error handling, and the oscillator's
+numerical behavior. They do not measure an agent's workflow reliability or
+establish experimental validity. The evaluator reports incorrect physical claims
+as manual-review controls, not as something the format checker can reject.
