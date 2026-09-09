@@ -1,12 +1,5 @@
 # Theoretical Biophysics Modeling Skills
 
-## Install
-
-- **Codex:** ask `$skill-installer` to install the desired folder under `skills/` from this repository.
-- **Claude Code:** `git clone https://github.com/surajinacademia/theoretical-biophysics-modeling-skills.git ~/.claude/skills/theoretical-biophysics-modeling-skills`
-- **Gemini CLI:** `gemini extensions install https://github.com/surajinacademia/theoretical-biophysics-modeling-skills`
-- **Perplexity Computer:** upload a skill as a ZIP with `SKILL.md` at the ZIP root from **Skills → Create skill → Upload a skill**.
-
 ## `computational-modeling`
 Workflow for implementing, modifying, debugging, validating, or reviewing code for scientific and biophysical models. Preserve the stated scientific model, modify the smallest existing pathway,
 validate the exact scientific claim, and stop.
