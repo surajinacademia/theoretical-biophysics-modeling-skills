@@ -1,0 +1,4 @@
+interface:
+  display_name: "Computational Modeling"
+  short_description: "Scientific model development, tests, and records"
+  default_prompt: "Use $computational-modeling to understand and develop this scientific model, test its claims with appropriate evidence, and maintain reproducible records with $model-documentation when needed."

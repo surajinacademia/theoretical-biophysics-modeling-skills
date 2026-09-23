@@ -1,33 +1,23 @@
-# Aesthetic Profile: scientific-neutral
+# Scientific-neutral construction vocabulary
 
-Use this quiet, portable profile when a journal, project, or user-supplied
-visual grammar does not take precedence. It changes only presentation, never
-data, equations, units, scale, topology, or physical relationships.
+This historical profile name now provides compatibility names for the shared
+[Minimalist design](minimalist.md). It does not select a second palette or font.
+Use it only when adapting examples that already refer to `COLORS`, `sa/cell`,
+`sa/process box`, and related components; start new figures from Minimalist.
 
-## Visual grammar
+The Python asset reads the owner's palette API and maps the old color names to
+that palette. Pale fills are derived from the shared fill-opacity role; no
+separate hue table is maintained. Color names are compatibility identifiers,
+not scientific meanings. Declare the actual entity-to-color mapping in the figure.
 
-- Use a white canvas, near-black text and outlines, and no decorative page tint.
-- Use the colorblind-aware qualitative cycle only for unrelated categories; use
-  sequential color for magnitude and diverging color only around a meaningful
-  center.
-- Give every critical color distinction a label, marker, line style, direction,
-  or shape cue.
-- Favor direct labels, restrained line weights, and whitespace. Add a frame or
-  ribbon only when it communicates grouping or phase.
-- Use lower-case panel tags (a), (b), and so on at consistent upper-left
-  positions.
+The TikZ asset loads a generated `minimalist-profile.sty`. Declare both style
+files to the renderer. It supplies the same CMU/LaTeX typography, role sizes,
+white canvas, and native `Latex` heads while retaining useful cell, receptor,
+fiber, process, scale-bar, and layout primitives. Geometric dimensions remain
+construction defaults and must not replace a physical size or quantitative scale.
 
-## Tokens and use
-
-The authoritative executable tokens are
-assets/styles/matplotlib/scientific_neutral.py and
-assets/styles/tikz/scientific-neutral.sty.
-
-Use CMU Sans Serif when available, with DejaVu Sans, Arial, or Latin Modern
-Sans as the local fallback. Use native mathematical typography for variables
-and equations. The assets provide near-black ink, muted and faint neutrals, a
-blue/orange/green/red/purple/teal cycle, and standard panel, title, body, and
-small-text sizes.
-
-Apply the profile before figure-specific layout, then follow
-references/renderer-workflows.md and references/vector-export.md.
+Small labels use dark ink when a light palette entry is not readable. Keep
+labels opaque even when their associated fill or contextual geometry is pale.
+A panel border or equation box should express a real grouping; ordinary panel
+separation uses whitespace. Follow the [renderer workflow](../renderer-workflows.md)
+and [vector export contract](../vector-export.md).

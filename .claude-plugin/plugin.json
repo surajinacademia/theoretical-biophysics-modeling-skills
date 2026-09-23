@@ -1,10 +1,10 @@
 {
   "name": "theoretical-biophysics-modeling-skills",
-  "description": "Reusable skills for scientific computing, model documentation, figures, clarification, and agent guidance.",
-  "version": "0.4.0",
+  "description": "Eight skills for scientific modeling, documentation, notebooks, stability analysis, plots, schematics, clarification, and simple Slurm jobs.",
+  "version": "1.0.0",
   "author": {
     "name": "Theoretical Biophysics Modeling Skills contributors"
   },
   "repository": "https://github.com/surajinacademia/theoretical-biophysics-modeling-skills",
-  "license": "MIT"
+  "license": "SEE LICENSE IN LICENSE"
 }

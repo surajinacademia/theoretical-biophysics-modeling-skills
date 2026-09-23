@@ -1,0 +1,59 @@
+% Minimalist adaptation, 2026. See ATTRIBUTION.md for provenance and changes.
+% Independent original example by the schematic-designer maintainers.
+% Pattern reference (no upstream code copied):
+% https://github.com/f0nzie/tikz_favorites/blob/9506fd5643abb406197bed176ab9183484006dd1/src/plot-linear-regression%2Bgeometry.tex
+% License: MIT, as part of the biophysics-simulation-workflow-skills bundle.
+\documentclass[tikz,border=8bp]{standalone}
+\usepackage{minimalist-profile}
+\usetikzlibrary{arrows.meta,calc}
+
+\begin{document}
+\begin{tikzpicture}[ms base,x=1.15cm,y=1.15cm]
+  \pgfmathsetmacro{\xP}{1.35}
+  \pgfmathsetmacro{\xQ}{4.85}
+  \pgfmathsetmacro{\yP}{0.16*(\xP-2.65)^2+0.90}
+  \pgfmathsetmacro{\yQ}{0.16*(\xQ-2.65)^2+0.90}
+
+  \coordinate (O) at (0,0);
+  \coordinate (P) at (\xP,\yP);
+  \coordinate (Q) at (\xQ,\yQ);
+  \coordinate (Px) at (\xP,0);
+  \coordinate (Qx) at (\xQ,0);
+  \coordinate (R) at (\xQ,\yP);
+
+  \draw[-{Latex[length=\msArrowLength,width=\msArrowWidth]},draw=msInk,line width=\msLineStructure]
+    (-0.2,0) -- (6.35,0) node[below] {$x$};
+  \draw[-{Latex[length=\msArrowLength,width=\msArrowWidth]},draw=msInk,line width=\msLineStructure]
+    (0,-0.2) -- (0,3.25) node[left] {$f(x)$};
+
+  \draw[color=msColor1,line width=\msLineEmphasis]
+    plot[domain=0.15:6.05,samples=100,smooth]
+      (\x,{0.16*(\x-2.65)^2+0.90});
+% Function label matches the analytic curve; secant has a separate semantic color.
+  \node[anchor=west,ms body,text=msColor1] at (6.05,2.9) {$f$};
+
+  \draw[color=msColor5,line width=\msLineStructure]
+    ($(P)!-0.22!(Q)$) -- ($(P)!1.22!(Q)$)
+    node[pos=0.75,above,sloped,ms body,text=msColor5] {secant};
+
+  \draw[ms context,draw=msMuted,ms dashed] (P) -- (Px);
+  \draw[ms context,draw=msMuted,ms dashed] (Q) -- (Qx);
+  \draw[ms context,draw=msMuted,ms dashed] (P) -- (R) -- (Q);
+
+  \fill[msPaper,draw=msInk,line width=\msLineStructure] (P) circle ({0.5*\msMarkerPoint})
+    ;
+  \node[ms body,text=msInk,anchor=south] at (1.35,1.5) {$P=(x_0,f(x_0))$};
+  \fill[msPaper,draw=msInk,line width=\msLineStructure] (Q) circle ({0.5*\msMarkerPoint})
+    ;
+  \node[ms body,text=msInk,anchor=east] at (4.75,0.55) {$Q=(x_0+\Delta x,f(x_0+\Delta x))$};
+
+  \draw[{Latex[length=\msArrowLength,width=\msArrowWidth]}-{Latex[length=\msArrowLength,width=\msArrowWidth]},color=msInk]
+    ([yshift=-\msSpaceGroup]Px) -- node[below,ms body,text=msInk] {$\Delta x$} ([yshift=-\msSpaceGroup]Qx);
+  \draw[{Latex[length=\msArrowLength,width=\msArrowWidth]}-{Latex[length=\msArrowLength,width=\msArrowWidth]},color=msInk]
+    ([xshift=\msSpaceGroup]R) -- node[right,ms body,text=msInk] {$\Delta f$} ([xshift=\msSpaceGroup]Q);
+
+  \node[ms equation,inner sep=\msSpaceLabel,anchor=north west] at (0.35,3.02)
+    {$m_{\mathrm{sec}}=\dfrac{\Delta f}{\Delta x}
+      =\dfrac{f(x_0+\Delta x)-f(x_0)}{\Delta x}$};
+\end{tikzpicture}
+\end{document}

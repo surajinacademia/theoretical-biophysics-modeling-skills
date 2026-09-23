@@ -1,0 +1,215 @@
+% Palette-only restoration of the archived design; see ATTRIBUTION.md.
+% Author: Marco Miani
+
+\documentclass[tikz,border=5pt,12pt]{standalone}
+\usepackage{minimalist-profile}
+\usetikzlibrary{arrows.meta}
+\usepackage{tikz}
+
+
+
+
+
+
+\usetikzlibrary{positioning}
+%% helper macros
+
+% The 3D code is based on The drawing is based on Tomas M. Trzeciak's
+% `Stereographic and cylindrical map projections example`:
+% http://www.texample.net/tikz/examples/map-projections/
+\newcommand\pgfmathsinandcos[3]{%
+  \pgfmathsetmacro#1{sin(#3)}%
+  \pgfmathsetmacro#2{cos(#3)}%
+}
+\newcommand\LongitudePlane[3][current plane]{%
+  \pgfmathsinandcos\sinEl\cosEl{#2} % elevation
+  \pgfmathsinandcos\sint\cost{#3} % azimuth
+  \edef\PlaneStyle{\noexpand\tikzset{#1/.style={cm={\cost,\sint*\sinEl,0,\cosEl,(0,0)}}}}\PlaneStyle
+}
+\newcommand\LatitudePlane[3][current plane]{%
+  \pgfmathsinandcos\sinEl\cosEl{#2} % elevation
+  \pgfmathsinandcos\sint\cost{#3} % latitude
+  \pgfmathsetmacro\yshift{\cosEl*\sint}
+  \edef\PlaneStyle{\noexpand\tikzset{#1/.style={cm={\cost,0,0,\cost*\sinEl,(0,\yshift)}}}}\PlaneStyle %
+}
+\newcommand\DrawLongitudeCircle[2][1]{
+  \LongitudePlane{\angEl}{#2}
+  \tikzset{current plane/.prefix style={scale=#1}}
+   % angle of "visibility"
+  \pgfmathsetmacro\angVis{atan(sin(#2)*cos(\angEl)/sin(\angEl))} %
+  \draw[current plane,thin,msInk] (\angVis:1) arc (\angVis:\angVis+180:1);
+  \draw[current plane,thin,dashed] (\angVis-180:1) arc (\angVis-180:\angVis:1);
+}%this is fake: for drawing the grid
+\newcommand\DrawLongitudeCirclered[2][1]{
+  \LongitudePlane{\angEl}{#2}
+  \tikzset{current plane/.prefix style={scale=#1}}
+   % angle of "visibility"
+  \pgfmathsetmacro\angVis{atan(sin(#2)*cos(\angEl)/sin(\angEl))} %
+  \draw[current plane,msColor1,thick] (150:1) arc (150:180:1);
+  %\draw[current plane,dashed] (-50:1) arc (-50:-35:1);
+}%for drawing the grid
+\newcommand\DLongredd[2][1]{
+  \LongitudePlane{\angEl}{#2}
+  \tikzset{current plane/.prefix style={scale=#1}}
+   % angle of "visibility"
+  \pgfmathsetmacro\angVis{atan(sin(#2)*cos(\angEl)/sin(\angEl))} %
+  \draw[current plane,msInk,dashed, ultra thick] (150:1) arc (150:180:1);
+}
+\newcommand\DLatred[2][1]{
+  \LatitudePlane{\angEl}{#2}
+  \tikzset{current plane/.prefix style={scale=#1}}
+  \pgfmathsetmacro\sinVis{sin(#2)/cos(#2)*sin(\angEl)/cos(\angEl)}
+  % angle of "visibility"
+  \pgfmathsetmacro\angVis{asin(min(1,max(\sinVis,-1)))}
+  \draw[current plane,dashed,msInk,ultra thick] (-50:1) arc (-50:-35:1);
+
+}
+\newcommand\fillred[2][1]{
+  \LongitudePlane{\angEl}{#2}
+  \tikzset{current plane/.prefix style={scale=#1}}
+   % angle of "visibility"
+  \pgfmathsetmacro\angVis{atan(sin(#2)*cos(\angEl)/sin(\angEl))} %
+  \draw[current plane,msColor1,thin] (\angVis:1) arc (\angVis:\angVis+180:1);
+
+}
+
+\newcommand\DrawLatitudeCircle[2][1]{
+  \LatitudePlane{\angEl}{#2}
+  \tikzset{current plane/.prefix style={scale=#1}}
+  \pgfmathsetmacro\sinVis{sin(#2)/cos(#2)*sin(\angEl)/cos(\angEl)}
+  % angle of "visibility"
+  \pgfmathsetmacro\angVis{asin(min(1,max(\sinVis,-1)))}
+  \draw[current plane,thin,msInk] (\angVis:1) arc (\angVis:-\angVis-180:1);
+  \draw[current plane,thin,dashed] (180-\angVis:1) arc (180-\angVis:\angVis:1);
+}%Defining functions to draw limited latitude circles (for the msColor1 mesh)
+\newcommand\DrawLatitudeCirclered[2][1]{
+  \LatitudePlane{\angEl}{#2}
+  \tikzset{current plane/.prefix style={scale=#1}}
+  \pgfmathsetmacro\sinVis{sin(#2)/cos(#2)*sin(\angEl)/cos(\angEl)}
+  % angle of "visibility"
+  \pgfmathsetmacro\angVis{asin(min(1,max(\sinVis,-1)))}
+  %\draw[current plane,msColor1,thick] (-\angVis-50:1) arc (-\angVis-50:-\angVis-20:1);
+\draw[current plane,msColor1,thick] (-50:1) arc (-50:-35:1);
+
+}
+
+\tikzset{%
+  >={Latex[length=\msArrowLength,width=\msArrowWidth]},
+  inner sep=0pt,%
+  outer sep=2pt,%
+  mark coordinate/.style={inner sep=0pt,outer sep=0pt,minimum size=3pt,
+    fill=msInk,circle}%
+}
+\pagestyle{empty}
+
+
+% Preserve the original construction, lighting, opacity, layout and stroke hierarchy.
+% Only palette colors and required CMU/CM font and native Latex support change.
+\AtBeginDocument{\sffamily\tikzset{
+  every picture/.append style={font=\sffamily,color=msInk,text=msInk,
+    >={Latex[length=\msArrowLength,width=\msArrowWidth]}},
+  every node/.append style={font=\sffamily}}}
+
+\begin{document}
+\pgfsetlayers{background,main}
+
+    \begin{tikzpicture}[scale=1,every node/.style={minimum size=1cm}]
+    %% some definitions
+
+    \def\R{4} % sphere radius
+
+    \def\angEl{25} % elevation angle
+    \def\angAz{-100} % azimuth angle
+    \def\angPhiOne{-50} % longitude of point P
+    \def\angPhiTwo{-35} % longitude of point Q
+    \def\angBeta{30} % latitude of point P and Q
+
+    %% working planes
+
+    \pgfmathsetmacro\H{\R*cos(\angEl)} % distance to north pole
+    \LongitudePlane[xzplane]{\angEl}{\angAz}
+    \LongitudePlane[pzplane]{\angEl}{\angPhiOne}
+    \LongitudePlane[qzplane]{\angEl}{\angPhiTwo}
+    \LatitudePlane[equator]{\angEl}{0}
+    \fill[ball color=msColor4!25!msPaper] (0,0) circle (\R); % 3D lighting effect
+    \coordinate (O) at (0,0);
+    \coordinate[mark coordinate] (N) at (0,\H);
+    \coordinate[mark coordinate] (S) at (0,-\H);
+    \path[xzplane] (\R,0) coordinate (XE);
+
+    %defining points outsided the area bounded by the sphere
+    \path[qzplane] (\angBeta:\R+5.2376) coordinate (XEd);
+    \path[pzplane] (\angBeta:\R) coordinate (P);%fino alla sfera
+    \path[pzplane] (\angBeta:\R+5.2376) coordinate (Pd);%sfora di una quantitÃ  pari a 10 dopo la sfera
+    \path[pzplane] (\angBeta:\R+5.2376) coordinate (Td);%sfora di una quantitÃ  pari a 10 dopo la sfera
+    \path[pzplane] (\R,0) coordinate (PE);
+    \path[pzplane] (\R+4,0) coordinate (PEd);
+    \path[qzplane] (\angBeta:\R) coordinate (Q);
+    \path[qzplane] (\angBeta:\R) coordinate (Qd);%sfora di una quantitÃ  pari a 10 dopo la sfera
+
+    \path[qzplane] (\R,0) coordinate (QE);
+    \path[qzplane] (\R+4,0) coordinate (QEd);%sfora di una quantitÃ  10 dalla sfera sul piano equat.
+
+
+    \DrawLongitudeCircle[\R]{\angPhiOne} % pzplane
+    \DrawLongitudeCircle[\R]{\angPhiTwo} % qzplane
+    \DrawLatitudeCircle[\R]{\angBeta}
+    \DrawLatitudeCircle[\R]{0} % equator
+    %labelling north and south
+    \node[above=8pt] at (N) {$\mathbf{N}$};
+    \node[below=8pt] at (S) {$\mathbf{S}$};
+
+    \draw[-,dashed, thick] (N) -- (S);
+    \draw[->] (O) -- (P);
+    \draw[dashed] (XE) -- (O) -- (PE);
+    \draw[dashed] (O) -- (QE);
+    %connecting Points outside the sphere
+    \draw[-,dashed,msInk,very thick] (O) -- (Pd);
+    \draw[-,dashed,msInk,very thick] (O) -- (PEd);
+    \draw[-,dashed,msInk,very thick] (O) -- (QEd);
+    \draw[-,dashed,msInk,very thick] (O) -- (XEd);
+    \draw[dashed] (XE) -- (O) -- (PE);
+    %draw msInk thick flat grid
+    \draw[-,ultra thick,msInk] (Pd) -- (PEd) node[below, left] {$P_1$};%verticale sinistro
+    \draw[-,ultra thick,msInk] (PEd) -- (QEd)node[below, right] {$P_3$};%orizzontale inferiore
+    \draw[-,ultra thick,msInk] (Pd)-- (XEd)node[above, right] {$P_2$};%orizzontale superiore
+    \draw[-,ultra thick,msInk] (XEd) -- (QEd);
+
+    \draw[pzplane,->,thin] (0:0.5*\R) to[bend right=15]
+        node[midway,right] {$\lambda$} (\angBeta:0.5*\R);
+    \path[pzplane] (0.5*\angBeta:\R) node[right] {$$};
+    \path[qzplane] (0.5*\angBeta:\R) node[right] {$$};
+    \draw[equator,->,thin] (\angAz:0.5*\R) to[bend right=30]
+        node[pos=0.4,above] {$\phi_1$} (\angPhiOne:0.5*\R);
+    \draw[equator,->,thin] (\angAz:0.6*\R) to[bend right=35]
+        node[midway,below] {$\phi_2$} (\angPhiTwo:0.6*\R);
+            \path[xzplane] (0:\R) node[below] {$$};
+    \path[xzplane] (\angBeta:\R) node[below left] {$$};
+    \foreach \t in {0,2,...,30} { \DrawLatitudeCirclered[\R]{\t} }
+    \foreach \t in {130,133,...,145} { \DrawLongitudeCirclered[\R]{\t} }
+
+    %drawing grids on the spere invoking DLongredd and DrawLongitudeCirclered
+
+    \foreach \t in {130,145,...,145} { \DLongredd[\R+3]{\t} }
+    \foreach \t in {130,133,...,145} { \DrawLongitudeCirclered[\R+3]{\t} }
+
+    \foreach \t in {0,30,...,30} { \DLatred[\R+3]{\t} }
+    \foreach \t in {0,2,...,30} { \DrawLatitudeCirclered[\R+3]{\t} }
+
+    %labelling
+    \draw[->,thick](4,-5.5)node[left]{{Computational grid}}
+                 to[out=0,in=270] (5.8,-2.3);
+    \draw[thick](3.6,-6)node[left]{$[\mathsf{Rectilinear}]$};
+
+% Cover the original page border plus 1 pt export bleed in white;
+% pgfinterruptboundingbox preserves the original page dimensions.
+\coordinate (paper southwest) at (current bounding box.south west);
+\coordinate (paper northeast) at (current bounding box.north east);
+\begin{pgfinterruptboundingbox}
+\begin{pgfonlayer}{background}
+  \fill[msPaper,opacity=1] ([xshift=-6pt,yshift=-6pt]paper southwest)
+    rectangle ([xshift=6pt,yshift=6pt]paper northeast);
+\end{pgfonlayer}
+\end{pgfinterruptboundingbox}
+\end{tikzpicture}
+\end{document}

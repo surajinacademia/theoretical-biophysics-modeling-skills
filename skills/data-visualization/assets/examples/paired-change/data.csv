@@ -1,0 +1,13 @@
+run,state,value
+01,Before,1.5
+01,After,2
+02,Before,1.8
+02,After,2.1
+03,Before,1.9
+03,After,1.8
+04,Before,2
+04,After,2.8
+05,Before,2.2
+05,After,2.4
+06,Before,2.6
+06,After,3.2

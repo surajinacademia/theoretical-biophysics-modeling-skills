@@ -9,38 +9,7 @@
 \RequirePackage{tikz}
 \RequirePackage{pgfplots}
 
-\ifLuaTeX
-  \RequirePackage{fontspec}
-  \IfFontExistsTF{CMU Sans Serif}
-    {
-      \setsansfont{CMU Sans Serif}
-      \renewcommand{\familydefault}{\sfdefault}
-    }
-    {
-      \setsansfont{Latin Modern Sans}
-      \renewcommand{\familydefault}{\sfdefault}
-      \PackageWarning{scientific-neutral}
-        {CMU Sans Serif unavailable; using Latin Modern Sans}
-    }
-\else\ifXeTeX
-  \RequirePackage{fontspec}
-  \IfFontExistsTF{CMU Sans Serif}
-    {
-      \setsansfont{CMU Sans Serif}
-      \renewcommand{\familydefault}{\sfdefault}
-    }
-    {
-      \setsansfont{Latin Modern Sans}
-      \renewcommand{\familydefault}{\sfdefault}
-      \PackageWarning{scientific-neutral}
-        {CMU Sans Serif unavailable; using Latin Modern Sans}
-    }
-\else
-  \RequirePackage[T1]{fontenc}
-  \RequirePackage{lmodern}
-  \renewcommand{\familydefault}{\sfdefault}
-\fi
-\fi
+\RequirePackage{minimalist-profile}
 
 \pgfplotsset{compat=1.18}
 
@@ -71,16 +40,16 @@
   }
 }
 
-\definecolor{saBlue}{HTML}{3F78A8}
-\definecolor{saCyan}{HTML}{278C8A}
-\definecolor{saGreen}{HTML}{2C8C68}
-\definecolor{saAmber}{HTML}{D88A24}
-\definecolor{saRed}{HTML}{B84B52}
-\definecolor{saViolet}{HTML}{7656A5}
-\definecolor{saInk}{HTML}{202124}
-\definecolor{saGray}{HTML}{5F6368}
-\definecolor{saLightGray}{HTML}{C7CED8}
-\definecolor{saPanelGray}{HTML}{FBFCFD}
+\colorlet{saBlue}{msColor5}
+\colorlet{saCyan}{msColor6}
+\colorlet{saGreen}{msColor4}
+\colorlet{saAmber}{msColor2}
+\colorlet{saRed}{msColor1}
+\colorlet{saViolet}{msColor6}
+\colorlet{saInk}{msInk}
+\colorlet{saGray}{msMuted}
+\colorlet{saLightGray}{msGrid}
+\colorlet{saPanelGray}{msPaper}
 
 \newlength{\saCellWidth}
 \newlength{\saCellHeight}
@@ -100,15 +69,15 @@
 \setlength{\saZoneWidth}{1.45cm}
 \setlength{\saZoneHeight}{2.55cm}
 
-\newcommand{\saFontPanelLabel}{\sffamily\bfseries\fontsize{12pt}{14pt}\selectfont}
-\newcommand{\saFontTitle}{\sffamily\bfseries\fontsize{9pt}{10.8pt}\selectfont}
-\newcommand{\saFontBody}{\sffamily\fontsize{8pt}{9.6pt}\selectfont}
-\newcommand{\saFontSmall}{\sffamily\fontsize{7pt}{8.4pt}\selectfont}
-\newcommand{\saFontTiny}{\sffamily\fontsize{6pt}{7.2pt}\selectfont}
-\newcommand{\saFontEquation}{\sffamily\fontsize{8pt}{9.8pt}\selectfont}
+\newcommand{\saFontPanelLabel}{\sffamily\bfseries\fontsize{\msFontPanel}{12pt}\selectfont}
+\newcommand{\saFontTitle}{\sffamily\bfseries\fontsize{\msFontTitle}{10.8pt}\selectfont}
+\newcommand{\saFontBody}{\sffamily\fontsize{\msFontBody}{9.6pt}\selectfont}
+\newcommand{\saFontSmall}{\sffamily\fontsize{\msFontSmall}{8.4pt}\selectfont}
+\newcommand{\saFontTiny}{\sffamily\fontsize{\msFontSmall}{8.4pt}\selectfont}
+\newcommand{\saFontEquation}{\sffamily\fontsize{\msFontEquation}{9.6pt}\selectfont}
 
 \tikzset{
-  every picture/.append style={font=\saFontBody},
+  every picture/.append style={ms base,font=\saFontBody},
   every node/.append style={font=\saFontBody},
   sa/font panel label/.style={font=\saFontPanelLabel},
   sa/font title/.style={font=\saFontTitle},
@@ -117,10 +86,10 @@
   sa/font tiny/.style={font=\saFontTiny},
   sa/font equation/.style={font=\saFontEquation},
   sa/panel/.style={
-    draw=saLightGray!80!black,
-    fill=saPanelGray,
-    rounded corners=4pt,
-    line width=0.5pt
+    draw=none,
+    fill=none,
+    rounded corners=0pt,
+    line width=\msLineContext
   },
   sa/panel label/.style={
     sa/font panel label,
@@ -129,34 +98,34 @@
   },
   sa/cell/.style={
     ellipse,
-    draw=saBlue!80!black,
-    fill=saCyan!18,
-    line width=0.8pt,
+    draw=saBlue,
+    fill=saCyan,fill opacity=\msOpacityFill,text opacity=1,
+    line width=\msLineStructure,
     minimum width=\saCellWidth,
     minimum height=\saCellHeight,
     align=center,
-    inner sep=1pt
+    inner sep=\msSpaceLabel
   },
   sa/source cell/.style={
     ellipse,
-    draw=saAmber!80!black,
-    fill=saAmber!22,
-    line width=0.8pt,
+    draw=saAmber,
+    fill=saAmber,fill opacity=\msOpacityFill,text opacity=1,
+    line width=\msLineStructure,
     minimum width=\saCellWidth,
     minimum height=\saCellHeight,
     align=center,
-    inner sep=1pt
+    inner sep=\msSpaceLabel
   },
   sa/nucleus/.style={
     circle,
-    draw=saBlue!70!black,
-    fill=saBlue!18,
+    draw=saBlue,
+    fill=saBlue,fill opacity=\msOpacityFill,text opacity=1,
     minimum size=4mm,
     inner sep=0pt
   },
   sa/receptor/.style={
-    draw=saRed!80!black,
-    fill=saRed!50,
+    draw=saRed,
+    fill=saRed,fill opacity=\msOpacityFill,text opacity=1,
     rounded corners=0.8pt,
     minimum width=2.8mm,
     minimum height=1.2mm,
@@ -166,19 +135,19 @@
     circle,
     draw=saInk,
     fill=white,
-    line width=0.55pt,
+    line width=\msLineContext,
     minimum size=2.4mm,
     inner sep=0pt
   },
   sa/fiber/.style={
     draw=saGray,
-    line width=0.8pt,
-    line cap=round
+    line width=\msLineStructure,
+    line cap=butt
   },
   sa/active fiber/.style={
     sa/fiber,
-    draw=saGreen!80!black,
-    line width=1.1pt
+    draw=saGreen,
+    line width=\msLineEmphasis
   },
   sa/buckled fiber/.style={
     sa/fiber,
@@ -186,45 +155,45 @@
     decoration={snake, amplitude=0.35mm, segment length=2.2mm}
   },
   sa/force arrow/.style={
-    -{Stealth[length=2.5mm]},
-    draw=saRed!85!black,
-    line width=1pt,
-    line cap=round
+    -{Latex[length=\msArrowLength,width=\msArrowWidth]},
+    draw=saRed,
+    line width=\msLineStructure,
+    line cap=butt
   },
   sa/tension arrow/.style={
-    {Stealth[length=2.2mm]}-{Stealth[length=2.2mm]},
-    draw=saAmber!90!black,
-    line width=0.9pt,
-    line cap=round
+    {Latex[length=\msArrowLength,width=\msArrowWidth]}-{Latex[length=\msArrowLength,width=\msArrowWidth]},
+    draw=saAmber,
+    line width=\msLineStructure,
+    line cap=butt
   },
   sa/displacement arrow/.style={
-    -{Stealth[length=2.3mm]},
-    draw=saGreen!80!black,
-    line width=0.9pt,
-    dashed
+    -{Latex[length=\msArrowLength,width=\msArrowWidth]},
+    draw=saGreen,
+    line width=\msLineStructure,
+    dash pattern=on \msDashDashedOn off \msDashDashedOff
   },
   sa/gradient arrow/.style={
-    -{Stealth[length=2.5mm]},
-    draw=saAmber!90!black,
-    line width=1pt
+    -{Latex[length=\msArrowLength,width=\msArrowWidth]},
+    draw=saAmber,
+    line width=\msLineStructure
   },
   sa/torque arrow/.style={
-    -{Stealth[length=2.3mm]},
-    draw=saViolet!90!black,
-    line width=0.9pt
+    -{Latex[length=\msArrowLength,width=\msArrowWidth]},
+    draw=saViolet,
+    line width=\msLineStructure
   },
   sa/sensing radius/.style={
-    draw=saBlue!65,
-    dashed,
-    line width=0.75pt,
-    opacity=0.8
+    draw=saBlue,draw opacity=\msOpacityContext,
+    dash pattern=on \msDashDashedOn off \msDashDashedOff,
+    line width=\msLineStructure,
+    draw opacity=\msOpacityContext,fill opacity=\msOpacityFill,text opacity=1
   },
   sa/annotation/.style={
-    draw=saGray!60,
+    draw=saGray,draw opacity=\msOpacityContext,
     fill=white,
     rounded corners=2pt,
-    inner xsep=4pt,
-    inner ysep=2.5pt,
+    inner xsep=\msSpaceLabel,
+    inner ysep=\msSpaceLabel,
     align=center
   },
   sa/process box/.style={
@@ -232,8 +201,8 @@
     minimum width=\saProcessBoxWidth,
     minimum height=\saProcessBoxHeight,
     text width=\saProcessBoxWidth,
-    inner xsep=2pt,
-    inner ysep=2pt,
+    inner xsep=\msSpaceLabel,
+    inner ysep=\msSpaceLabel,
     sa/font small,
     align=center
   },
@@ -241,8 +210,8 @@
     sa/annotation,
     minimum width=\saChipWidth,
     minimum height=\saChipHeight,
-    inner xsep=1.5pt,
-    inner ysep=1pt,
+    inner xsep=\msSpaceLabel,
+    inner ysep=\msSpaceLabel,
     sa/font tiny,
     align=center
   },
@@ -256,16 +225,16 @@
   },
   sa/layout zone debug/.style={
     sa/layout zone,
-    draw=saLightGray!80!black,
+    draw=saLightGray,
     fill=white,
-    opacity=0.35,
+    draw opacity=\msOpacityContext,fill opacity=\msOpacityFill,text opacity=1,
     rounded corners=2pt
   },
   sa/annotation arrow/.style={
-    -{Stealth[length=2.2mm]},
+    -{Latex[length=\msArrowLength,width=\msArrowWidth]},
     draw=saInk,
-    line width=0.75pt,
-    line cap=round
+    line width=\msLineStructure,
+    line cap=butt
   },
   sa/imported plot/.style={
     inner sep=0pt,
@@ -273,30 +242,30 @@
     anchor=south west
   },
   sa/plot frame/.style={
-    draw=saLightGray!85!black,
+    draw=saLightGray,
     fill=none,
     rounded corners=2pt,
-    line width=0.45pt
+    line width=\msLineContext
   },
   sa/equation box/.style={
-    draw=saGray!60,
+    draw=saGray,draw opacity=\msOpacityContext,
     fill=white,
     rounded corners=3pt,
-    inner xsep=6pt,
-    inner ysep=4pt,
+    inner xsep=\msSpaceLabel,
+    inner ysep=\msSpaceLabel,
     sa/font equation,
     align=center
   },
   sa/scale bar/.style={
     draw=saInk,
-    line width=0.9pt
+    line width=\msLineStructure
   },
   sa/axis/.style={
     axis line style={draw=saInk},
     tick style={draw=saInk},
     label style={text=saInk},
     tick label style={text=saInk},
-    grid=major,
+    grid=none,
     grid style={draw=saLightGray},
     legend style={
       draw=none,
@@ -311,5 +280,5 @@
 
 \newcommand{\sascaleBar}[3]{%
   \draw[sa/scale bar] #1 -- ++(#2,0)
-    node[midway, below=2pt] {#3};%
+    node[midway, below=\msSpaceLabel] {#3};%
 }

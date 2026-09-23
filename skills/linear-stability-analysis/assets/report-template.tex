@@ -1,0 +1,149 @@
+\documentclass[11pt]{article}
+
+\usepackage[margin=1in]{geometry}
+\usepackage{amsmath,amssymb,bm}
+\usepackage{booktabs}
+\usepackage{graphicx}
+\usepackage{xcolor}
+\usepackage[hidelinks]{hyperref}
+
+\newcommand{\modelname}{Replace with model name}
+\newcommand{\authorprompt}[1]{\textcolor{gray}{\emph{Authoring prompt: #1}}}
+\newcommand{\vect}[1]{\bm{#1}}
+\newcommand{\Real}{\operatorname{Re}}
+\newcommand{\Imag}{\operatorname{Im}}
+
+\title{\modelname: Linear Stability Analysis}
+\author{}
+\date{}
+
+\begin{document}
+\maketitle
+
+\noindent\textbf{Governing-equation source:} \path{replace/with/source/path}\\
+\textbf{Analysis code:} \path{linear_stability.py}\\
+\textbf{Parameter data:} \path{parameters.json}\\
+\textbf{Spectrum data:} \path{spectrum.csv}\\
+\textbf{Artifact manifest:} \path{artifact-manifest.sha256}
+
+\section{Model Purpose And Questions}
+
+\authorprompt{State the physical phenomenon, stationary reference state, stability question, and observable criterion. Bound all predictions to infinitesimal early-time perturbations.}
+
+\section{Physical Picture And Assumptions}
+
+\authorprompt{Explain the stabilizing and destabilizing mechanisms before the mathematics. Record each linearization, geometry, constitutive, and scale assumption with its rationale, evidence or status, and limitation.}
+
+\begin{center}
+\begin{tabular}{p{0.19\linewidth}p{0.23\linewidth}p{0.23\linewidth}p{0.23\linewidth}}
+\toprule
+Assumption & Rationale & Source or status & Limitation \\
+\midrule
+Replace & Replace & Replace & Replace \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Entities, Domain, And Notation}
+
+\authorprompt{Define fields, components, coordinates, domain, spatial dimension, units, geometric conventions, growth rate $s$, wavevector $\vect{k}$, and branch indices before use.}
+
+\begin{center}
+\begin{tabular}{p{0.16\linewidth}p{0.52\linewidth}p{0.20\linewidth}}
+\toprule
+Symbol & Physical meaning & Units or domain \\
+\midrule
+Replace & Replace & Replace \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Parameters And Scales}
+
+\authorprompt{Record physical parameters, units, values or symbolic assumptions, admissible ranges, and provenance. Define scales and dimensionless groups. Keep numerical controls in Section 8.2.}
+
+\begin{center}
+\small
+\begin{tabular}{p{0.08\linewidth}p{0.11\linewidth}p{0.17\linewidth}p{0.08\linewidth}p{0.14\linewidth}p{0.18\linewidth}}
+\toprule
+Symbol & Code name & Meaning & Units & Value or range & Provenance \\
+\midrule
+Replace & Replace & Replace & Replace & Replace & Replace \\
+\bottomrule
+\end{tabular}
+\end{center}
+
+\section{Governing Equations}
+
+\authorprompt{Present the supplied governing equations and verify the stationary-state residual before linearizing. The displays below illustrate notation only and must be replaced by the model-specific derivation.}
+
+\begin{equation}
+  \mathcal{F}\!\left(\vect{u},\partial_t\vect{u},\nabla\vect{u},\ldots;\vect{p}\right)=\vect{0},
+  \qquad
+  \mathcal{F}\!\left(\vect{u}_0,\vect{0},\nabla\vect{u}_0,\ldots;\vect{p}\right)=\vect{0}.
+  \label{eq:governing-pattern}
+\end{equation}
+
+\begin{equation}
+  \vect{u}=\vect{u}_0+\epsilon\vect{\eta},
+  \qquad 0<\epsilon\ll1,
+  \label{eq:perturbation-pattern}
+\end{equation}
+
+\authorprompt{Show the coefficient of $\epsilon$, define the complete linear operator, and derive the characteristic equation or exact matrix pencil. Justify a spatial-mode substitution before presenting a dispersion relation; otherwise retain the full discretized operator. Present analytical branches or stability conditions with their assumptions.}
+
+\section{Initial And Boundary Conditions}
+
+\authorprompt{State boundary conditions for the original and perturbed fields. Derive admissible eigenfunctions and wavevectors when they exist; otherwise explain how the full discretized operator enforces the boundaries. Explain constraints, gauge choices, excluded modes, and the small initial-amplitude requirement.}
+
+\section{Observables And Model Tests}
+
+\authorprompt{Present analytical and numerical dispersion results when a valid wavevector basis exists; otherwise present a refinement-supported indexed or complex-plane eigenspectrum. Include unstable modes or bands, thresholds, eigenvector content, uncertainty, and supported physical interpretation. Never fabricate missing numerical results or assert a fastest wavelength without a finite nonzero admissible maximizer. For real-wavevector analysis of an open advective system, avoid absolute or fixed-location instability claims without separate evidence. Distinguish a physical high-wavenumber cutoff from grid truncation and flag proven unbounded growth as possible continuum ill-posedness.}
+
+\begin{figure}[htbp]
+  \centering
+  % Authoring scaffold only. In a completed report, replace the entire
+  % \IfFileExists block with one unconditional direct \includegraphics command.
+  \IfFileExists{figures/dispersion_relation.pdf}{%
+    \includegraphics[width=0.86\linewidth]{figures/dispersion_relation.pdf}%
+  }{%
+    \fbox{\parbox[c][0.25\textheight][c]{0.80\linewidth}{\centering
+      \authorprompt{Generate \path{figures/dispersion_relation.pdf} from the recorded spectrum data before treating this as a completed report.}}}%
+  }
+  \caption{Replace with a factual caption defining the stability convention, axes and units, parameter set, spectral representation, branch or refinement encoding, and analytical versus numerical marks when both exist.}
+  \label{fig:dispersion-relation}
+\end{figure}
+
+\section{Solution Method}
+
+\subsection{Methodology And Rationale}
+
+\authorprompt{Explain why the symbolic linearization, spatial basis, and eigenvalue formulation suit the supplied equations and stability question.}
+
+\subsection{Numerical Formulation}
+
+\authorprompt{Define the lambdified matrix or polynomial, either valid wavevector sampling and finite modes or the full-operator discretization and refinements, SciPy solver, constraint projection or companion form, branch or subspace matching, tolerances, scaling, and stored data schema.}
+
+\subsection{Algorithm And Flowchart}
+
+\authorprompt{Give mathematical pseudocode for validation, reference-state checking, first-order extraction, spectral construction, lambdification, eigensolution, branch matching, residual checks, storage, and plotting. Include a compact in-report flowchart only when it clarifies branching.}
+
+\subsection{Accuracy And Verification}
+
+\authorprompt{Report checks actually performed: symbolic residuals, dimensions, analytical--numerical agreement when available, eigenpair backward residuals, limiting cases, wavenumber resolution or operator refinement, and proportionate conditioning or subspace checks for non-normal or nearly defective cases. Leave a sign or threshold unresolved when uncertainty crosses zero. State unperformed checks as limitations.}
+
+\section{Model Record And Implementation}
+
+\subsection{Implementation Mapping}
+
+\authorprompt{Map governing equations and report quantities to inspected source, SymPy expressions, SciPy calculation, parameter input, spectrum columns, and figure files. Record runtime and package versions, revision and dirty state, and the SHA-256 artifact manifest covering report, calculation, parameters, spectrum, figures, PDF, and checker version. The manifest must not hash itself; external review records reference its separately computed hash.}
+
+\subsection{Method Decisions And Changes}
+
+\authorprompt{Record consequential choices, rationale, evidence or status, and effects on interpretation. Do not write a routine edit log.}
+
+\subsection{References}
+
+\authorprompt{List only sources actually used and cite them where they support equations, assumptions, values, or numerical methods. Use stable links or identifiers.}
+
+\end{document}

@@ -1,0 +1,4 @@
+interface:
+  display_name: "Slurm"
+  short_description: "Prepare and manage one CPU batch job with Slurm"
+  default_prompt: "Use $slurm to prepare a CPU batch script for my specified command and check it before submission."

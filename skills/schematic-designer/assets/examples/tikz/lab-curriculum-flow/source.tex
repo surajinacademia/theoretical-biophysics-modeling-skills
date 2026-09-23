@@ -1,0 +1,39 @@
+% Independent original example by the schematic-designer maintainers.
+% Pattern reference (no upstream code copied):
+% https://github.com/f0nzie/tikz_favorites/blob/9506fd5643abb406197bed176ab9183484006dd1/src/flow-labs_class%2Bdiagram%2Bstyle%2Bpgf%2Bcommand.tex
+% License: MIT, as part of the biophysics-simulation-workflow-skills bundle.
+% Minimalist adaptation: shared roles, native Latex heads, and revised spacing.
+\documentclass[tikz,border=10bp]{standalone}
+\usepackage{minimalist-profile}
+\usetikzlibrary{calc,fit}
+\tikzset{lab/.style={text=msColor5,align=center,inner sep=\msSpaceLabel},prerequisite/.style={ms arrow},crosslink/.style={ms arrow,draw=msColor1,ms dashed},stage/.style={ms title,text=msInk,text width=2.2cm,align=left,anchor=west}}
+\begin{document}
+\begin{tikzpicture}[ms base]
+  \node[lab] (signals) at (1,0) {Signals and systems};
+  \node[lab] (fourier) at (1,-1.2) {Fourier methods};
+  \node[lab] (rf) at (-1.8,-2.7) {RF circuits};
+  \node[lab] (sampling) at (3.8,-2.7) {Sampling and data};
+  \node[lab] (modulation) at (-1.8,-4.1) {Modulation};
+  \node[lab] (coding) at (3.8,-4.1) {Digital coding};
+  \node[lab] (integration) at (1,-5.6) {Integrated transceiver};
+  \node[lab,text=msInk] (capstone) at (1,-6.8)
+    {\textcolor{msColor2}{\rule{\msMarkerPoint}{\msLineEmphasis}}\enspace Capstone measurement};
+  \draw[prerequisite] (signals) -- (fourier);
+  \draw[prerequisite] (fourier) -- (rf);
+  \draw[prerequisite] (fourier) -- (sampling);
+  \draw[prerequisite] (rf) -- (modulation);
+  \draw[prerequisite] (sampling) -- (coding);
+  \draw[prerequisite] (modulation) -- (integration);
+  \draw[prerequisite] (coding) -- (integration);
+  \draw[prerequisite] (integration) -- (capstone);
+  \draw[crosslink] (rf.east) to[bend left=18] (coding.west);
+  \draw[crosslink] (sampling.west) to[bend right=18] (modulation.east);
+
+  \node[stage] at (-5.1,-.6) {Foundations};
+  \node[stage] at (-5.1,-3.4) {Parallel\\laboratory\\streams};
+  \node[stage] at (-5.1,-6.2) {Integration};
+  \node[ms title] at (1,1) {Laboratory curriculum dependencies};
+  \node[ms small,text=msMuted] at (1,-7.7)
+    {solid: prerequisite \quad dashed: cross-stream dependency};
+\end{tikzpicture}
+\end{document}

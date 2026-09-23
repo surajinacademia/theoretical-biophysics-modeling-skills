@@ -1,0 +1,40 @@
+% Author: Marek Fiser <tikz at marekfiser.cz>
+% MESIF protocol: http://en.wikipedia.org/wiki/MESIF_protocol
+% Minimalist adaptation: shared roles, native Latex heads, and revised spacing.
+\documentclass[tikz,border=10bp]{standalone}
+\usepackage{minimalist-profile}
+\usetikzlibrary{automata}
+\begin{document}
+\begin{tikzpicture}[ms base,ms arrow,shorten >=1bp,auto,node distance=3.2cm,main node/.style={circle,fill=msColor5!\msFillPercent!msPaper,draw=msColor5,text=msColor5,ms title,minimum size=13mm}]
+  \node[main node] (M) {M};
+  \node[main node] (E) [below of=M] {E};
+  \node[main node] (S) [below of=E] {S};
+  \node[main node] (F) [below of=S] {F};
+  \node[main node] (I) [below of=F] {I};
+
+  \path[every node/.style={ms body,fill=msPaper,inner sep=\msSpaceUnit}]
+    % Right-hand-side arrows rendered from top to bottom to
+    % achieve proper rendering of labels over arrows.
+    (M) edge [loop above] node {PrRd/-, PrWr/-} (M)
+        edge [bend left=60] node[right=1mm] {BusRdX/Flush} (I)
+        edge [bend left=40] node[right=1mm] {BusRd/Flush} (S)
+    (E) edge [loop above] node {PrRd/-} (E)
+        edge [bend left=50] node[right=1mm] {BusRdX/Flush} (I)
+        edge [bend left=30] node[right=1mm] {BusRd/Flush} (S)
+    (S) edge [loop above] node {PrRd/-} (S)
+        edge [loop right] node[right=1mm]  {BusRd/-} (S)
+        edge [bend left=40] node[right=1mm] {BusRdX/Flush} (I)
+    (F) edge [bend left=30] node[right=1mm] {BusRdX/Flush} (I)
+
+    % Left-hand-side arrows rendered from bottom to top to
+    % achieve proper rendering of labels over arrows.
+    (I) edge [bend left=65] node[left=1mm] {PrWr/BusRdX} (M)
+        edge [bend left=55] node[left=1mm] {PrRd/BusRd Ex} (E)
+        edge [bend left=30] node[left=1mm] {PrRd/BusRd} (F)
+    (F) edge [loop above] node {PrRd/-} (F)
+        edge [bend left=50] node[left=1mm] {PrWr/BusRdX} (M)
+        edge [bend left=30] node[left=1mm] {BusRd/Flush} (S)
+    (S) edge [bend left=40] node[left=1mm] {PrWr/BusRdX} (M)
+    (E) edge [bend left=30] node[left=1mm] {PrWr/-} (M);
+\end{tikzpicture}
+\end{document}

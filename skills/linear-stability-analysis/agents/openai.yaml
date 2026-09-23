@@ -1,0 +1,4 @@
+interface:
+  display_name: "Linear Stability Analysis"
+  short_description: "Derive LSA, plot dispersion, and write LaTeX reports"
+  default_prompt: "Use $linear-stability-analysis to derive and verify analytical and numerical stability in 1D or 2D with SymPy and SciPy, plot dispersion relations, and write a LaTeX report."

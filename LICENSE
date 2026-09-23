@@ -1,6 +1,21 @@
+License scope
+=============
+
+Original code and documentation in this collection use the MIT terms below,
+except where a file or accompanying notice states otherwise. Existing copyright
+and license notices must be retained. Third-party material and adaptations keep
+their own licenses; this MIT grant does not relicense them.
+
+In particular, attributed diagram examples include CC BY-SA 4.0, CC BY-SA 3.0,
+and CC BY-NC 4.0 material. The VIGIL example has a noncommercial restriction.
+Embedded font subsets have their own terms. See THIRD_PARTY_NOTICES.md and the
+per-example ATTRIBUTION.md and license files before reuse. The collection as a
+whole is mixed-license, not uniformly MIT or unrestricted open source.
+
 MIT License
 
 Copyright (c) 2026 Theoretical Biophysics Modeling Skills contributors
+Copyright (c) 2026 Biophysics Simulation Workflow Skills contributors
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

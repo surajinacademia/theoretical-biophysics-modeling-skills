@@ -1,0 +1,70 @@
+% Minimalist adaptation, 2026. See ATTRIBUTION.md for provenance and changes.
+% Independent original example by the schematic-designer maintainers.
+% Pattern reference (no upstream code copied):
+% https://github.com/f0nzie/tikz_favorites/blob/9506fd5643abb406197bed176ab9183484006dd1/src/physics-trajectory.tex
+% License: MIT, as part of the biophysics-simulation-workflow-skills bundle.
+\documentclass[tikz,border=8bp]{standalone}
+\usepackage{minimalist-profile}
+\usetikzlibrary{arrows.meta,calc}
+
+\begin{document}
+\begin{tikzpicture}[ms base,
+  x={(0.96cm,-0.18cm)},
+  y={(0.52cm,0.30cm)},
+  z={(0cm,1cm)},
+  line join=round
+]
+  \def\incCos{0.82}
+  \def\incSin{0.57}
+
+  % Reference plane and axes.
+  \filldraw[ms context,fill=msMuted,ms fill,draw=msMuted]
+    (-4,-3,0) -- (4,-3,0) -- (4,3,0) -- (-4,3,0) -- cycle;
+  \node[ms body,text=msMuted,anchor=north east] at (4,-3,0)
+    {reference plane};
+  \draw[-{Latex[length=\msArrowLength,width=\msArrowWidth]},draw=msInk] (0,0,0) -- (4.6,0,0) node[below] {$x$};
+  \draw[-{Latex[length=\msArrowLength,width=\msArrowWidth]},draw=msInk] (0,0,0) -- (0,3.7,0) node[right,yshift=-\msSpaceGroup] {$y$};
+  \draw[-{Latex[length=\msArrowLength,width=\msArrowWidth]},draw=msInk] (0,0,0) -- (0,0,2.8) node[left] {$z$};
+
+  % Inclined orbital plane and full trajectory.
+  \filldraw[ms context,fill=msColor1,ms fill,draw=msColor1]
+    (-3.8,{-2.5*\incCos},{-2.5*\incSin}) --
+    ( 3.8,{-2.5*\incCos},{-2.5*\incSin}) --
+    ( 3.8,{ 2.5*\incCos},{ 2.5*\incSin}) --
+    (-3.8,{ 2.5*\incCos},{ 2.5*\incSin}) -- cycle;
+  \draw[ms context,color=msColor1,ms dashed]
+    plot[domain=0:360,samples=120,variable=\t]
+      ({3.25*cos(\t)},{1.95*\incCos*sin(\t)},{1.95*\incSin*sin(\t)});
+  \draw[color=msColor1,line width=\msLineEmphasis,-{Latex[length=\msArrowLength,width=\msArrowWidth]}]
+    plot[domain=-15:118,samples=70,variable=\t]
+      ({3.25*cos(\t)},{1.95*\incCos*sin(\t)},{1.95*\incSin*sin(\t)});
+
+  % Line of nodes is the intersection of the two planes.
+  \draw[draw=msColor5,line width=\msLineStructure]
+    (-4.1,0,0) -- (4.1,0,0)
+    node[pos=0.12,below,ms body,text=msColor5] {line of nodes};
+
+  \pgfmathsetmacro{\bodyX}{3.25*cos(68)}
+  \pgfmathsetmacro{\bodyY}{1.95*\incCos*sin(68)}
+  \pgfmathsetmacro{\bodyZ}{1.95*\incSin*sin(68)}
+  \coordinate (B) at (\bodyX,\bodyY,\bodyZ);
+  \coordinate (Bproj) at (\bodyX,\bodyY,0);
+  \draw[-{Latex[length=\msArrowLength,width=\msArrowWidth]},color=msColor6,line width=\msLineStructure]
+    (0,0,0) -- node[above left,ms body,text=msColor6] {$\mathbf r(t)$} (B);
+  \draw[ms context,draw=msMuted,ms dashed] (B) -- (Bproj);
+  \fill[fill=msColor1,draw=msColor1] (B) circle ({0.5*\msMarkerEmphasis})
+    node[above right,ms body,text=msColor1] {body};
+  \fill[msInk] (0,0,0) circle ({0.5*\msMarkerEmphasis})
+    node[below left,ms body] {Ellipse center};
+
+  % The inclination is a neutral angular measure; its color no longer duplicates the body role.
+  \draw[-{Latex[length=\msArrowLength,width=\msArrowWidth]},color=msInk,line width=\msLineStructure]
+    (1.15,0,0) to[bend left=28]
+    node[pos=0.58,above,ms body,text=msInk] {$i$}
+    (1.15,{0.95*\incCos},{0.95*\incSin});
+  \node[ms title,anchor=south] at (0,3.3,2.45)
+    {Inclined orbital trajectory};
+  \node[ms small,text=msMuted,anchor=north,yshift=-\msSpaceGroup]
+    at (current bounding box.south) {illustrative geometry; not to scale};
+\end{tikzpicture}
+\end{document}

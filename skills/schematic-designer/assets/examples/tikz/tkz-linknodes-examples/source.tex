@@ -1,0 +1,43 @@
+% Adapted from Alain Matthes, including Herbert Voss's completing-square example.
+% CC BY-SA 4.0. See ATTRIBUTION.md for provenance and the corrected annotation.
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{minimalist-profile}
+\usetikzlibrary{calc}
+\begin{document}
+\begin{tikzpicture}[ms base]
+  \node[ms title,text=msColor5,anchor=west] at (0,0.9) {Solve a quadratic equation};
+  \node (a1) at (1.7,0) {$3\left(x^2-\frac23\right)=4$};
+  \node (a2) at (1.7,-1.15) {$3x^2-2=4$};
+  \node (a3) at (1.7,-2.3) {$3x^2=6$};
+  \node (a4) at (1.7,-3.45) {$x^2=2$};
+  \node (a5) at (1.7,-4.6) {$\sqrt{x^2}=\sqrt2$};
+  \node (a6) at (1.7,-5.75) {$|x|=\sqrt2$};
+  \node[text=msColor5] (a7) at (1.7,-6.9) {$x=\pm\sqrt2$};
+  \foreach \from/\to/\label in {1/2/{expand},2/3/{$+2$},3/4/{$\div3$},4/5/{$\sqrt{\ldots}$},5/6/{$\sqrt{x^2}=|x|$},6/7/{so that}} {
+    \draw[ms arrow,draw=msColor5] (a\from.south) -- (a\to.north)
+      node[midway,right=\msSpaceLabel,text=msColor5] {\label};
+  }
+  \node[ms small,text=msMuted,align=left,anchor=west] at (4,-3.45)
+    {Isolate the term\\with the variable.};
+
+  \node[ms title,text=msColor1,anchor=west] at (7,0.9) {Complete the square};
+  \node (b1) at (10.5,0) {$y=2x^2-3x+5$};
+  \node (b2) at (10.5,-2.35)
+    {$y=2\left(\textcolor{msColor1}{\underbrace{x^2-\frac32x+\left(\frac34\right)^2}}
+      \underbrace{-\left(\frac34\right)^2+\frac52}\right)$};
+  \node (b3) at (10.5,-4.6)
+    {$y=2\left(\textcolor{msColor1}{\left(x-\frac34\right)^2}+\frac{31}{16}\right)$};
+  \node (b4) at (10.5,-6.9)
+    {$y=2\textcolor{msColor1}{\left(x-\frac34\right)^2}+\frac{31}{8}$};
+  \draw[ms arrow,draw=msColor1] (b1.south) -- (b2.north)
+    node[midway,right=\msSpaceLabel,align=left,text=msColor1]
+    {Form a binomial square:\\add and subtract $\frac9{16}$ inside.};
+  \draw[ms arrow,draw=msColor1] (b2.south) -- (b3.north)
+    node[midway,right=\msSpaceLabel,align=left,text=msColor1]
+    {$(a-b)^2=a^2-2ab+b^2$};
+  \draw[ms arrow,draw=msColor1] (b3.south) -- (b4.north)
+    node[midway,right=\msSpaceLabel,text=msColor1] {simplify};
+  \node[ms small,text=msMuted,anchor=north west] at (0,-7.5)
+    {Real-valued $x$; arrows indicate equivalent algebraic steps.};
+\end{tikzpicture}
+\end{document}

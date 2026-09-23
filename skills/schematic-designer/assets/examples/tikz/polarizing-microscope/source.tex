@@ -1,0 +1,102 @@
+% Adapted from Cyril Langlois; CC BY-SA 4.0. See ATTRIBUTION.md.
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{minimalist-profile}
+\begin{document}
+\begin{tikzpicture}[ms base,x={(0.866cm,-0.5cm)}, y={(0.866cm,0.5cm)}, z={(0cm,1cm)}, scale=1.0,
+    %Option for nice arrows
+    % Native Latex heads come from the shared profile.
+    inner sep=\msSpaceLabel, outer sep=0bp,%
+    axis/.style={ms arrow,draw=msMuted,line width=\msLineContext},
+    wave/.style={ms structure,color=#1,smooth},
+    polaroid/.style={draw=msMuted,line width=\msLineContext,fill=msMuted,ms fill},
+    field vector/.style={line width=\msLineContext,-{Latex[length=0.6*\msArrowLength,width=0.6*\msArrowWidth]}},
+]
+    % Shared colors are reused for waves and labels.
+    % Frame
+    \coordinate (O) at (0, 0, 0);
+    \draw[axis] (O) -- +(14, 0,   0) node [right,text=msMuted] {$x$};
+    \draw[axis] (O) -- +(0,  2.5, 0) node [right,text=msMuted] {$y$};
+    \draw[axis] (O) -- +(0,  0,   2) node [above,text=msMuted] {$z$};
+
+    \draw[ms structure,ms dashed] (-2,0,0) -- (O);
+
+    % monochromatic incident light with electric field
+    \draw[wave=msColor6, draw opacity=\msOpacityForeground, variable=\x, samples at={-2,-1.75,...,0}]
+        plot (\x, { cos(1.0*\x r)*sin(2.0*\x r)}, { sin(1.0*\x r)*sin(2.0*\x r)})
+        plot (\x, {-cos(1.0*\x r)*sin(2.0*\x r)}, {-sin(1.0*\x r)*sin(2.0*\x r)});
+
+    \foreach \x in{-2,-1.75,...,-0.25}{
+        \draw[color=msColor6, draw opacity=\msOpacityForeground,field vector]
+            (\x,0,0) -- (\x, { cos(1.0*\x r)*sin(2.0*\x r)}, { sin(1.0*\x r)*sin(2.0*\x r)})
+            (\x,0,0) -- (\x, {-cos(1.0*\x r)*sin(2.0*\x r)}, {-sin(1.0*\x r)*sin(2.0*\x r)});
+    }
+
+    \filldraw[polaroid] (0,-2,-1.5) -- (0,-2,1.5) -- (0,2,1.5) -- (0,2,-1.5) -- (0,-2,-1.5)
+        ;
+    \node[anchor=north west] at (0,-2,-1.7) {Polaroid};
+
+    %Direction of polarization
+    \draw[ms structure,<->] (0,-1.75,-1) -- (0,-0.75,-1);
+
+    % Electric field vectors
+    \draw[wave=msColor6, variable=\x,samples at={0,0.25,...,6}]
+        plot (\x,{sin(2*\x r)},0)node[anchor=north,text=msColor6]{$\vec{E}$};
+
+    %Polarized light between polaroid and thin section
+    \foreach \x in{0.25,0.5,...,6}
+        \draw[color=msColor6,field vector] (\x,0,0) -- (\x,{sin(2*\x r)},0);
+
+    \draw (3,1,1) node [text width=2.5cm, text centered,text=msColor6]{Polarized light};
+
+    %Crystal thin section
+    \begin{scope}[draw=msMuted,line width=\msLineContext]
+        \draw (6,-2,-1.5) -- (6,-2,1.5)
+                -- (6, 2, 1.5) -- (6, 2, -1.5) -- cycle % First face
+            (6,  -2, -1.5) -- (6.2, -2,-1.5)
+            (6,   2, -1.5) -- (6.2,  2,-1.5)
+            (6,  -2,  1.5) -- (6.2, -2, 1.5)
+            (6,   2,  1.5) -- (6.2,  2, 1.5)
+            (6.2,-2, -1.5) -- (6.2, -2, 1.5) -- (6.2, 2, 1.5)
+                -- (6.2, 2, -1.5) -- cycle; % Second face
+
+        \node[anchor=north west] at (6,-2,-1.7) {Crystal section};
+
+        %Optical indices
+        \draw[msColor1, ->]       (6.1, 0, 0) -- (6.1, 0.26,  0.966) node [right,text=msColor1] {$n_{g}'$}; % index 1
+        \draw[msColor1, ms dashed]   (6.1, 0, 0) -- (6.1,-0.26, -0.966); % index 1
+        \draw[msColor5, ->]     (6.1, 0, 0) -- (6.1, 0.644,-0.173) node [right,text=msColor5] {$n_{p}'$}; % index 2
+        \draw[msColor5, ms dashed] (6.1, 0, 0) -- (6.1,-0.644, 0.173); % index 2
+    \end{scope}
+
+    %Rays leaving thin section
+    \draw[wave=msColor1,   variable=\x, samples at={6.2,6.45,...,12}]
+        plot (\x, {0.26*0.26*sin(2*(\x-0.5) r)},  {0.966*0.26*sin(2*(\x-0.5) r)});  %n'g-oriented ray
+    \draw[wave=msColor5, variable=\x, samples at={6.2,6.45,...,12}]
+        plot (\x, {0.966*0.966*sin(2*(\x-0.1) r)},{-0.26*0.966*sin(2*(\x-0.1) r)}); %n'p-oriented ray
+    \draw (10,1,1) node [text width=2.5cm, text centered] {Polarized and dephased light};
+
+    \foreach \x in{6.2,6.45,...,12} {
+        \draw[color=msColor5,field vector] (\x, 0, 0) --
+            (\x, {0.966*0.966*sin(2*(\x-0.1) r)}, {-0.26*0.966*sin(2*(\x-0.1) r)});
+        \draw[color=msColor1,field vector] (\x, 0, 0) --
+            (\x, {0.26*0.26*sin(2*(\x-0.5) r)}, {0.966*0.26*sin(2*(\x-0.5) r)});
+    }
+
+    %Second polarization
+    \draw[polaroid]   (12, -2,  -1.5) -- (12, -2,   1.5)  %Polarizing filter
+        -- (12, 2, 1.5) -- (12, 2, -1.5) -- cycle;
+    \node[anchor=north west] at (12,-2,-1.7) {Polaroid};
+    \draw[ms structure, <->] (12, -1.5,-0.5) -- (12, -1.5, 0.5); %Polarization direction
+
+    %Light leaving the second polaroid
+    \draw[wave=msColor1,variable=\x, samples at={12, 12.25,..., 14}]
+        plot (\x,{0}, {0.966*0.966*0.26*sin(2*(\x-0.5) r)}); %n'g polarized ray
+    \draw[wave=msColor5,  variable=\x, samples at={12, 12.25,..., 14}]
+        plot (\x,{0}, {-0.26*0.966*sin(2*(\x-0.1) r)});      %n'p polarized ray
+
+    \node[ms small,align=left, text width=14cm, anchor=north west, yshift=-\msSpaceGroup] at (current bounding box.south west)
+        {Light behavior in a petrographic microscope with light polarizing
+        device. Only one incident wavelength is shown (monochromatic light).
+        The magnetic field, perpendicular to the electric one, is not drawn.};
+\end{tikzpicture}
+\end{document}

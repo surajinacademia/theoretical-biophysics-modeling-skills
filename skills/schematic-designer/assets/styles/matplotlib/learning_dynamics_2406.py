@@ -1,89 +1,36 @@
-"""Executable Matplotlib profile for the learning-dynamics-2406 grammar."""
+"""Compatibility names for existing examples, backed by the Minimalist profile.
 
-from __future__ import annotations
+The historical module name is retained for source compatibility; it no longer
+selects a second palette or a fallback font. New examples can use the shared
+profile directly and assign scientific roles in their own source.
+"""
+from pathlib import Path
+import sys
+sys.path.insert(0, str(Path(__file__).resolve().parents[1]))
+from minimalist_profile import apply_style, palette, FONT_PT, OPACITY, INK, MUTED, PAPER, tint, neutral_colors
 
-import logging
-
-import matplotlib
-from matplotlib import font_manager
-
+_c = palette()
+_n = neutral_colors()
+def _pale(color):
+    return tint(color, OPACITY['fill'])
 
 COLORS = {
-    "canvas": "#FFFFFF",
-    "ink": "#1A1A1A",
-    "warm_ink": "#231F20",
-    "muted": "#4D4D4D",
-    "faint": "#999999",
-    "neutral_bar": "#E1E1E1",
-    "training": "#2CA05A",
-    "training_bar": "#C0E3CE",
-    "retrieval": "#A9745C",
-    "retrieval_bar": "#EACFC3",
-    "purple": "#8B5EB9",
-    "purple_edge": "#52386E",
-    "orange": "#E8901A",
-    "orange_edge": "#8E4D08",
-    "blue": "#3B8BC3",
-    "blue_dark": "#124984",
-    "red": "#F24432",
-    "red_dark": "#A52C22",
-    "yellow": "#FFD42A",
-    "field_core": "#FAD432",
-    "field_pale": "#FBECAE",
-    "fixed_section": "#D9E9F3",
-    "cycle_section": "#F6DFDB",
+    'canvas': PAPER, 'ink': INK, 'warm_ink': INK, 'muted': MUTED, 'faint':_n['faint'],
+    'neutral_bar':_n['panel'], 'training':_c[4], 'training_bar':_pale(_c[4]),
+    'retrieval':_c[0], 'retrieval_bar':_pale(_c[0]),
+    'purple':_c[5], 'purple_edge':_c[5], 'orange':_c[1], 'orange_edge':_c[1],
+    'blue':_c[4], 'blue_dark':_c[4], 'red':_c[0], 'red_dark':_c[0],
+    'yellow':_c[2], 'field_core':_c[2], 'field_pale':_pale(_c[2]),
+    'fixed_section':_pale(_c[4]), 'cycle_section':_pale(_c[0]),
 }
+FONT_SIZES = {'major_heading':FONT_PT['panel'],'panel_label':FONT_PT['panel'],
+              'section_label':FONT_PT['title'],'panel_title':FONT_PT['title'],
+              'axis_label':FONT_PT['body'],'annotation':FONT_PT['body'],
+              'tick_label':FONT_PT['small']}
 
-FONT_SIZES = {
-    "major_heading": 13.0,
-    "panel_label": 11.5,
-    "section_label": 10.5,
-    "panel_title": 10.0,
-    "axis_label": 8.5,
-    "annotation": 7.8,
-    "tick_label": 7.5,
-}
-
-
-def resolve_cmu_face(target_weight: int):
-    """Resolve a concrete CMU Sans face; return a documented fallback if absent."""
-    candidates = [
-        face
-        for face in font_manager.fontManager.ttflist
-        if face.name == "CMU Sans Serif" and face.style == "normal"
-    ]
-    if candidates:
-        face = min(candidates, key=lambda item: abs(item.weight - target_weight))
-        return font_manager.FontProperties(fname=face.fname), None
-    fallback = font_manager.FontProperties(
-        family="DejaVu Sans", weight=target_weight
-    )
-    return fallback, "CMU Sans Serif unavailable; using DejaVu Sans"
-
-
-def apply_style() -> None:
-    """Apply the reusable typography, palette-independent axes, and vector export rules."""
-    logging.getLogger("fontTools").setLevel(logging.ERROR)
-    matplotlib.rcParams.update(
-        {
-            "text.usetex": False,
-            "font.family": "sans-serif",
-            "font.sans-serif": [
-                "CMU Sans Serif",
-                "Latin Modern Sans",
-                "DejaVu Sans",
-            ],
-            "font.weight": 500,
-            "font.size": FONT_SIZES["axis_label"],
-            "mathtext.fontset": "cm",
-            "axes.unicode_minus": False,
-            "figure.facecolor": COLORS["canvas"],
-            "axes.facecolor": COLORS["canvas"],
-            "savefig.facecolor": COLORS["canvas"],
-            "savefig.transparent": False,
-            "pdf.fonttype": 42,
-            "ps.fonttype": 42,
-        "svg.fonttype": "path",
-        "svg.image_inline": True,
-        }
-    )
+def resolve_cmu_face(target_weight):
+    """Retained caller signature; require the actual CMU face, never substitute."""
+    from matplotlib.font_manager import FontProperties, findfont
+    prop = FontProperties(family='CMU Sans Serif', weight=target_weight)
+    findfont(prop, fallback_to_default=False)
+    return FontProperties(family='sans-serif', weight=target_weight), None

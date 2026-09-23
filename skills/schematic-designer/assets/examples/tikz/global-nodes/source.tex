@@ -1,0 +1,32 @@
+% Adapted from the TeXample global-nodes example; CC BY-SA 4.0.
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{minimalist-profile}
+\usetikzlibrary{calc}
+\begin{document}
+\begin{tikzpicture}[ms base]
+  \node[anchor=base west,inner sep=0bp] (base) at (0,0)
+    {$\vec a_p=\vec a_o+\frac{{}^bd^2}{dt^2}\vec r+$};
+  \node[anchor=base west,text=msColor5]
+    (coriolis) at ([xshift=\msSpaceLabel]base.base east)
+    {$2\vec\omega_{ib}\times\frac{{}^bd}{dt}\vec r$};
+  \node[anchor=base west,inner sep=0bp] (plus1)
+    at ([xshift=\msSpaceLabel]coriolis.base east) {$+$};
+  \node[anchor=base west,text=msColor1]
+    (transversal) at ([xshift=\msSpaceLabel]plus1.base east)
+    {$\vec\alpha_{ib}\times\vec r$};
+  \node[anchor=base west,inner sep=0bp] (plus2)
+    at ([xshift=\msSpaceLabel]transversal.base east) {$+$};
+  \node[anchor=base west,text=msColor6]
+    (centripetal) at ([xshift=\msSpaceLabel]plus2.base east)
+    {$\vec\omega_{ib}\times(\vec\omega_{ib}\times\vec r)$};
+  \node[ms body,text=msColor5,above=\msSpacePanel of coriolis] (c-label)
+    {Coriolis acceleration};
+  \node[ms body,text=msColor1,below=\msSpacePanel of transversal] (t-label)
+    {Transversal acceleration};
+  \node[ms body,text=msColor6,above=\msSpacePanel of centripetal] (p-label)
+    {Centripetal acceleration};
+  \draw[ms arrow,draw=msColor5] (c-label.south) -- (coriolis.north);
+  \draw[ms arrow,draw=msColor1] (t-label.north) -- (transversal.south);
+  \draw[ms arrow,draw=msColor6] (p-label.south) -- (centripetal.north);
+\end{tikzpicture}
+\end{document}

@@ -1,0 +1,74 @@
+% Chemoattraction hybrid compositor: four computed PDF panels plus native TikZ.
+% Run matplotlib-panels.py first, then declare every PDF and the style package
+% with repeated --include options when calling scripts/render_tikz.py.
+\documentclass[tikz,border=7pt]{standalone}
+\usepackage{scientific-neutral}
+
+\newcommand{\PanelFrame}[4]{%
+  \node[sa/panel,minimum width=8.35cm,minimum height=6.0cm,anchor=north west] (#4panel) at (#1,#2) {};
+  \sapanelLabel{($(#4panel.north west)+(0.14,-0.12)$)}{#4}
+  \node[sa/font title,text=saInk,anchor=north] at ($(#4panel.north)+(0,-0.14)$) {#3};
+}
+
+\begin{document}
+\begin{tikzpicture}[sa/process box/.append style={ms body,draw=none},sa/annotation chip/.append style={ms body,draw=none},sa/equation box/.append style={draw=none},sa/annotation/.append style={draw=none}]
+  \path[use as bounding box] (-0.2,-0.15) rectangle (17.25,18.8);
+
+  \PanelFrame{0}{18.6}{mechanism}{A}
+  \begin{scope}[shift={($(Apanel.south west)+(0,0)$)}]
+    \node[sa/layout zone] (cellzone) at (1.35,3.3) {};
+    \node[sa/layout zone] (signalzone) at (4.1,3.3) {};
+    \node[sa/layout zone] (sourcezone) at (6.85,3.3) {};
+
+    \node[sa/cell,fill=saBlue!\msFillPercent!msPaper,fill opacity=1] (cell) at (cellzone.center) {cell $i$};
+    \draw[sa/sensing radius] (cell.center) circle (1.02cm);
+    \node[sa/font small,text=saBlue,anchor=north] at ($(cellzone.south)+(0,0.06)$) {$r_c$};
+    \foreach \dy in {-0.15,0,0.15}{\node[sa/receptor] at ($(cell.east)+(0.08,\dy)$) {};}
+
+    \begin{scope}
+      % The illustrative halo keeps its elliptical boundary; it is not a scalar map.
+      \foreach \rx/\ry/\op in {1.35/0.74/0.08,1.02/0.56/0.13,0.70/0.38/0.20,0.38/0.22/0.32}{
+        \fill[saAmber,opacity=\op] (sourcezone.center) ellipse ({\rx} and {\ry});
+      }
+    \end{scope}
+    \node[sa/source cell,fill=saAmber!\msFillPercent!msPaper,fill opacity=1] (source) at (sourcezone.center) {source\\VEGF};
+    \node[sa/process box,draw=none,text=saViolet] (polarize) at (3.3,1.65) {PI3K/Rac1\\polarize};
+    \node[sa/process box,draw=none,text=saInk] (update) at (5.5,1.65) {$\theta_i$\\update};
+    \node[sa/annotation chip,draw=none,text=saRed] (noise) at (5.5,0.6) {$\eta_i$};
+
+    \draw[sa/gradient arrow] (cell.east) -- (source.west)
+      node[pos=0.5,above,ms body,text=saInk] {$\nabla C_i$};
+    \draw[sa/annotation arrow,draw=saViolet] ($(cell.east)+(0.16,-0.10)$) -- (polarize.west);
+    \draw[sa/annotation arrow,draw=msColor5] (polarize.east) -- (update.west)
+      node[midway,above=8pt,ms body,text=saInk] {$\kappa\sin\Delta\phi$};
+    \draw[sa/annotation arrow,draw=saRed,ms dashed] (noise.north) -- (update.south);
+    \draw[sa/annotation arrow,draw=msColor5,line width=\msLineEmphasis] (update.north) to[out=90,in=-90] (source.south);
+  \end{scope}
+
+  % Panels are imported at native size: all text retains its physical point size.
+  % Literal filenames keep every imported asset visible to the declared-input renderer.
+  \PanelFrame{8.75}{18.6}{field profile $K_0(r/\lambda)$}{B}
+  \node[sa/imported plot,anchor=center] at ($(Bpanel.center)+(0,-0.20)$)
+    {\includegraphics{field-profile.pdf}};
+
+  \PanelFrame{0}{12.3}{field and sensed $\nabla C_i$}{C}
+  \node[sa/imported plot,anchor=center] at ($(Cpanel.center)+(0,-0.20)$)
+    {\includegraphics{concentration-map.pdf}};
+
+  \PanelFrame{8.75}{12.3}{simulation: $\kappa=0.18$, $\sigma=0.35$}{D}
+  \node[sa/imported plot,anchor=center] at ($(Dpanel.center)+(0,-0.20)$)
+    {\includegraphics{simulation-summary.pdf}};
+
+  \PanelFrame{0}{6.0}{illustrative heading-order sweep}{E}
+  \node[sa/imported plot,anchor=center] at ($(Epanel.center)+(0,-0.20)$)
+    {\includegraphics{phase-diagram.pdf}};
+
+  \PanelFrame{8.75}{6.0}{hybrid contract}{F}
+  \node[sa/equation box,text width=7.45cm] at ($(Fpanel.center)+(0,0.52)$)
+    {$\theta_i(t+1)=\theta_i(t)+\eta_i+\kappa\sin(\phi_{\nabla C_i}-\theta_i)\;(\mathrm{mod}\;2\pi)$};
+  \node[sa/annotation,align=center] (mpl) at ($(Fpanel.center)+(-1.35,-0.88)$) {Matplotlib\\computed PDFs};
+  \node[sa/annotation,align=center] (tikz) at ($(Fpanel.center)+(1.35,-0.88)$) {TikZ\\layout + labels};
+  \draw[sa/annotation arrow,draw=saInk] (mpl.east) -- (tikz.west);
+  \node[sa/font tiny,text=saGray] at ($(Fpanel.south)+(0,0.28)$) {illustrative simulation; not experimental data};
+\end{tikzpicture}
+\end{document}
