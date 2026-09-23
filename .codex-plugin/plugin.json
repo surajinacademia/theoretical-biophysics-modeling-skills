@@ -1,40 +1,45 @@
 {
   "name": "theoretical-biophysics-modeling-skills",
-  "version": "0.4.0",
-  "description": "Reusable skills for scientific computing, model documentation, figures, clarification, and agent guidance.",
+  "version": "1.0.0",
+  "description": "Eight skills for scientific modeling, documentation, notebooks, stability analysis, plots, schematics, clarification, and simple Slurm jobs.",
   "author": {
     "name": "Theoretical Biophysics Modeling Skills contributors"
   },
-  "license": "MIT",
+  "license": "SEE LICENSE IN LICENSE",
   "keywords": [
     "theoretical-biophysics",
-    "biophysical-modeling",
-    "model-documentation",
-    "scientific-computing",
+    "scientific-modeling",
+    "scientific-notebooks",
+    "linear-stability",
     "scientific-figures",
-    "request-clarification",
-    "agent-guidance"
+    "slurm"
   ],
   "skills": "./skills/",
   "interface": {
     "displayName": "Theoretical Biophysics Modeling Skills",
-    "shortDescription": "Scientific computing, model docs, figures, and workflows",
-    "longDescription": "Five independently triggered skills for scientific computing, physics-focused model documentation, scientific figure design, confirmed request restatement, and durable repository agent guidance.",
+    "shortDescription": "Scientific models, notebooks, figures, and Slurm jobs",
+    "longDescription": "Eight skills for scientific modeling, documentation, notebooks, stability analysis, plots, schematics, clarification, and simple Slurm jobs.",
     "developerName": "Theoretical Biophysics Modeling Skills contributors",
     "category": "Productivity",
     "capabilities": [
-      "Scientific computing",
+      "Scientific modeling",
       "Model documentation",
-      "Scientific figure design",
+      "Scientific notebooks",
+      "Linear stability analysis",
+      "Data visualization",
+      "Scientific schematics",
       "Request clarification",
-      "Agent guidance"
+      "Single-job Slurm workflows"
     ],
     "defaultPrompt": [
-      "Answer the exact scientific question with the smallest correct, readable, reproducible change.",
-      "Plan one physics-focused model document and wait for my approval before writing.",
-      "Design a scientifically accurate vector figure.",
-      "Restate my request and wait for confirmation.",
-      "Save this feedback as one durable repository rule."
+      "Use $computational-modeling to address my scientific modeling task.",
+      "Use $model-documentation to plan a physics-focused model document.",
+      "Use $scientific-notebook to create an editable research notebook.",
+      "Use $linear-stability-analysis to analyze the specified stationary state.",
+      "Use $data-visualization to plot my completed simulation data.",
+      "Use $schematic-designer to design a scientific diagram.",
+      "Use $lets-be-clear to confirm my request before acting.",
+      "Use $slurm to prepare a CPU batch script for my specified command."
     ]
   }
 }

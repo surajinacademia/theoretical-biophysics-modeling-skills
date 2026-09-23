@@ -33,24 +33,25 @@ MAX_FIXTURE_FILES = 4
 MAX_FIXTURE_FILE_BYTES = 4 * 1024
 
 HEADINGS: tuple[tuple[int, str], ...] = (
-    (2, "1. Model Purpose And Questions"),
-    (2, "2. Physical Picture And Assumptions"),
-    (2, "3. Entities, Domain, And Notation"),
-    (2, "4. Parameters And Scales"),
-    (2, "5. Governing Equations"),
-    (2, "6. Initial And Boundary Conditions"),
-    (2, "7. Observables And Model Tests"),
-    (2, "8. Solution Method"),
-    (3, "8.1. Methodology And Rationale"),
-    (3, "8.2. Numerical Formulation"),
-    (3, "8.3. Algorithm And Flowchart"),
-    (3, "8.4. Accuracy And Verification"),
-    (2, "9. Model Record And Implementation"),
-    (3, "9.1. Implementation Mapping"),
-    (3, "9.2. Method Decisions And Changes"),
-    (3, "9.3. References"),
+    (2, "1. Purpose, Questions, and Hypothesis"),
+    (2, "2. Mechanism and Assumptions"),
+    (2, "3. Notation, Parameters, Values, and Evidence"),
+    (2, "4. Governing Model"),
+    (3, "4.1. Model Equations"),
+    (3, "4.2. Mechanistic Steps"),
+    (3, "4.3. Initial and Boundary Conditions"),
+    (2, "5. Observables and Outputs"),
+    (2, "6. Method"),
+    (3, "6.1. Methodology and Rationale"),
+    (3, "6.2. Numerical Formulation"),
+    (3, "6.3. Algorithm and Flowchart"),
+    (3, "6.4. Verification, Validation, and Required Scientific Tests"),
+    (2, "7. Model Record and Implementation History"),
+    (3, "7.1. Scripts and Version History"),
+    (3, "7.2. Method Decisions and Changes"),
+    (3, "7.3. References"),
 )
-LEAF_HEADINGS = HEADINGS[:7] + HEADINGS[8:12] + HEADINGS[13:]
+LEAF_HEADINGS = HEADINGS[:3] + HEADINGS[4:8] + HEADINGS[9:13] + HEADINGS[14:]
 LEAF_TITLES = frozenset(title for _, title in LEAF_HEADINGS)
 
 
@@ -149,8 +150,8 @@ CASES: tuple[EvaluationCase, ...] = (
         document=_document(
             IMPLEMENTED_HEADER,
             {
-                "1. Model Purpose And Questions": (
-                    "Synthetic body for 1. Model Purpose And Questions.\n\n"
+                "1. Purpose, Questions, and Hypothesis": (
+                    "Synthetic body for 1. Purpose, Questions, and Hypothesis.\n\n"
                     "## Extra Evaluation Section\n\nUnexpected material."
                 )
             },
@@ -165,8 +166,8 @@ CASES: tuple[EvaluationCase, ...] = (
         document=_document(
             IMPLEMENTED_HEADER,
             {
-                "1. Model Purpose And Questions": (
-                    "Synthetic body for 1. Model Purpose And Questions.\n\n"
+                "1. Purpose, Questions, and Hypothesis": (
+                    "Synthetic body for 1. Purpose, Questions, and Hypothesis.\n\n"
                     "Extra Evaluation Section\n------------------------\n\nUnexpected material."
                 )
             },
@@ -181,8 +182,8 @@ CASES: tuple[EvaluationCase, ...] = (
         document=_document(
             IMPLEMENTED_HEADER,
             {
-                "1. Model Purpose And Questions": (
-                    "Synthetic body for 1. Model Purpose And Questions.\n\n"
+                "1. Purpose, Questions, and Hypothesis": (
+                    "Synthetic body for 1. Purpose, Questions, and Hypothesis.\n\n"
                     "####### Not A Markdown Heading"
                 )
             },
@@ -197,8 +198,8 @@ CASES: tuple[EvaluationCase, ...] = (
         document=_document(
             IMPLEMENTED_HEADER,
             {
-                "1. Model Purpose And Questions": (
-                    "Synthetic body for 1. Model Purpose And Questions.\n\n"
+                "1. Purpose, Questions, and Hypothesis": (
+                    "Synthetic body for 1. Purpose, Questions, and Hypothesis.\n\n"
                     "<!-- ## Commented Extra Section -->"
                 )
             },
@@ -212,7 +213,7 @@ CASES: tuple[EvaluationCase, ...] = (
         rationale="A multiline HTML comment must not introduce a visible extra heading.",
         document=_document(
             IMPLEMENTED_HEADER,
-            {"1. Model Purpose And Questions": "Visible content.\n\n<!--\n## Hidden Extra Section\n-->"},
+            {"1. Purpose, Questions, and Hypothesis": "Visible content.\n\n<!--\n## Hidden Extra Section\n-->"},
         ),
         files=(SOLVER,),
     ),
@@ -222,7 +223,7 @@ CASES: tuple[EvaluationCase, ...] = (
         scope="known-unsupported-markdown",
         rationale="Required sections inside an HTML comment are absent from the rendered document.",
         document=_document(IMPLEMENTED_HEADER).replace(
-            "## 1. Model Purpose And Questions", "<!--\n## 1. Model Purpose And Questions", 1
+            "## 1. Purpose, Questions, and Hypothesis", "<!--\n## 1. Purpose, Questions, and Hypothesis", 1
         ) + "-->\n",
         files=(SOLVER,),
     ),
@@ -233,7 +234,7 @@ CASES: tuple[EvaluationCase, ...] = (
         rationale="A comment-only leaf has no rendered body and should be treated as empty.",
         document=_document(
             IMPLEMENTED_HEADER,
-            {"5. Governing Equations": "<!-- No visible section content -->"},
+            {"4.1. Model Equations": "<!-- No visible section content -->"},
         ),
         files=(SOLVER,),
     ),
@@ -242,7 +243,7 @@ CASES: tuple[EvaluationCase, ...] = (
         expected_format_pass=False,
         scope="known-unsupported-markdown",
         rationale="A thematic break alone is markup, not a nonempty leaf-section body.",
-        document=_document(IMPLEMENTED_HEADER, {"5. Governing Equations": "---"}),
+        document=_document(IMPLEMENTED_HEADER, {"4.1. Model Equations": "---"}),
         files=(SOLVER,),
     ),
     EvaluationCase(
@@ -253,8 +254,8 @@ CASES: tuple[EvaluationCase, ...] = (
         document=_document(
             IMPLEMENTED_HEADER,
             {
-                "1. Model Purpose And Questions": (
-                    "Synthetic body for 1. Model Purpose And Questions.\n\n"
+                "1. Purpose, Questions, and Hypothesis": (
+                    "Synthetic body for 1. Purpose, Questions, and Hypothesis.\n\n"
                     "```text\n## Fenced Fake H2\n### Fenced Fake H3\n```"
                 )
             },
@@ -268,7 +269,7 @@ CASES: tuple[EvaluationCase, ...] = (
         rationale="Heading-like lines inside balanced display math are not document headings.",
         document=_document(
             IMPLEMENTED_HEADER,
-            {"1. Model Purpose And Questions": "$$\n## Math Fake H2\nx = y\n$$"},
+            {"1. Purpose, Questions, and Hypothesis": "$$\n## Math Fake H2\nx = y\n$$"},
         ),
         files=(SOLVER,),
     ),
@@ -279,7 +280,7 @@ CASES: tuple[EvaluationCase, ...] = (
         rationale="Balanced multiline display math supplies nonempty leaf-section content.",
         document=_document(
             IMPLEMENTED_HEADER,
-            {"5. Governing Equations": "\\[\nF = 0\n\\]"},
+            {"4.1. Model Equations": "\\[\nF = 0\n\\]"},
         ),
         files=(SOLVER,),
     ),
@@ -349,7 +350,7 @@ CASES: tuple[EvaluationCase, ...] = (
         document=_document(
             IMPLEMENTED_HEADER,
             {
-                "2. Physical Picture And Assumptions": (
+                "2. Mechanism and Assumptions": (
                     "This deliberately wrong claim says an overdamped model conserves "
                     "inertial kinetic energy without evidence."
                 )

@@ -1,0 +1,13 @@
+condition,run,value
+Control,01,1.5
+Control,02,1.8
+Control,03,1.9
+Control,04,2
+Control,05,2.2
+Control,06,2.6
+Perturbed,01,1.9
+Perturbed,02,2.2
+Perturbed,03,2.4
+Perturbed,04,2.6
+Perturbed,05,2.7
+Perturbed,06,3.2

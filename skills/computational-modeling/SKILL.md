@@ -1,254 +1,74 @@
 ---
-name: computational-modeling 
-description: >
-  Core workflow for implementing, modifying, debugging, validating, or
-  reviewing code for scientific and biophysical models. Trigger this skill
-  whenever the user asks to work on code for a scientific model. Trigger only
-  when the chat is about both coding and modeling. Do not trigger for data
-  analysis, statistics, plotting, or figure generation.
+name: computational-modeling
+description: "Develop, modify, test, or review scientific models and their records, with or without code changes. Use for model formulation, hypothesis testing, numerical verification, and physical validation; coordinate model documents with model-documentation. Exclude generic software engineering, standalone non-model analysis or plotting, and isolated explanations."
 ---
 
-# Scientific Computing Core Workflow
+# Computational Modeling
 
-## Objective
+Use the scientific method to develop, test, and revise models, keeping the equations, implementation, evidence, and records consistent.
 
-Answer the exact scientific question with the smallest correct, readable,
-reproducible change.
+## 1. Understand the model before changing it
 
-Scientific correctness takes priority over software sophistication.
-Do not broaden the task, redesign the project, or add infrastructure that
-is not required to support the requested scientific result.
+Inspect the existing equations, implementation, parameter sources, scientific evidence, and model records. Establish the question, hypothesis, intended result, and whether the model is proposed or implemented.
 
-Citation: Wilson G, Aruliah DA, Brown CT, Chue Hong NP, Davis M, Guy RT, et al. (2014) Best Practices for Scientific Computing. PLoS Biol 12(1): e1001745. https://doi.org/10.1371/journal.pbio.1001745
+- Identify state variables, governing equations or discrete and stochastic rules, assumptions, domain, and initial and boundary conditions.
+- Check symbols, units, signs, parameter meanings and provenance, physical constraints, and observables. Distinguish physical parameters from numerical controls.
+- Preserve established notation and the authorized scientific scope. Resolve disagreements between intended equations, code, records, and expected results before changing scientific meaning.
 
-## Core workflow
+Label unsupported choices as assumptions and unimplemented choices as proposals. An expected result is a prediction to assess, not a reason to change the physics until it appears.
 
-### 1. Establish the scientific contract
+## 2. Reuse existing code and keep changes simple
 
-Before changing code, identify:
+Locate and reuse existing routines, parameter definitions, and established scientific libraries when they perform the required operation. Keep the path from inputs through equations to observables readable and traceable.
 
-- the exact scientific question or claim;
-- the governing equations, algorithm, or data transformation;
-- inputs, outputs, units, assumptions, and boundary conditions;
-- parameters that may change and parameters that must remain fixed;
-- the minimum evidence needed to accept the result.
+Implement the intended equations faithfully, including update order, state dependencies, boundary treatment, and stochastic scaling. Prefer a small number of coherent scientific operations; avoid duplicated pathways, speculative abstractions, and infrastructure that the requested work does not need.
 
-Treat the user's latest explicit correction, the stated governing equations,
-and the project's established notation as the scientific contract.
-If the equations, code, documentation, or expected result disagree, identify
-the conflict before changing the implementation. Do not silently choose a
-formulation or change the scientific model to reproduce an expected result.
+Optimize only for a demonstrated runtime or memory limitation, then compare with a verified reference using scientifically meaningful tolerances.
 
-Do not silently substitute another equation, numerical method, dataset,
-parameterization, normalization, or interpretation.
+## 3. Distinguish bugs, numerical errors, and model limitations
 
-### 2. Inspect before creating
+When a result fails a check, isolate a representative case and determine which explanation the evidence supports:
 
-Locate the existing implementation, equations, parameter definitions,
-data paths, and plotting routines before writing anything new.
+- **Implementation bug:** code differs from the intended mathematical model.
+- **Numerical error:** resolution, convergence, stability, solver tolerances, or sampling prevents an accurate calculation.
+- **Model limitation:** the correctly implemented and sufficiently resolved formulation does not describe the target behavior under its stated assumptions.
 
-Reuse an existing routine or established scientific library when it
-already performs the required operation.
+Insufficient or unsuitable observations can also leave the cause unresolved. Use targeted checks to distinguish plausible causes before interpreting a discrepancy as evidence against a hypothesis.
 
-Do not duplicate scripts, constants, equations, or analysis pathways.
+Changes to equations, assumptions, parameter meanings, or boundary conditions are scientific model revisions. State their rationale, retain the earlier findings, and reassess affected predictions; do not present changed physics as a bug fix.
 
-### 3. Write code for humans, not computers
+## 4. Validate the scientific claim with appropriate evidence
 
-Work in small, reversible steps and preserve a working state after each
-meaningful step.
+Before inspecting decisive results, define the prediction, relevant alternative, observable, and criteria for support, failure, or an inconclusive result. For numerical checks, specify the reference, error measure, and justified tolerance. Label exploratory analysis and later changes to criteria honestly.
 
-Prefer:
+Use the smallest checks that can support the scientific claim:
 
-- a small number of coherent functions corresponding to real scientific
-  operations;
-- names taken from the model, experiment, or numerical method;
-- a short, traceable path from inputs to scientific outputs;
-- modification of the existing pathway rather than parallel replacements.
+- **Code verification:** compare the implementation with derivations, exact or manufactured solutions, or independent reference calculations.
+- **Solution verification:** assess numerical error through appropriate convergence, resolution, stability, conservation, or sampling checks.
+- **Physical validation:** compare predictions with empirical observations for the intended use, accounting for measurement uncertainty and applicable regimes.
 
-Do not split short, linear logic into helper functions solely for abstraction,
-testing, stylistic uniformity, or possible future reuse.
+Separate calibration and model selection data from independent evaluation evidence where available. Disclose reuse of the same evidence and assess sensitivity, identifiability, and uncertainty when they affect the conclusion. A fixed seed supports debugging; statistical conclusions require appropriate sampling. Agreement supports tested predictions without proving the mechanism or validity outside the tested regime.
 
-Do not introduce new classes, frameworks, configuration layers,
-directories, helper modules, or generalized interfaces unless the
-requested result demonstrably requires them.
+Run the checks authorized by the request or session. Designing tests or writing documentation does not authorize simulation runs or sweeps; keep unperformed tests explicit without adding approval gates to already authorized work.
 
-Do not implement speculative future requirements.
+See the [NASA verification and validation overview](https://www.grc.nasa.gov/www/wind/valid/tutorial/overview.html) for these distinctions.
 
-Use subagents only for bounded, independent checks with explicit inputs,
-outputs, and stopping conditions. Do not pass the full parent context, assign
-overlapping work, or accept delegated conclusions without verification.
+## 5. Record enough to reproduce and interpret results
 
-### 4. Automate repeated scientific operations
+Use existing project record locations. For retained results, record the question and criteria, model and input identity, source revision and dirty state with recoverable uncommitted changes, parameter values and units, conditions and seeds, numerical method and controls, relevant software versions, ordered procedure and output processing, and output links.
 
-A repeated, error-prone, or publication-relevant manual operation should
-become a reproducible command or script.
+Preserve actual evidence, negative and inconclusive results, failed checks, uncertainty, and applicability. Distinguish observations, computed results, interpretations, and predictions; retain earlier findings when conclusions change.
 
-For any result intended to be retained, compared, reported, published, or
-rerun, retain enough provenance to identify:
+Keep maintained formulation and methods documents synchronized through [$model-documentation](../model-documentation/SKILL.md), following its plan approval, template, and review workflow. An approved matching scope remains approved. Identify pending document changes explicitly; its document gate does not block unrelated authorized model work or require a full document for every minor task. Keep run-specific results in existing experiment or analysis records.
 
-- input data or initial condition;
-- code revision;
-- parameter values;
-- random seed, when applicable;
-- numerical method and relevant tolerances;
-- software or library versions when they affect the result;
-- generated output path.
+Keep model name, release identity, source revision, and run settings distinct. Include `Model version control name:` in model-document headers with the applicable recorded name or a literally blank value. Do not manufacture versions or releases for individual run configurations. Read [model versioning](references/model-versioning.md) only when assigning or assessing a release version or name.
 
-Manually authored code, equations, configurations, and manuscript sources
-belong in version control. Generated results should be reproducible from
-their recorded inputs rather than manually edited.
+Use the [MIASE reporting guideline](https://doi.org/10.1371/journal.pcbi.1001122) and [NASEM reproducibility guidance](https://www.nationalacademies.org/read/25303/chapter/7) as references for reproducible records, adapting them to the project's existing format.
 
-### 5. Validate the scientific claim
+## 6. Stop when the requested work is complete and verified
 
-Validation must match the claim being made. Do not measure quality by the
-number of tests.
+Review the affected scientific pathway, complete the relevant authorized checks, and preserve the evidence and records. Satisfy the applicable model-documentation completion gate for document work.
 
-Use the smallest relevant checks:
+Report what changed or was established, supporting evidence, record locations, remaining uncertainty, pending documentation, and unperformed work that limits the conclusion. Distinguish proposed versions from established releases when relevant. Do not claim successful tests, execution, or physical validity beyond the evidence.
 
-- Mathematical derivation:
-  rederive critical steps; check signs, dimensions, assumptions, and
-  limiting cases.
-
-- Deterministic numerical method:
-  compare with a known or simplified case; check physical invariants and
-  perform a convergence check when discretization accuracy matters.
-
-- Stochastic calculation:
-  use a fixed seed for debugging; use ensembles only when the conclusion
-  is statistical.
-
-- Data analysis:
-  verify data provenance, units, exclusions, missing-data treatment,
-  normalization, aggregation, and the path from raw data to the reported
-  quantity.
-
-- Figure generation:
-  verify the source data, plotted variables, axes, units, normalization,
-  parameter values, and labels. Generate scientific values from the
-  computation rather than editing them manually in the figure.
-
-Add assertions only at scientifically meaningful boundaries, such as:
-
-- finite numerical values;
-- conserved quantities within expected tolerance;
-- valid parameter ranges and units;
-- array, grid, and domain consistency;
-- positive or otherwise constrained physical fields;
-- physically admissible states.
-
-When debugging, first distinguish:
-
-- implementation error:
-  the code does not implement the stated scientific model;
-- numerical error:
-  discretization, resolution, stability, tolerances, or solver behavior
-  distort the stated model;
-- model limitation:
-  the correctly implemented and numerically resolved model does not produce
-  the expected scientific behavior.
-
-Reproduce the smallest representative failure. State the expected behavior
-from the governing equation, algorithm, or physical constraint. Change one
-suspected cause at a time and rerun only the checks relevant to that cause.
-Do not alter governing equations, parameter meanings, boundary conditions,
-normalizations, or scientific assumptions merely to make a test pass or
-recover an expected figure.
-Such an alteration is a model revision, not a bug fix. Make it explicit,
-justify it scientifically, and report it separately.
-
-Do not add broad test suites, exhaustive parameter sweeps, or unrelated
-validation that doesn’t serve the scientific goals. 
-
-### 6. Optimize only after correctness is established
-
-First obtain a clear, verified reference implementation.
-
-Optimize only when runtime or memory is a demonstrated limitation.
-Measure the actual bottleneck before modifying the implementation.
-
-After optimization, compare against the simpler reference calculation
-using scientifically meaningful tolerances.
-
-Do not move to a lower-level language, parallel execution, specialized
-data structures, or approximate algorithms without measured need.
-
-### 7. Document scientific intent, not mechanics
-
-Document:
-
-- purpose;
-- equations or numerical method;
-- assumptions;
-- units and conventions;
-- inputs and outputs;
-- non-obvious scientific decisions;
-- reasons for approximations or exclusions.
-
-Use comments or docstrings beside the implementation for local scientific
-intent. Use adjacent documentation only when an explanation spans multiple
-files, components, or workflow stages.
-
-Do not narrate obvious code mechanics line by line.
-
-When a section needs a long explanation merely to be understandable,
-simplify or reorganize it before adding more commentary.
-
-Keep documentation next to the implementation so that changes to one can
-be accompanied by changes to the other.
-
-### 8. Review the changed scientific pathway and stop
-
-Before completion:
-
-1. Inspect only the relevant changes.
-2. Confirm that no unrelated behavior, notation, or parameter changed.
-3. Run the minimum validation required by the scientific claim.
-4. Report the result, evidence, assumptions, and remaining uncertainty.
-5. Stop once the requested result is complete and verified.
-
-Do not continue with unrelated cleanup, redesign, additional figures, broader
-parameter sweeps, new tests, or new features unless explicitly requested.
-
-## Conditional escalation
-
-Use additional machinery only when its trigger is present:
-
-- Workflow manager:
-  when several dependent stages are repeatedly regenerated.
-
-- Separate formal test files:
-  when logic is reusable, consequential, or vulnerable to regression.
-
-- Profiler:
-  when measured performance prevents the scientific calculation.
-
-- Independent reviewer or auditor:
-  when a derivation, numerical method, or central conclusion is
-  sufficiently consequential or difficult to verify directly.
-
-- Issue tracking:
-  when the work spans multiple distinct tasks or contributors.
-
-- New abstraction:
-  when at least two real existing pathways require the same operation,
-  not because future reuse is merely imaginable.
-
-## Required completion report
-
-Unless the user requests another format, return only the applicable sections:
-
-### Result
-What was established or changed.
-
-### Scientific evidence
-The derivation, comparison, invariant, convergence check, or data check
-supporting the result.
-
-### Files changed
-Only files actually modified.
-
-### Assumptions and uncertainty
-Consequential assumptions, limitations, or unresolved scientific issues.
-
-Omit sections that do not apply. Do not invent file changes, validation
-results, evidence, or certainty.
+A supported negative or inconclusive finding can complete the investigation; a hypothesis need not prove true. Stop without unrelated cleanup, extra features, broader sweeps, or unrequested execution.

@@ -1,0 +1,6 @@
+# Quantitative export geometry. Shared visual roles live in publication.py.
+figure.figsize: 3.3464566929, 2.7559055118
+pdf.fonttype: 42
+savefig.format: pdf
+lines.markerfacecolor: none
+legend.labelcolor: linecolor

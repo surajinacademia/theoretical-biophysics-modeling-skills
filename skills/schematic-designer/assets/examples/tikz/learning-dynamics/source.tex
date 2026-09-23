@@ -1,0 +1,119 @@
+% !TEX program = lualatex
+% Native TeX/TikZ specimen: learning-dynamics layout with Minimalist roles.
+% The scientific content is illustrative and original; it does not reproduce
+% data or scientific content from arXiv:2406.07856v1.
+\documentclass[tikz,border=6pt]{standalone}
+
+\usepackage{learning-dynamics-2406}
+\usetikzlibrary{arrows.meta,backgrounds,calc,positioning}
+
+% Scientific parameters -------------------------------------------------------
+\def\TauG{1.35}
+\def\EvenTarget{0.82}
+\def\OddTarget{0.28}
+
+\tikzset{paneltag/.append style={anchor=west}}
+
+\begin{document}
+\begin{tikzpicture}[x=1cm,y=1cm]
+  \begin{scope}[on background layer]
+    \fill[Canvas] (-0.15,-0.15) rectangle (17.95,7.55);
+  \end{scope}
+
+  % Headings and whitespace separate the scientific phases. ------------------
+  \node[majorheading] at (8.9,7.12) {Adaptive field response};
+
+  \node[sectiontitle,text=Train] at (5.675,6.31) {Training};
+  \node[sectiontitle,text=Retrieve] at (14.76,6.31) {Retrieval};
+
+  % Panel (a): imposed motion -------------------------------------------------
+  \node[paneltag] at (0.05,5.35) {A};
+  \node[paneltitle] at (2.65,5.35) {imposed motion};
+
+  \begin{scope}
+    \foreach \rx/\ry/\op in {1.65/0.82/0.035,1.30/0.64/0.055,
+                                0.98/0.48/0.085,0.68/0.33/0.13,
+                                0.38/0.19/0.20}{
+      \fill[FieldCore,opacity=\op] (4.05,3.40) ellipse (\rx cm and \ry cm);
+    }
+  \end{scope}
+
+  \node[entityi] (ai) at (1.35,3.40) {$i$};
+  \node[entityj] (aj) at (4.05,3.40) {$j$};
+  \draw[trainarrow] ($(ai.north)+(0,0.20)$) -- ++(1.05,0);
+  \draw[trainarrow] ($(aj.north)+(0,0.20)$) -- ++(1.05,0);
+
+  \draw[axisline] (1.35,2.55) -- (4.05,2.55);
+  \draw[axisline] (1.35,2.46) -- (1.35,2.64);
+  \draw[axisline] (4.05,2.46) -- (4.05,2.64);
+  \node[mathlabel] at (2.70,2.30) {$a$};
+  \node[mathlabel] at (2.70,1.43)
+    {$\tau_g\dot g=g_{\mathrm{target}}-g$};
+
+  % Panel (b): learned response ----------------------------------------------
+  \node[paneltag] at (5.88,5.35) {B};
+  \node[paneltitle,anchor=west] at (6.60,5.35) {learn interaction};
+
+  \begin{scope}[shift={(6.42,1.22)},x=0.63cm,y=3.45cm]
+    \draw[axisline] (0,0) -- (6.15,0);
+    \draw[axisline] (0,0) -- (0,0.92);
+
+
+    \foreach \x/\lab in {0/0,3/3,6/6}{
+      \draw[axisline] (\x,0) -- ++(0,-0.025);
+      \node[ticklabel,anchor=north] at (\x,-0.055) {\lab};
+    }
+    \foreach \y/\lab in {0/0,0.4/0.4,0.8/0.8}{
+      \draw[axisline] (0,\y) -- ++(-0.04,0);
+      \node[ticklabel,anchor=east] at (-0.10,\y) {\lab};
+    }
+
+    \draw[positive]
+      plot[domain=0:6,samples=100,smooth]
+      (\x,{\EvenTarget*(1-exp(-\x/\TauG))});
+    \draw[negative]
+      plot[domain=0:6,samples=100,smooth]
+      (\x,{\OddTarget*(1-exp(-\x/\TauG))});
+
+    \node[mathlabel,text=InteractionBlue,anchor=south east]
+      at (5.9,0.82) {$g^{+}$};
+    \node[mathlabel,text=InteractionRed,anchor=north east]
+      at (5.9,0.25) {$g^{-}$};
+    \node[mathlabel] at (3,-0.20) {$t$};
+    \node[annotation,rotate=90] at (-1.05,0.44) {learned response $g$};
+  \end{scope}
+
+  % Panel (c): retrieved drift ------------------------------------------------
+  \node[paneltag] at (11.88,5.35) {C};
+  \node[paneltitle,anchor=west] at (12.66,5.35) {adaptive drift};
+
+  \begin{scope}
+    \clip (12.45,1.02) rectangle (17.48,5.05);
+    \foreach \rx/\ry/\op in {2.25/1.40/0.035,1.80/1.12/0.055,
+                                1.35/0.84/0.085,0.92/0.57/0.13,
+                                0.48/0.30/0.20}{
+      \fill[FieldCore,opacity=\op] (16.18,3.20) ellipse (\rx cm and \ry cm);
+    }
+  \end{scope}
+  \draw[snapshot] (12.45,5.05) -- (12.45,1.02) -- (17.48,1.02);
+
+  \draw[Retrieve,line width=\msLineContext,opacity=\msOpacityContext]
+    (13.12,1.62) .. controls (13.75,2.05) and (14.20,2.63) .. (14.63,2.86);
+  \draw[retrievearrow]
+    (14.60,2.85) .. controls (15.05,3.08) and (15.35,3.18) .. (15.78,3.20);
+  \foreach \p/\op in {{(13.12,1.62)}/0.28,{(13.65,2.00)}/0.38,
+                         {(14.16,2.55)}/0.52,{(14.65,2.87)}/0.68,
+                         {(15.20,3.10)}/0.82}{
+    \fill[Retrieve,opacity=\op] \p circle (0.5*\msMarkerPoint);
+  }
+
+  \node[entityi,draw opacity=\msOpacityContext,fill opacity=\msOpacityFill,text opacity=1] at (13.12,1.62) {$i$};
+  \node[entityi] at (15.82,3.20) {$i$};
+  \node[entityj] at (16.55,3.20) {$j$};
+  \node[annotation,text=Muted,anchor=north west] at (13.24,1.50) {start};
+  \node[annotation,anchor=south east] at (17.31,1.18)
+    {illustrative; not to scale};
+  \node[mathlabel] at (14.97,0.66) {$x$};
+  \node[mathlabel,rotate=90] at (12.03,3.04) {$y$};
+\end{tikzpicture}
+\end{document}

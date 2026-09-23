@@ -1,0 +1,4 @@
+interface:
+  display_name: "Scientific Notebook"
+  short_description: "Create and maintain rigorous research notebooks"
+  default_prompt: "Use $scientific-notebook to create or carefully update this research notebook, preserve my customizations, and verify the requested calculations and plots."

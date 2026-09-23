@@ -1,13 +1,12 @@
 ---
 name: lets-be-clear
 description: >-
-  Restate a user's request clearly and ask for confirmation before acting.
-  Trigger this skill whenever the user asks the agent to restate their request
-  and wait for confirmation, invokes this skill, checks whether the agent
-  understood them, or uses phrases such as "let's be clear," "am I clear?",
-  "do you get me?", or a semantic equivalent. Do not trigger from ambiguity
-  alone or from an ordinary retrieval or definition request.
-metadata:
+  Restate a user's request clearly and ask for confirmation before acting. Use
+  when the user invokes this skill or checks whether the agent understood them,
+  with phrases such as "let's be clear," "am I clear?", "do you get me?", or a
+  semantic equivalent. Do not trigger from ambiguity alone or from an ordinary
+  retrieval or definition request.
+metadata: 
   short-description: Restate a request and confirm it before action
 ---
 
@@ -21,9 +20,10 @@ metadata:
 3. Ask the user to confirm. Before confirmation, do not start the underlying
    request, including searching, editing, running commands, calling tools,
    delegating, or external communication.
-4. If the user changes the meaning, restate the complete request and ask again,
-   even if the same reply says **yes** or **proceed**. Continue only after the
-   user confirms the unchanged restatement.
+4. If the user corrects the request and explicitly authorizes that corrected
+   request in the same reply, accept the confirmation and proceed within that
+   scope. Ask again only when the correction or what the user authorized remains
+   unclear, or when the user has not confirmed the corrected request.
 
 If explicit invocation has no current or relevant prior request, ask what the
 user wants restated.

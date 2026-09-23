@@ -1,0 +1,42 @@
+% Title: Example for tkz-orm v0.1 2010/01/25
+% Author: Jakob Voß
+% Site: http://tug.ctan.org/tex-archive/graphics/pgf/contrib/tkz-orm/
+% Redraw of Halpin & Morgan, Information modeling and relational databases, p 902.
+% Minimalist native-TikZ adaptation. Dots and role bars retain ORM semantics.
+\documentclass[tikz,border=10bp]{standalone}
+\usepackage{minimalist-profile}
+\usetikzlibrary{calc,shapes.geometric}
+\tikzset{entity/.style={ellipse,draw=msColor5,text=msColor5,fill=msPaper,ms structure,minimum width=25mm,minimum height=14mm,align=center},role/.style={rectangle,draw=msColor1,fill=msPaper,ms structure,minimum width=5mm,minimum height=5mm,inner sep=0bp},mandatory/.style={ms point,fill=msInk},predlabel/.style={ms body,text=msColor1,fill=msPaper,inner sep=\msSpaceUnit}}
+\begin{document}
+\begin{tikzpicture}[ms base]
+\node[entity] (E) at (0,0) {Employee$^{1}$\\(.nr)};
+\node[entity] (Rank) at (-7,1.8) {Rank\\(.code)};
+\node[entity] (Car) at (-7,-1.8) {CompanyCar\\(.regNr)};
+\node[entity] (Date) at (7,0) {Date\\(mdy)};
+\foreach \prefix/\xx/\yy in {h/-3.5/1.8,u/-3.5/-1.8,b/3.5/1.8,i/3.5/-1.8}{
+ \node[role] (\prefix1) at (\xx-.25,\yy) {};
+ \node[role] (\prefix2) at (\xx+.25,\yy) {};
+}
+% The h predicate's second role is unique; u spans both roles; b/i first roles unique.
+\draw[ms emphasis,msColor1] ([yshift=\msSpaceUnit]h2.north west) -- ([yshift=\msSpaceUnit]h2.north east);
+\draw[ms emphasis,msColor1] ([yshift=\msSpaceUnit]u1.north west) -- ([yshift=\msSpaceUnit]u2.north east);
+\foreach \prefix in {b,i}{\draw[ms emphasis,msColor1] ([yshift=\msSpaceUnit]\prefix1.north west) -- ([yshift=\msSpaceUnit]\prefix1.north east);}
+\node[predlabel,above=7mm] at (h1.north east) {$\triangleleft$ has};
+\node[predlabel,below=3mm] at (u1.south east) {$\triangleleft$ uses$^{2,3}$};
+\node[predlabel,above=7mm] at (b1.north east) {was born on};
+\node[predlabel,below=3mm] at (i1.south east) {was hired on};
+% Plain role-player connectors; mandatory participation dots at Employee.
+\draw[ms structure] (Rank.east)--(h1.west) (h2.east)--(E.north west) (Car.east)--(u1.west) (u2.east)--(E.south west);
+\draw[ms structure] (E.north east)--(b1.west) (b2.east)--(Date.north west) (E.south east)--(i1.west) (i2.east)--(Date.south west);
+\node[mandatory] at(E.north west) {};
+\node[mandatory] at(E.north east) {};
+\node[mandatory] at(E.south east) {};
+\node[ms body,above=\msSpaceGroup,align=center,text=msMuted] at(Rank.north) {$\{$`Exec', `NonExec'$\}$};
+\node[ms body,anchor=south west] at ([xshift=\msSpaceUnit,yshift=\msSpaceUnit]b2.east) {[birthdate]};
+\node[ms body,anchor=north west] at ([xshift=\msSpaceUnit,yshift=-\msSpaceUnit]i2.east) {[hiredate]};
+\node[anchor=north west,align=left,text width=16cm] at (-8.2,-3.4) {
+\textbf{1. For each} Employee, birthdate $<$ hiredate.\\[\msSpaceGroup]
+\textbf{2. Each} Employee \textbf{who} has Rank `NonExec' uses \textbf{at most one} CompanyCar.\\[\msSpaceGroup]
+\textbf{3. Each} Employee \textbf{who} has Rank `Exec' uses \textbf{some} CompanyCar.};
+\end{tikzpicture}
+\end{document}

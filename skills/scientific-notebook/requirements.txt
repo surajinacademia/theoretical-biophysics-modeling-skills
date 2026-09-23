@@ -1,0 +1,6 @@
+nbformat>=5.7,<6
+nbclient>=0.10,<1
+ipykernel>=6,<8
+
+# Portable scaffold plotting (scientific dependencies are project-specific).
+matplotlib>=3.7,<4

@@ -1,5 +1,3 @@
-skills/schematic-designer/examples/tikz-gallery/tkz-linknodes-examples/tkz-linknodes.sty -text whitespace=-trailing-space,-space-before-tab
-skills/schematic-designer/examples/tikz-gallery/tkz-linknodes-examples/PACKAGE-LICENSE.txt -text whitespace=-trailing-space,-space-before-tab
-THIRD_PARTY_LICENSES/*.txt -text whitespace=-trailing-space,-space-before-tab
-skills/schematic-designer/examples/activator-inhibitor/renders/*.svg -text whitespace=-trailing-space,-space-before-tab
-skills/schematic-designer/examples/learning-dynamics/renders/*.svg -text whitespace=-trailing-space,-space-before-tab
+# Preserve reviewed source and license bytes across checkouts.
+# release-manifest.json hashes these exact bytes.
+* -text

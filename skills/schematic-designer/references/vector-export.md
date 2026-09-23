@@ -18,16 +18,23 @@ in SVG.
 
 ## Matplotlib
 
-Call configure_matplotlib_vector_output() before creating the figure and
-save_vector_pair(...) from assets/python/vector_output.py for the final pair.
-The helper sets svg.fonttype = "path", embeds intentional raster layers, and
-publishes safely. Keep rasterization limited to a declared dense scientific
-layer at sufficient final-size resolution.
+Follow references/typography.md and render the figure to a staged PDF with
+Matplotlib's PGF/LuaLaTeX backend. Convert that same PDF to outlined SVG using
+`dvisvgm --pdf --no-fonts` or a verified local vector converter. Validate both
+staged files before atomically replacing each final file in the approved output
+directory. Keep rasterization limited to declared scientific image layers.
+
+The bundled `save_vector_pair` detects the PGF canvas and converts its rendered
+PDF to SVG using the same bounded converter and validation as the TikZ runner.
+Both formats are staged and checked before either final file is replaced.
+Use common/PDF save options; a PGF SVG has no independent renderer options.
+The older non-PGF branch remains for existing callers, but it does not meet
+this skill's mandatory LaTeX typography rule. Do not switch backends for SVG.
 
 ## TikZ and hybrid
 
 Compile the trusted/generated final TeX with scripts/render_tikz.py. It produces
-the PDF and converts it to a path-only SVG with dvisvgm --no-fonts or its checked
+the PDF and converts it to an outlined-text SVG with dvisvgm --no-fonts or its checked
 local fallback. For a hybrid, validate only the composed final pair; intermediate
 vector PDFs are inputs, not final deliverables.
 
@@ -39,6 +46,9 @@ vector PDFs are inputs, not final deliverables.
 - The SVG has no script, DTD, entity declaration, stylesheet import, or external
   file reference.
 - Any <image> is an intentional scientific raster layer, never rasterized labels
-  or a disguised full-page figure.
+  or a disguised full-page figure. The owner-requested original Standard Model
+  design has one documented exception: 18 embedded blur-shadow opacity masks.
+  Its manifest identifies and hashes each mask; tests require every image
+  reference to occur inside a mask, with all diagram content kept as vectors.
 - Reopen both files at final dimensions and check clipping, legibility, and
   color-independent distinctions.

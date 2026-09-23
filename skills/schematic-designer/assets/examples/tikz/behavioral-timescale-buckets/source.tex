@@ -1,0 +1,74 @@
+% Adapted from "Behavioral biology diagram" by Izaak Neutelings.
+% https://tikz.net/behavior_sapolsky/
+% Original and this derivative: CC BY-SA 4.0.
+% Inspired by Robert Sapolsky's cross-timescale framework for behavior.
+% Changes: semantic styles, neutral typography, spacing, and label placement.
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{minimalist-profile}
+\usetikzlibrary{arrows.meta,backgrounds,decorations.pathreplacing}
+
+\tikzset{
+  bucket/.style={rounded corners=\msSpaceUnit,line width=\msLineContext,draw opacity=\msOpacityForeground,fill=none},
+  branch/.style={draw=msColor5,ms structure},
+  timespan/.style={decorate,decoration={brace,amplitude=\msSpaceLabel},ms structure}
+}
+
+\begin{document}
+\begin{tikzpicture}[ms base,x=1.2cm,y=1.1cm]
+  % Buckets precede marks on the main layer so the paper background cannot cover them.
+    \draw[bucket,draw=msColor3]
+      (-0.65,-2.35) rectangle (11.75,2.45);
+    \draw[bucket,draw=msColor5]
+      (-0.45,0.40) rectangle (4.75,1.90);
+    \draw[bucket,draw=msColor1]
+      (2.95,-1.80) rectangle (7.25,1.78);
+    \draw[bucket,draw=msColor2]
+      (6.00,0.38) rectangle (8.35,1.85);
+    \draw[bucket,draw=msColor6]
+      (7.35,-1.70) rectangle (9.90,1.75);
+
+
+  \node[ms body,text=msColor5,anchor=south west] at (-0.35,1.92) {evolution};
+  \node[ms body,text=msColor1,anchor=north west,yshift=-\msSpaceLabel] at (2.95,-1.80) {epigenetics};
+  \node[ms body,anchor=south west] at (6.10,1.88) {\textcolor{msColor2}{\rule{\msMarkerPoint}{\msLineEmphasis}}\enspace endocrinology};
+  \node[ms body,text=msColor6,anchor=south east] at (9.80,1.78) {neurobiology};
+  \node[ms body,anchor=south east] at (11.55,-2.25) {\textcolor{msColor3}{\rule{\msMarkerPoint}{\msLineEmphasis}}\enspace ethology};
+
+  \draw[ms arrow,draw=msInk,ms emphasis]
+    (0,0) -- (10.25,0) node[right,ms title,text=msInk] {behavior};
+
+  \draw[branch] (0.90,0.06) to[out=180,in=-90] ++(-0.48,0.48)
+    node[above,ms body,text=msColor5] {species};
+  \draw[branch] (2.40,0.06) to[out=180,in=-90] ++(-0.48,0.48)
+    node[above,ms body,text=msColor5] {population};
+  \draw[branch,draw=msInk] (4.20,0.06) to[out=180,in=-90] ++(-0.50,0.60)
+    node[above,align=center,ms body] {individual\\genetics};
+  \draw[branch,draw=msColor1] (4.85,-0.06) to[out=180,in=90] ++(-0.65,-0.48)
+    node[below left,ms body,text=msColor1] {biology};
+  \draw[branch,draw=msColor1] (5.55,-0.06) to[out=180,in=90] ++(-0.48,-0.48)
+    node[below right,ms body,text=msColor1] {environment};
+  \draw[branch,draw=msInk] (6.15,0.06) to[out=180,in=-90] ++(-0.60,0.78)
+    node[above,ms body] {culture};
+  \draw[branch,draw=msColor2] (7.22,0.06) to[out=180,in=-90] ++(-0.45,0.50)
+    node[above,ms body] {chronic};
+  \draw[branch,draw=msColor2] (8.20,0.06) to[out=180,in=-90] ++(-0.45,0.50)
+    node[above,ms body] {acute};
+  \draw[branch,draw=msColor6] (8.95,-0.06) to[out=180,in=90] ++(-0.48,-0.60)
+    node[below,align=center,ms body,text=msColor6] {releasing\\stimuli};
+  \draw[branch,draw=msColor6] (9.42,0.06) to[out=180,in=-90] ++(-0.45,0.60)
+    node[above right,align=center,ms body,text=msColor6] {nervous\\system};
+
+  \draw[timespan,draw=msColor5]
+    (-0.20,1.04) -- (2.92,1.04)
+    node[midway,above=\msSpaceLabel,ms body,text=msColor5] {evolutionary time};
+  \draw[timespan,draw=msColor1]
+    (6.15,-1.08) -- (3.40,-1.08)
+    node[midway,below=\msSpaceLabel,ms body,text=msColor1] {perinatal};
+  \draw[timespan,draw=msColor2]
+    (6.15,1.04) -- (8.25,1.04)
+    node[midway,above=\msSpaceLabel,ms body] {hormones};
+
+  \node[ms small,text=msMuted,anchor=north]
+    at (5.35,-2.48) {nested scientific perspectives across timescales};
+\end{tikzpicture}
+\end{document}

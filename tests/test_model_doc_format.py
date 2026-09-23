@@ -35,27 +35,29 @@ def make_document(header: str, empty_heading: str | None = None) -> str:
     """Build the fixed skeleton with short nonempty bodies for all leaves."""
 
     headings = (
-        (2, "1. Model Purpose And Questions"),
-        (2, "2. Physical Picture And Assumptions"),
-        (2, "3. Entities, Domain, And Notation"),
-        (2, "4. Parameters And Scales"),
-        (2, "5. Governing Equations"),
-        (2, "6. Initial And Boundary Conditions"),
-        (2, "7. Observables And Model Tests"),
-        (2, "8. Solution Method"),
-        (3, "8.1. Methodology And Rationale"),
-        (3, "8.2. Numerical Formulation"),
-        (3, "8.3. Algorithm And Flowchart"),
-        (3, "8.4. Accuracy And Verification"),
-        (2, "9. Model Record And Implementation"),
-        (3, "9.1. Implementation Mapping"),
-        (3, "9.2. Method Decisions And Changes"),
-        (3, "9.3. References"),
+        (2, "1. Purpose, Questions, and Hypothesis"),
+        (2, "2. Mechanism and Assumptions"),
+        (2, "3. Notation, Parameters, Values, and Evidence"),
+        (2, "4. Governing Model"),
+        (3, "4.1. Model Equations"),
+        (3, "4.2. Mechanistic Steps"),
+        (3, "4.3. Initial and Boundary Conditions"),
+        (2, "5. Observables and Outputs"),
+        (2, "6. Method"),
+        (3, "6.1. Methodology and Rationale"),
+        (3, "6.2. Numerical Formulation"),
+        (3, "6.3. Algorithm and Flowchart"),
+        (3, "6.4. Verification, Validation, and Required Scientific Tests"),
+        (2, "7. Model Record and Implementation History"),
+        (3, "7.1. Scripts and Version History"),
+        (3, "7.2. Method Decisions and Changes"),
+        (3, "7.3. References"),
     )
     leaves = {
-        *headings[:7],
-        *headings[8:12],
-        *headings[13:],
+        *headings[:3],
+        *headings[4:8],
+        *headings[9:13],
+        *headings[14:],
     }
     lines = ["# Example Relaxation Model", "", header, ""]
     for level, title in headings:
@@ -194,26 +196,26 @@ class ModelDocumentFormatTests(unittest.TestCase):
     def test_extra_reordered_duplicate_and_missing_headings_fail(self):
         cases = {
             "extra": lambda text: text.replace(
-                "## 2. Physical Picture And Assumptions",
-                "## Extra Section\n\nBody.\n\n## 2. Physical Picture And Assumptions",
+                "## 2. Mechanism and Assumptions",
+                "## Extra Section\n\nBody.\n\n## 2. Mechanism and Assumptions",
                 1,
             ),
             "reordered": lambda text: text.replace(
-                "## 1. Model Purpose And Questions", "## TEMPORARY HEADING", 1
+                "## 1. Purpose, Questions, and Hypothesis", "## TEMPORARY HEADING", 1
             )
             .replace(
-                "## 2. Physical Picture And Assumptions",
-                "## 1. Model Purpose And Questions",
+                "## 2. Mechanism and Assumptions",
+                "## 1. Purpose, Questions, and Hypothesis",
                 1,
             )
-            .replace("## TEMPORARY HEADING", "## 2. Physical Picture And Assumptions", 1),
+            .replace("## TEMPORARY HEADING", "## 2. Mechanism and Assumptions", 1),
             "duplicate": lambda text: text.replace(
-                "## 3. Entities, Domain, And Notation",
-                "## 3. Entities, Domain, And Notation\n\nBody.\n\n## 3. Entities, Domain, And Notation",
+                "## 3. Notation, Parameters, Values, and Evidence",
+                "## 3. Notation, Parameters, Values, and Evidence\n\nBody.\n\n## 3. Notation, Parameters, Values, and Evidence",
                 1,
             ),
             "missing": lambda text: text.replace(
-                "### 8.4. Accuracy And Verification\n\nBody for 8.4. Accuracy And Verification.\n\n",
+                "### 6.4. Verification, Validation, and Required Scientific Tests\n\nBody for 6.4. Verification, Validation, and Required Scientific Tests.\n\n",
                 "",
                 1,
             ),
@@ -231,8 +233,8 @@ class ModelDocumentFormatTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root, document = self.make_root(Path(temporary).resolve())
             text = make_document("Implementation: [source](../src/solver.R)").replace(
-                "Body for 1. Model Purpose And Questions.",
-                "Body for 1. Model Purpose And Questions.\n\n"
+                "Body for 1. Purpose, Questions, and Hypothesis.",
+                "Body for 1. Purpose, Questions, and Hypothesis.\n\n"
                 "Extra Evaluation Section\n------------------------\n\nUnexpected material.",
                 1,
             )
@@ -247,7 +249,7 @@ class ModelDocumentFormatTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root, document = self.make_root(Path(temporary).resolve())
             valid = make_document("Implementation: [source](../src/solver.R)").replace(
-                "Body for 1. Model Purpose And Questions.",
+                "Body for 1. Purpose, Questions, and Hypothesis.",
                 "Visible body <!-- ## Inline Fake Heading --> after the comment.\n\n"
                 "<!--\n## Multiline Fake Heading\n-->",
                 1,
@@ -256,8 +258,8 @@ class ModelDocumentFormatTests(unittest.TestCase):
             self.assertEqual(self.run_checker(root, document).returncode, 0)
 
             hidden_required = valid.replace(
-                "## 1. Model Purpose And Questions",
-                "<!--\n## 1. Model Purpose And Questions",
+                "## 1. Purpose, Questions, and Hypothesis",
+                "<!--\n## 1. Purpose, Questions, and Hypothesis",
                 1,
             ) + "-->\n"
             self.write_implemented(root, document, hidden_required)
@@ -266,20 +268,20 @@ class ModelDocumentFormatTests(unittest.TestCase):
             self.assertIn("missing required heading", required_result.stdout)
 
             comment_only = make_document("Implementation: [source](../src/solver.R)").replace(
-                "Body for 5. Governing Equations.",
+                "Body for 4.1. Model Equations.",
                 "<!-- No visible section content -->",
                 1,
             )
             self.write_implemented(root, document, comment_only)
             leaf_result = self.run_checker(root, document)
             self.assertNotEqual(leaf_result.returncode, 0)
-            self.assertIn("empty leaf section: 5. Governing Equations", leaf_result.stdout)
+            self.assertIn("empty leaf section: 4.1. Model Equations", leaf_result.stdout)
 
     def test_comment_and_setext_syntax_inside_code_and_math_is_not_structure(self):
         with tempfile.TemporaryDirectory() as temporary:
             root, document = self.make_root(Path(temporary).resolve())
             text = make_document("Implementation: [source](../src/solver.R)").replace(
-                "Body for 1. Model Purpose And Questions.",
+                "Body for 1. Purpose, Questions, and Hypothesis.",
                 "```markdown <!-- fenced text\nFenced Fake Heading\n-------------------\n```\n\n"
                 "$$\n<!--\nMath Fake Heading\n-----------------\n$$",
                 1,
@@ -300,7 +302,7 @@ class ModelDocumentFormatTests(unittest.TestCase):
             for name, body in contexts.items():
                 with self.subTest(context=name):
                     text = make_document("Implementation: [source](../src/solver.R)").replace(
-                        "Body for 1. Model Purpose And Questions.", body, 1
+                        "Body for 1. Purpose, Questions, and Hypothesis.", body, 1
                     )
                     self.write_implemented(root, document, text)
 
@@ -312,7 +314,7 @@ class ModelDocumentFormatTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root, document = self.make_root(Path(temporary).resolve())
             text = make_document("Implementation: [source](../src/solver.R)").replace(
-                "Body for 1. Model Purpose And Questions.",
+                "Body for 1. Purpose, Questions, and Hypothesis.",
                 "An unmatched ` remains ordinary body text.",
                 1,
             )
@@ -328,14 +330,14 @@ class ModelDocumentFormatTests(unittest.TestCase):
             for thematic_break in ("---", "***", "___"):
                 with self.subTest(thematic_break=thematic_break):
                     text = make_document("Implementation: [source](../src/solver.R)").replace(
-                        "Body for 5. Governing Equations.", thematic_break, 1
+                        "Body for 4.1. Model Equations.", thematic_break, 1
                     )
                     self.write_implemented(root, document, text)
 
                     result = self.run_checker(root, document)
 
                     self.assertNotEqual(result.returncode, 0)
-                    self.assertIn("empty leaf section: 5. Governing Equations", result.stdout)
+                    self.assertIn("empty leaf section: 4.1. Model Equations", result.stdout)
 
     def test_empty_leaf_section_fails(self):
         with tempfile.TemporaryDirectory() as temporary:
@@ -345,22 +347,22 @@ class ModelDocumentFormatTests(unittest.TestCase):
                 document,
                 make_document(
                     "Implementation: [source](../src/solver.R)",
-                    empty_heading="5. Governing Equations",
+                    empty_heading="4.1. Model Equations",
                 ),
             )
 
             result = self.run_checker(root, document)
 
             self.assertNotEqual(result.returncode, 0)
-            self.assertIn("empty leaf section: 5. Governing Equations", result.stdout)
+            self.assertIn("empty leaf section: 4.1. Model Equations", result.stdout)
 
     def test_fenced_fake_headings_are_ignored(self):
         with tempfile.TemporaryDirectory() as temporary:
             root, document = self.make_root(Path(temporary).resolve())
             text = make_document("Implementation: [source](../src/solver.R)")
             text = text.replace(
-                "Body for 1. Model Purpose And Questions.",
-                "Body for 1. Model Purpose And Questions.\n\n"
+                "Body for 1. Purpose, Questions, and Hypothesis.",
+                "Body for 1. Purpose, Questions, and Hypothesis.\n\n"
                 "```mermaid\n## Fake H2\n### Fake H3\n#### Fake H4\n```",
                 1,
             )
@@ -481,7 +483,7 @@ class ModelDocumentFormatTests(unittest.TestCase):
         with tempfile.TemporaryDirectory() as temporary:
             root, document = self.make_root(Path(temporary).resolve())
             valid_math = make_document("Implementation: [source](../src/solver.R)").replace(
-                "Body for 5. Governing Equations.",
+                "Body for 4.1. Model Equations.",
                 "The relation $a < b > c$ is stated here.",
                 1,
             )
@@ -495,7 +497,7 @@ class ModelDocumentFormatTests(unittest.TestCase):
             self.assertNotEqual(self.run_checker(root, document).returncode, 0)
 
             document.write_text(
-                valid_math.replace("Body for 1. Model Purpose And Questions.", "<...>", 1),
+                valid_math.replace("Body for 1. Purpose, Questions, and Hypothesis.", "<...>", 1),
                 encoding="utf-8",
             )
             self.assertNotEqual(self.run_checker(root, document).returncode, 0)

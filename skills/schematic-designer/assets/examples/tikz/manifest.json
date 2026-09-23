@@ -1,0 +1,410 @@
+{
+  "schema_version": 2,
+  "profile": "Minimalist",
+  "engine": "lualatex",
+  "files": {
+    "source": "source.tex",
+    "recipe": "README.md",
+    "attribution": "ATTRIBUTION.md",
+    "pdf": "figures/figure.pdf",
+    "svg": "figures/figure.svg"
+  },
+  "shared_profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+  "svg_text_policy": "Outlined glyph paths; no live text, font dependency, or linked resources.",
+  "provenance_note": "Archive hashes identify preserved local inputs, not asserted upstream revisions. Source/PDF/SVG hashes identify the stored specimens. The profile hashes record their earlier build; the current profile adds an optional native-palette fallback without regenerating these specimens.",
+  "examples": [
+    {
+      "slug": "behavioral-timescale-buckets",
+      "title": "Behavioral timescale buckets",
+      "author": "Izaak Neutelings",
+      "page_url": "https://tikz.net/behavior_sapolsky/",
+      "source_url": "https://tikz.net/files/behavior_sapolsky.tex",
+      "license": "CC BY-SA 4.0",
+      "adaptation": "Semantic styles, neutral typography, spacing, and label placement; inspired by Robert Sapolsky's framework.",
+      "build_case": "tikz-behavioral-timescale-buckets",
+      "archived_source_sha256": "20247dc90f0df90ea3fe62de0e9659abe5dbdd3c24ebd26574aea090a7ef918b",
+      "source_sha256": "f6bdd5825025a1af1aa9955eff84e87834516aa87cae0ceca59a4bec7b7e736b",
+      "pdf_sha256": "c86ee490cd608f1f70ac7932cf05ebd73dcff6e1aaec1bcfc4569a831dababee",
+      "svg_sha256": "2a83a9becde509df3f08c211016f82f7b8bfbf5da14b95e98c99365c431ba56b",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "dome",
+      "title": "Projection of circles onto a spherical surface",
+      "author": "Mark Wibrow",
+      "page_url": "https://texample.net/dome/",
+      "source_url": "https://texample.net/files/dome.tex",
+      "license": "CC BY-SA 4.0",
+      "build_case": "tikz-dome",
+      "archived_source_sha256": "454a9728898b2cbe0d8b06e8a1c8a5e24b84bdad105019c5be10d9aa130e66bc",
+      "source_sha256": "935790acb41de824100a6ae25bd1a19bd9d8547039e2d0dd62c79682020eed97",
+      "pdf_sha256": "ecf375b1a460b5078c40e5d55ce70a272335bd429929a787c5b8b7c1f02c82b0",
+      "svg_sha256": "81169dc0aaafe036b167baa3c7378c44e4c22a6ee2dcf5557f890192b1669b0b",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "epc-flow-charts",
+      "title": "EPC flow charts",
+      "author": "Fabian Schuh",
+      "page_url": "https://texample.net/epc-flow-charts/",
+      "source_url": "https://texample.net/files/epc-flow-charts.tex",
+      "license": "CC BY-SA 4.0",
+      "build_case": "tikz-epc-flow-charts",
+      "archived_source_sha256": "9e6b80170cef8d627d8120ff25389e4b8ecfe1366211f1904c22b21604eda601",
+      "source_sha256": "a37d19146d7374d9f5096e751f16e6b61ae6f755f0a5ef48b3c572c7b2692597",
+      "pdf_sha256": "85b899fedc8a4148b5732873300e64b1ebfb3b50d52f43c624059f224703bfa5",
+      "svg_sha256": "d74328aa7216f43c959ac18244099342b5b2da54bd60457282a6f5eedd702ea8",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "global-nodes",
+      "title": "Global nodes across equations and lists",
+      "author": "Kjell Magne Fauske",
+      "page_url": "https://texample.net/global-nodes/",
+      "source_url": "https://texample.net/files/global-nodes.tex",
+      "license": "CC BY-SA 4.0",
+      "build_case": "tikz-global-nodes",
+      "archived_source_sha256": "0005bb80d6d5dda8b13474ed2150f954e1884838efb7ca7883b8d5c8dfa13d56",
+      "source_sha256": "73787bb6f0665ea150436b9d2d6d13196c2cb8679862676eb13f98518948209f",
+      "pdf_sha256": "8a829da0827ccaabd893d2d9f3f5a161644979414ebf39183f9b2793d5cb5772",
+      "svg_sha256": "e506dfd3fd6573d507a63c94b94e760985881903d5772169d4191e60ad9b8077",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "lab-curriculum-flow",
+      "title": "Laboratory curriculum dependencies",
+      "author": "schematic-designer maintainers",
+      "page_url": "https://github.com/f0nzie/tikz_favorites/blob/9506fd5643abb406197bed176ab9183484006dd1/src/flow-labs_class%2Bdiagram%2Bstyle%2Bpgf%2Bcommand.tex",
+      "license": "MIT",
+      "provenance": "Independent implementation informed only by the linked pattern; no upstream code copied.",
+      "build_case": "tikz-lab-curriculum-flow",
+      "archived_source_sha256": "4c81cf1310a1dcbbce70229b5bcae249dbf0c6f5919e858a55cb278148876e40",
+      "source_sha256": "1e3fa5a1cdc16cd11f761c869854aae9c103d752380685ab8c754bc074044e63",
+      "pdf_sha256": "9d88683c4c4d1cf333e7c8fbcc766f91437b0fbd3cf5c2f3f03c2339681bd106",
+      "svg_sha256": "02705de3ca15316f71a7040b2396a12f1348df8336c8a2920ea45a799d3c1737",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "mesif",
+      "title": "MESIF protocol",
+      "author": "Marek Fiser",
+      "page_url": "https://texample.net/mesif/",
+      "source_url": "https://texample.net/files/mesif.tex",
+      "license": "CC BY-SA 4.0",
+      "build_case": "tikz-mesif",
+      "archived_source_sha256": "135abd305a20a4d7a1684b9082afb7be98d5fd9e4114cc2e5d235f0ceb4bf4c8",
+      "source_sha256": "380fa30df73b19fc8daa5bf0b745db286a1c1e3e83168fb25c00f5b584d454c4",
+      "pdf_sha256": "04d84321eb588c564bcb1dc133bfad2f3cb5e0b537d26756735d0f3f3a5d2497",
+      "svg_sha256": "a8be3c2dbf091cc994e498e80ead40ba05020a1e429b79b9d29e54f491a70b26",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "model-physics",
+      "title": "Standard model of physics",
+      "author": "Carsten Burgard",
+      "page_url": "https://texample.net/model-physics/",
+      "source_url": "https://texample.net/files/model-physics.tex",
+      "license": "CC BY-SA 4.0",
+      "build_case": "tikz-model-physics",
+      "archived_source_sha256": "ad283c87725a058dffe76fb6b0ff7bb47e3f01687016d2596b6fe8f1a509d6ee",
+      "source_sha256": "b254fbd44fd1ea58743ab10a255c1cc744f551d71bb7668d67bdb7f65f9288ae",
+      "pdf_sha256": "5c90d4076aaede90585e637ac5dec03261f0c29810f78151881e456d74f5f570",
+      "svg_sha256": "516b4842ef1e717dfe972792482303c9f940975b10b52075698af822eac2a0fc",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {},
+      "svg_embedded_layers_reason": "The owner requested the original rounded particle cards and blur shadows. The SVG converter embeds only the 18 shadow opacity masks; card geometry, text glyphs and property tabs remain vector.",
+      "svg_embedded_layers": [
+        {
+          "id": "source-9",
+          "kind": "shadow-opacity-mask",
+          "sha256": "ebcb965f8d2b57fe47842fa79cccfdea36c187b2b710801e5afaeff310e80b4f"
+        },
+        {
+          "id": "source-16",
+          "kind": "shadow-opacity-mask",
+          "sha256": "70f374fbbd39357defcd38921f7869f437b89da794549737641cf8969f8f3dc8"
+        },
+        {
+          "id": "source-23",
+          "kind": "shadow-opacity-mask",
+          "sha256": "b24d571d96f7b8d7f4c0f0bb7013d306dffc60ed4b42889021dcc9b1d7cee1e4"
+        },
+        {
+          "id": "source-30",
+          "kind": "shadow-opacity-mask",
+          "sha256": "76a748b4e7a56f59031a25fdaf6d33ebdbe5b5e5fe53d1fcd9129afd0da705d7"
+        },
+        {
+          "id": "source-37",
+          "kind": "shadow-opacity-mask",
+          "sha256": "3bceae122d74693fd8f7fbe2b8cd6298a6e42d2ffff23e6f39631533d9e9d84b"
+        },
+        {
+          "id": "source-44",
+          "kind": "shadow-opacity-mask",
+          "sha256": "49af983b07e2dc7cba3364a3a1cef17e57816b462ed05d078e3768f69d189f12"
+        },
+        {
+          "id": "source-51",
+          "kind": "shadow-opacity-mask",
+          "sha256": "265108582972cb07183a2a9b367b25041f5612b8cb88c4be70fb83624ca4d3ca"
+        },
+        {
+          "id": "source-58",
+          "kind": "shadow-opacity-mask",
+          "sha256": "691d0824b66e3b91485c8c641c0c15c37906ac366e923b5b27b804dadf0ae928"
+        },
+        {
+          "id": "source-65",
+          "kind": "shadow-opacity-mask",
+          "sha256": "7ec529a4493b7a8fcb3b1a355560723059d500fbabcad054257b44e1c22a71ec"
+        },
+        {
+          "id": "source-72",
+          "kind": "shadow-opacity-mask",
+          "sha256": "6b5c1b7edee0f2c46347f3932bfdb54b14541be7c673e912d9f454fe3e436df2"
+        },
+        {
+          "id": "source-79",
+          "kind": "shadow-opacity-mask",
+          "sha256": "34fd866a78ad4e5787f9ae835401bdad4a7eea1a55628f718527c03cf615af44"
+        },
+        {
+          "id": "source-86",
+          "kind": "shadow-opacity-mask",
+          "sha256": "e042d233daf096834d56d6225f4675dc4e95e0ab129338c6950108a53e29ba4f"
+        },
+        {
+          "id": "source-93",
+          "kind": "shadow-opacity-mask",
+          "sha256": "ce4ed98b53ca86222111ac937b516f940515a46cecfc3d505e840f0723441885"
+        },
+        {
+          "id": "source-100",
+          "kind": "shadow-opacity-mask",
+          "sha256": "af7f7003b0ba45f87a61667c00c25c67e9fa8f8f45b4630b31e4920613e54bc9"
+        },
+        {
+          "id": "source-107",
+          "kind": "shadow-opacity-mask",
+          "sha256": "2ec824c4237a8e90ed3f70b0430e9a3181f4156f4e039e7399fb237bced694fa"
+        },
+        {
+          "id": "source-114",
+          "kind": "shadow-opacity-mask",
+          "sha256": "d7180a37771ff4eebe5fce7d78592b5db9ccbe0aa9fc64a4d41fa8af7c8275f3"
+        },
+        {
+          "id": "source-121",
+          "kind": "shadow-opacity-mask",
+          "sha256": "770c2a53f3bdbd181e6f7fa9067cf8f1e203f43d44b18c116c7928c816a401f4"
+        },
+        {
+          "id": "source-128",
+          "kind": "shadow-opacity-mask",
+          "sha256": "0efaa780a00bc1e7b3ccc8ccf2de55ea39683241aed4442496630c7bbdc26e86"
+        }
+      ]
+    },
+    {
+      "slug": "optimization-decision-flowchart",
+      "title": "Optimization decision flowchart",
+      "author": "Jesse and Stack Exchange community contributors",
+      "source_url": "https://tex.stackexchange.com/a/169693",
+      "license": "CC BY-SA 3.0",
+      "adaptation": "Standalone layout, semantic nodes, current arrows, spelling corrections, and gallery typography.",
+      "build_case": "tikz-optimization-decision-flowchart",
+      "archived_source_sha256": "c8ecc8ca2b661e39078d4186b948219dd653546083eebf3f19ca11b64f9f3232",
+      "source_sha256": "5d6c4c9387598dfc69c7fa843d6a8ef5720778c64d0e1bb3626ed73d8dbe3769",
+      "pdf_sha256": "4b84724528e0fe667fb2ee67845e4e9399992ab0ac3d6c989a11b8f3b9525060",
+      "svg_sha256": "acf817c55102e504ed1197b8e7fc423c9cc628c8f948b0760aad71b1257e1962",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "orbital-elements-3d-trajectory",
+      "title": "Inclined orbital trajectory",
+      "author": "schematic-designer maintainers",
+      "page_url": "https://github.com/f0nzie/tikz_favorites/blob/9506fd5643abb406197bed176ab9183484006dd1/src/physics-trajectory.tex",
+      "license": "MIT",
+      "provenance": "Independent implementation informed only by the linked pattern; no upstream code copied.",
+      "build_case": "tikz-orbital-elements-3d-trajectory",
+      "archived_source_sha256": "ab35869b83c03028b952f69e15f245a738f2ebada166079b238836420a015eb9",
+      "source_sha256": "39df8fbb1cc94eab43e16ecf0d77118a2e867450d2665a5103945b1790d9863a",
+      "pdf_sha256": "d34c1adc5b30c28c81b189a50345a7b34b121f08789b4817db19b063bc12b98d",
+      "svg_sha256": "6b0a735f67a991d5a69d37e46519f96391589db8307a7f18e0cd05baca23ac55",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "polarizing-microscope",
+      "title": "Polarizing microscope",
+      "author": "Cyril Langlois",
+      "page_url": "https://texample.net/polarizing-microscope/",
+      "source_url": "https://texample.net/files/polarizing-microscope.tex",
+      "license": "CC BY-SA 4.0",
+      "build_case": "tikz-polarizing-microscope",
+      "archived_source_sha256": "e0cb28978aeebc44ee4f8b2d12cce77b37ba593af745496c854d4c392b22c086",
+      "source_sha256": "715bc15c2732424575304085979d4d82305a3126ec70ac8193a6394f5640fa58",
+      "pdf_sha256": "6eed6d2c58e834023ae6dfaaddd8f532a3345d4c7045b12034813655461b68ea",
+      "svg_sha256": "47c24d9be4f2e53c67ce0ead4587e5a693cf4d4361179d9505388321324a845a",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "secant-regression-geometry",
+      "title": "Secant slope geometry",
+      "author": "schematic-designer maintainers",
+      "page_url": "https://github.com/f0nzie/tikz_favorites/blob/9506fd5643abb406197bed176ab9183484006dd1/src/plot-linear-regression%2Bgeometry.tex",
+      "license": "MIT",
+      "provenance": "Independent implementation informed only by the linked pattern; no upstream code copied.",
+      "build_case": "tikz-secant-regression-geometry",
+      "archived_source_sha256": "44f308d66164dc08cf80c6ffd805746819646155735449ca379434791515bca8",
+      "source_sha256": "732811fa3467a610db07def3d1e3104a0a9dad7e1485a773d8d79c4183713a94",
+      "pdf_sha256": "300d8fce730df73b2380eb769b1418053fcffa57bb85c138bca6b34781c552d0",
+      "svg_sha256": "ff6d377d92e477ff089a93babbcfda88b5589f45a656a591fc7bdb0b06452d83",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "seismic-focal-mechanism-in-3d-view",
+      "title": "Seismic focal mechanism in 3D view",
+      "author": "Cyril Langlois",
+      "page_url": "https://texample.net/seismic-focal-mechanism-in-3d-view/",
+      "source_url": "https://texample.net/files/seismic-focal-mechanism-in-3d-view.tex",
+      "license": "CC BY-SA 4.0",
+      "build_case": "tikz-seismic-focal-mechanism-in-3d-view",
+      "archived_source_sha256": "0e4fb629494d956dce9094c79f08a61e52b1748c33eb0ce28efc168d54004f5a",
+      "source_sha256": "843925ac6fc8fda04a6b7dba00c554e7c9f3faa46d5d7b03d90e110b0474513b",
+      "pdf_sha256": "de2661d998cca3d6879eaa9b6c8c7def2d1412c08a49210bd888ac75ddf40fbe",
+      "svg_sha256": "557163915cac3b5020c9da29a5a38cf263c282f6b9492dcf6d5c980fe1cbe7e4",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "spherical-and-cartesian-grids",
+      "title": "Spherical and cartesian grids",
+      "author": "Marco Miani",
+      "page_url": "https://texample.net/spherical-and-cartesian-grids/",
+      "source_url": "https://texample.net/files/spherical-and-cartesian-grids.tex",
+      "license": "CC BY-SA 4.0",
+      "build_case": "tikz-spherical-and-cartesian-grids",
+      "archived_source_sha256": "b36e299424981d3fc5a9624be6dd0efda7010111d7551d16996471ce102d89ec",
+      "source_sha256": "bd07cfcbe0290743c5084c9f9621209a96902390623ed1d4d8f84cd0876f4269",
+      "pdf_sha256": "5e564f78b9215794e85f5caf1b6c86435e864e8bda9125e8b965908d7a4cf7e3",
+      "svg_sha256": "c0a1e93c7ec6c98b2ec2cac4285dd554cd1a6c59d253b67ed73a6f6a9502b716",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "swan-wave-model",
+      "title": "SWAN wave model",
+      "author": "Marco Miani",
+      "page_url": "https://texample.net/swan-wave-model/",
+      "source_url": "https://texample.net/files/swan-wave-model.tex",
+      "license": "CC BY-SA 4.0",
+      "build_case": "tikz-swan-wave-model",
+      "archived_source_sha256": "fd36d386c24a9baa9d5d4f948436cda1aec2535eeb6c035c738484ab7186bfd6",
+      "source_sha256": "1fc72c817a750a3230b792757edb017b736a9537976f1bc416247ec39a389840",
+      "pdf_sha256": "923aa56014ab0d636fa83c5c091515326d2b67882a322826aa5fed784f8e71fa",
+      "svg_sha256": "918a7215bbcc1f30a58d96ccd66094899516d2b29b5f118143e0758e45a09def",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "tkz-linknodes-examples",
+      "title": "Linked equation nodes",
+      "author": "Alain Matthes",
+      "page_url": "https://texample.net/tkz-linknodes-examples/",
+      "source_url": "https://texample.net/files/tkz-linknodes-examples.tex",
+      "license": "CC BY-SA 4.0",
+      "build_case": "tikz-tkz-linknodes-examples",
+      "archived_source_sha256": "4971c8818eb6a1c91f99cea3c74aec36c1d5dc6284488a376d1148e5f78a444f",
+      "source_sha256": "3791cb39ebc7d4023386999aa4ea19ecabc412e714197f75524802389f724d8f",
+      "pdf_sha256": "ba521e5c9594381256e78259ccf109e964169548bd5afa359b4c177b386b5e67",
+      "svg_sha256": "f8029297d003f3795805330678a387e9d15f34827a226977c987f11001be5ff1",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "tkz-orm-example",
+      "title": "Object-role modeling notation",
+      "author": "Jakob Voß",
+      "page_url": "https://texample.net/tkz-orm-example/",
+      "source_url": "https://texample.net/files/tkz-orm-example.tex",
+      "license": "CC BY-SA 4.0",
+      "build_case": "tikz-tkz-orm-example",
+      "archived_source_sha256": "8c91d3da4e181c83279e95ff0c57ee14909d23ca3e034dab501c1307f1ddcb1d",
+      "source_sha256": "19eefbc85efcfe0e6cfe0bebd50393c464ae2c60648fb7025c90cda15d82e3ed",
+      "pdf_sha256": "b3a7de7494afadf9d04604679a11ebf54f82e2abb8a59e11bb640ca7cbfdc7d4",
+      "svg_sha256": "d199088ea446b904daec91f5dee983282fb95aa8045ae3b3d9d6f64192a9fb71",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "transmission-electron-microscope",
+      "title": "Transmission Electron Microscope System",
+      "author": "Eric Jensen",
+      "page_url": "https://texample.net/transmission-electron-microscope/",
+      "source_url": "https://texample.net/files/transmission-electron-microscope.tex",
+      "license": "CC BY-SA 4.0",
+      "build_case": "tikz-transmission-electron-microscope",
+      "archived_source_sha256": "7caa5d0915ab261ea78732d357136c52639c833c9c6a29a7c53bf93a32cdcb18",
+      "source_sha256": "c2225746aed7d4801a11a1b1650d87d6f5299eee56296bf0c7484287d4402bc5",
+      "pdf_sha256": "61e3e90489047bb418a1001c9f9346d6baf7ef2c33bf1f1ddde641d488b52ebb",
+      "svg_sha256": "828a67698cebee0a4a153ea516959604828ce99642a1eea03546c0e8bd5dc119",
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {}
+    },
+    {
+      "slug": "learning-dynamics",
+      "title": "Native learning dynamics",
+      "author": "schematic-designer maintainers",
+      "provenance": "Original illustrative local example; see case recipe for scientific limitations.",
+      "build_case": "learning-tikz",
+      "files": {
+        "source": "source.tex",
+        "recipe": "README.md",
+        "pdf": "figures/learning-dynamics-tikz.pdf",
+        "svg": "figures/learning-dynamics-tikz.svg"
+      },
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {
+        "assets/styles/tikz/learning-dynamics-2406.sty": "6d1db1eec54462abb39c1d2ba7657beaedc39b4ced9d297bb1b5f27df97be025"
+      },
+      "source_sha256": "c9a55035ea6631045e951b3abb66f2fe1e7751d24f0f7144f03e158b8b715061",
+      "pdf_sha256": "ecfdcdbb8f93757a66b9eac5c89a24461f0bd8870f2a6790c77523616478796b",
+      "svg_sha256": "7507554cf09d195527024454c12873d7a0ce0d13dc180c7e2686b8f222ce70af"
+    },
+    {
+      "slug": "chemoattraction",
+      "title": "Chemoattraction hybrid",
+      "author": "schematic-designer maintainers",
+      "provenance": "Original illustrative local example; see case recipe for scientific limitations.",
+      "build_case": "chemoattraction",
+      "files": {
+        "source": "tikz-compositor.tex",
+        "recipe": "README.md",
+        "pdf": "figures/chemoattraction-hybrid.pdf",
+        "svg": "figures/chemoattraction-hybrid.svg"
+      },
+      "profile_sha256": "86b2092c701ea3133012c3edc79003eb8a5c0e7cd7793d926996925ae50a4da1",
+      "inputs": {
+        "assets/styles/tikz/scientific-neutral.sty": "dc3194b96191d2b8b76f6a1c541763421b52d09414404e6cb09b7540a4e5e68f",
+        "assets/styles/matplotlib/scientific_neutral.py": "f57563ccffb18c3f5512866c29a216c84043b68c325458d5786740e29da345a5",
+        "assets/examples/matplotlib/chemoattraction/matplotlib-panels.py": "14787f895832a0a740066c96484ed786d86861a62b2d2992031bf8bbea61ef97"
+      },
+      "source_sha256": "7bad44ff53abbfa701640a03fa5c3620610125e421eb1b93c118ced00b43a00e",
+      "pdf_sha256": "bb060b19207fcfa192eaa2bce1431f98494f045be965a05ab51cdae656684ef2",
+      "svg_sha256": "f418b7caebf97501da7502f3fbf9400f0953b3817f7a8be42ed8ce3489518c2c"
+    }
+  ],
+  "current_profile_sha256": "ebb188bc2f1c4b230c7d6bd4c0a3181b6cfad9db36f9bdc444f826bd92c19567",
+  "profile_change_note": "The current profile adds an explicit native Matplotlib color fallback when the optional personal theme is absent. shared_profile_sha256 and each entry profile_sha256 retain the profile used for stored specimens; no scientific geometry or stored PDF/SVG was regenerated."
+}

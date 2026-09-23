@@ -7,9 +7,9 @@ __pycache__/
 .pytest_cache/
 .mypy_cache/
 outputs/
-renders/
-!skills/schematic-designer/examples/activator-inhibitor/renders/
-!skills/schematic-designer/examples/activator-inhibitor/renders/**
-!skills/schematic-designer/examples/learning-dynamics/renders/
-!skills/schematic-designer/examples/learning-dynamics/renders/**
 tmp/
+*.aux
+*.log
+*.fls
+*.fdb_latexmk
+*.synctex.gz

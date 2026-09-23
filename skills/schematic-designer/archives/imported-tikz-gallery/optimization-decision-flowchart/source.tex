@@ -1,0 +1,129 @@
+% Source - https://tex.stackexchange.com/a/169693
+% Posted by Jesse, modified by community. See post 'Timeline' for change history
+% Retrieved 2026-08-12, License - CC BY-SA 3.0
+%
+% Adapted for the schematic-designer gallery: standalone layout, semantic node
+% names, current arrows.meta syntax, and corrected label spelling.
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{scientific-neutral}
+\usetikzlibrary{arrows.meta,calc,positioning,shapes.geometric}
+
+\tikzset{
+  process/.style={
+    rectangle,
+    rounded corners=2pt,
+    draw=saBlue!75!black,
+    fill=saBlue!8,
+    thick,
+    minimum height=8mm,
+    text width=57mm,
+    align=center,
+    inner sep=3pt
+  },
+  decision/.style={
+    diamond,
+    aspect=1.8,
+    draw=saAmber!80!black,
+    fill=saAmber!10,
+    thick,
+    minimum width=26mm,
+    minimum height=13mm,
+    align=center,
+    inner sep=2pt
+  },
+  result/.style={
+    process,
+    text width=28mm
+  },
+  flow/.style={
+    draw=saInk,
+    very thick,
+    -{Stealth[length=2.4mm,width=1.7mm]}
+  },
+  branch/.style={
+    flow,
+    draw=saRed!80!black
+  },
+  branchline/.style={
+    draw=saRed!80!black,
+    very thick
+  },
+  flow-label/.style={
+    fill=white,
+    inner sep=1.5pt,
+    font=\scriptsize,
+    text=black
+  }
+}
+
+\begin{document}
+\begin{tikzpicture}[node distance=7mm and 22mm]
+  \node[process] (start) {Start};
+  \node[process, below=of start] (candidate-c)
+    {Assume \(a=c\); evaluate the optimality criterion};
+  \node[decision, below=of candidate-c] (local-c)
+    {Locally\\optimal?};
+  \node[process, below=of local-c] (candidate-d)
+    {Assume \(a=d\); evaluate the optimality criterion};
+  \node[decision, below=of candidate-d] (local-d)
+    {Locally\\optimal?};
+  \node[process, below=of local-d] (candidate-e)
+    {Assume \(a=e\); evaluate the optimality criterion};
+  \node[decision, below=of candidate-e] (local-e)
+    {Locally\\optimal?};
+  \node[process, below=of local-e] (candidate-f)
+    {Assume \(a=f\); evaluate the optimality criterion};
+  \node[decision, below=of candidate-f] (local-f)
+    {Locally\\optimal?};
+  \node[process, below=of local-f] (candidate-k)
+    {Assume \(a=k\); evaluate the optimality criterion};
+
+  \node[result, right=of candidate-e] (metrics) {\(A=c^2\)\\\(A=b^2\)};
+  \node[result, right=of metrics] (global)
+    {Global\\optimal\\configuration};
+  \node[decision, right=of candidate-k] (local-k)
+    {Locally\\optimal?};
+  \node[result, below=38mm of global] (stop) {Stop};
+
+  \draw[flow] (start) -- (candidate-c);
+  \draw[flow] (candidate-c) -- (local-c);
+  \draw[flow] (local-c) -- (candidate-d);
+  \draw[flow] (candidate-d) -- (local-d);
+  \draw[flow] (local-d) -- (candidate-e);
+  \draw[flow] (candidate-e) -- (local-e);
+  \draw[flow] (local-e) -- (candidate-f);
+  \draw[flow] (candidate-f) -- (local-f);
+  \draw[flow] (local-f) -- (candidate-k);
+
+  \coordinate (branch-c) at ($(local-c.east)+(18mm,0)$);
+  \coordinate (branch-d) at ($(local-d.east)+(18mm,0)$);
+  \coordinate (branch-e) at ($(local-e.east)+(18mm,0)$);
+  \coordinate (branch-f) at ($(local-f.east)+(18mm,0)$);
+
+  \draw[branch] (local-c.east) -- node[flow-label,above]
+    {Yes, pass \((a,c)\)} (branch-c) |- ([xshift=12mm]candidate-d.north);
+  \draw[branch] (local-d.east) -- node[flow-label,above]
+    {Yes, pass \((a,c)\)} (branch-d) |- ([xshift=12mm]candidate-e.north);
+  \draw[branch] (local-e.east) -- node[flow-label,above]
+    {Yes, pass \((a,c)\)} (branch-e) |- ([xshift=12mm]candidate-f.north);
+  \draw[branch] (local-f.east) -- node[flow-label,above]
+    {Yes, pass \((a,c)\)} (branch-f) |- ([xshift=12mm]candidate-k.north);
+
+  \draw[branch] (candidate-k.east) -- (local-k.west);
+  \draw[branch] (local-k.north) -- node[flow-label,right,pos=0.35]
+    {Yes, pass \((a,c)\)} (metrics.south);
+  \draw[branch] (metrics.east) -- node[flow-label,above] {Step 6}
+    node[flow-label,below] {Yes, pass \((a,c)\)} (global.west);
+  \draw[branch] (global.south) -- (stop.north);
+  \draw[branch] (local-k.east) -| (stop.south);
+
+  \draw[branchline] (branch-c) -- (branch-f);
+  \draw[branch] ($(branch-c)!0.5!(branch-f)$) -- (metrics.south);
+
+  \node[flow-label, left=12mm of local-c] {Step 1 (4)};
+  \node[flow-label, left=12mm of local-d] {Step 2 (7)};
+  \node[flow-label, left=12mm of local-e] {Step 3 (9)};
+  \node[flow-label, left=12mm of local-f] {Step 4 (3)};
+  \node[flow-label, above=5mm of local-k] {Step 5};
+\end{tikzpicture}
+\end{document}

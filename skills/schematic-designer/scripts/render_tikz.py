@@ -834,7 +834,7 @@ def _read_build_artifact(path: Path, label: str) -> bytes:
 
 
 def _remove_build_entry(path: Path, label: str) -> None:
-    """Remove one failed converter output inside the isolated build directory."""
+    """Remove one failed converter output inside the private build directory."""
 
     try:
         metadata = os.lstat(os.fspath(path))

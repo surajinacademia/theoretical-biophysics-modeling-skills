@@ -1,0 +1,68 @@
+% Independent original example by the schematic-designer maintainers.
+% Pattern reference (no upstream code copied):
+% https://github.com/f0nzie/tikz_favorites/blob/9506fd5643abb406197bed176ab9183484006dd1/src/physics-trajectory.tex
+% License: MIT, as part of the biophysics-simulation-workflow-skills bundle.
+\documentclass[tikz,border=8pt]{standalone}
+\usepackage{scientific-neutral}
+\usetikzlibrary{arrows.meta,calc}
+
+\begin{document}
+\begin{tikzpicture}[
+  x={(0.96cm,-0.18cm)},
+  y={(0.52cm,0.30cm)},
+  z={(0cm,1cm)},
+  line join=round
+]
+  \def\incCos{0.82}
+  \def\incSin{0.57}
+
+  % Reference plane and axes.
+  \filldraw[fill=saLightGray!25,draw=saGray!55,line width=0.55pt]
+    (-4,-3,0) -- (4,-3,0) -- (4,3,0) -- (-4,3,0) -- cycle;
+  \node[sa/font small,text=saGray,anchor=north east] at (4,-3,0)
+    {reference plane};
+  \draw[-{Stealth[length=2mm]},draw=saInk] (0,0,0) -- (4.6,0,0) node[below] {$x$};
+  \draw[-{Stealth[length=2mm]},draw=saInk] (0,0,0) -- (0,3.7,0) node[right] {$y$};
+  \draw[-{Stealth[length=2mm]},draw=saInk] (0,0,0) -- (0,0,2.8) node[left] {$z$};
+
+  % Inclined orbital plane and full trajectory.
+  \filldraw[fill=saBlue!8,draw=saBlue!55,line width=0.55pt,opacity=0.75]
+    (-3.8,{-2.5*\incCos},{-2.5*\incSin}) --
+    ( 3.8,{-2.5*\incCos},{-2.5*\incSin}) --
+    ( 3.8,{ 2.5*\incCos},{ 2.5*\incSin}) --
+    (-3.8,{ 2.5*\incCos},{ 2.5*\incSin}) -- cycle;
+  \draw[draw=saGray,dashed,line width=0.7pt]
+    plot[domain=0:360,samples=120,variable=\t]
+      ({3.25*cos(\t)},{1.95*\incCos*sin(\t)},{1.95*\incSin*sin(\t)});
+  \draw[draw=saBlue,line width=1.5pt,-{Stealth[length=2.5mm]}]
+    plot[domain=-15:118,samples=70,variable=\t]
+      ({3.25*cos(\t)},{1.95*\incCos*sin(\t)},{1.95*\incSin*sin(\t)});
+
+  % Line of nodes is the intersection of the two planes.
+  \draw[draw=saViolet,line width=0.9pt]
+    (-4.1,0,0) -- (4.1,0,0)
+    node[pos=0.12,below,sa/font small,text=saViolet] {line of nodes};
+
+  \pgfmathsetmacro{\bodyX}{3.25*cos(68)}
+  \pgfmathsetmacro{\bodyY}{1.95*\incCos*sin(68)}
+  \pgfmathsetmacro{\bodyZ}{1.95*\incSin*sin(68)}
+  \coordinate (B) at (\bodyX,\bodyY,\bodyZ);
+  \coordinate (Bproj) at (\bodyX,\bodyY,0);
+  \draw[-{Stealth[length=2.2mm]},draw=saAmber!90!black,line width=1pt]
+    (0,0,0) -- node[above left,sa/font small] {$\mathbf r(t)$} (B);
+  \draw[draw=saGray,dashed] (B) -- (Bproj);
+  \fill[saRed,draw=saRed!75!black] (B) circle (2.2pt)
+    node[above right,sa/font small,text=saRed!80!black] {body};
+  \fill[saInk] (0,0,0) circle (2.7pt)
+    node[below left,sa/font small] {focus};
+
+  \draw[-{Stealth[length=2mm]},draw=saRed,line width=0.9pt]
+    (1.15,0,0) to[bend left=28]
+    node[pos=0.58,above,sa/font small,text=saRed] {$i$}
+    (1.15,{0.95*\incCos},{0.95*\incSin});
+  \node[sa/font title,anchor=south] at (0,3.3,2.45)
+    {Inclined orbital trajectory};
+  \node[sa/font tiny,text=saGray,anchor=north]
+    at (0,-3.25,-0.10) {illustrative geometry; not to scale};
+\end{tikzpicture}
+\end{document}
