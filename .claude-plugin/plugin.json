@@ -1,7 +1,7 @@
 {
   "name": "computational-modeling-skills",
   "description": "Nine skills for scientific modeling, paper reproduction, documentation, notebooks, stability analysis, plots, schematics, clarification, and Slurm jobs.",
-  "version": "2.0.0",
+  "version": "2.0.1",
   "author": {
     "name": "Computational Modeling Skills contributors"
   },
