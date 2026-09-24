@@ -51,6 +51,15 @@ _DANGEROUS_EXPL3 = re.compile(
 _CSS_URL = re.compile(
     r"url\(\s*(['\"]?)(.*?)\1\s*\)", re.IGNORECASE | re.DOTALL
 )
+_SVG_CSS_PROPERTIES = frozenset(
+    "color opacity display visibility fill fill-opacity fill-rule stroke "
+    "stroke-width stroke-opacity stroke-dasharray stroke-dashoffset stroke-linecap "
+    "stroke-linejoin stroke-miterlimit clip-path clip-rule mask filter marker "
+    "marker-start marker-mid marker-end stop-color stop-opacity flood-color "
+    "flood-opacity lighting-color color-interpolation color-interpolation-filters "
+    "shape-rendering image-rendering vector-effect paint-order".split()
+)
+_SVG_CSS_FUNCTIONS = frozenset({"url", "rgb", "rgba", "hsl", "hsla"})
 _SAFE_OUTPUT_BASENAME = re.compile(r"^[A-Za-z0-9][A-Za-z0-9_-]*$")
 _SAFE_DOCUMENT_CLASSES = frozenset({"article", "minimal", "standalone"})
 _SAFE_SYSTEM_PACKAGES = frozenset(
@@ -200,9 +209,12 @@ def _read_declared_regular_file(path: Path, label: str) -> Tuple[Path, bytes]:
     parent_descriptor = _open_directory(absolute.parent, create=False)
     descriptor: Optional[int] = None
     try:
+        if not hasattr(os, "O_NONBLOCK"):
+            raise RenderError("This platform lacks nonblocking input support")
         try:
             descriptor = os.open(
-                absolute.name, os.O_RDONLY | os.O_NOFOLLOW, dir_fd=parent_descriptor
+                absolute.name, os.O_RDONLY | os.O_NOFOLLOW | os.O_NONBLOCK,
+                dir_fd=parent_descriptor,
             )
         except FileNotFoundError:
             raise RenderError(f"{label} does not exist: {absolute}") from None
@@ -872,10 +884,52 @@ def _validate_svg_url_functions(value: str, context: str) -> None:
     if "url(" not in value.lower():
         return
     matches = list(_CSS_URL.finditer(value))
-    if not matches:
+    if not matches or "url(" in _CSS_URL.sub("", value).lower():
         raise RenderError(f"SVG contains an unparsable URL reference in {context}")
     for match in matches:
         _validate_svg_uri(match.group(2), is_image=False, context=context)
+
+
+def _validate_svg_css_syntax(value: str, context: str) -> None:
+    """Accept plain generated CSS, rejecting escape/comment obfuscation."""
+
+    if "\\" in value or "/*" in value or "*/" in value or "@" in value:
+        raise RenderError(f"SVG contains unsupported CSS syntax in {context}")
+
+
+def _validate_svg_css_value(value: str, context: str) -> None:
+    _validate_svg_css_syntax(value, context)
+    _validate_svg_url_functions(value, context)
+    functions = re.findall(r"([A-Za-z_-][A-Za-z0-9_-]*)\s*\(", value)
+    if any(name.lower() not in _SVG_CSS_FUNCTIONS for name in functions):
+        raise RenderError(f"SVG contains an unsupported CSS function in {context}")
+
+
+def _validate_svg_css_declarations(value: str, context: str) -> None:
+    """Allow only static SVG paint properties, never resource-bearing CSS extensions."""
+
+    _validate_svg_css_syntax(value, context)
+    for declaration in value.split(";"):
+        if not declaration.strip():
+            continue
+        name, separator, contents = declaration.partition(":")
+        if not separator or name.strip().lower() not in _SVG_CSS_PROPERTIES:
+            raise RenderError(f"SVG contains an unsupported CSS property in {context}")
+        _validate_svg_css_value(contents, context)
+
+
+def _validate_svg_stylesheet(value: str) -> None:
+    """Validate flat static style rules emitted by figure renderers."""
+
+    _validate_svg_css_syntax(value, "<style>")
+    cursor = 0
+    for rule in re.finditer(r"([^{}]+)\{([^{}]*)\}", value):
+        if value[cursor:rule.start()].strip() or not rule.group(1).strip():
+            raise RenderError("SVG contains an unsupported stylesheet rule")
+        _validate_svg_css_declarations(rule.group(2), "<style>")
+        cursor = rule.end()
+    if value[cursor:].strip():
+        raise RenderError("SVG contains an unsupported stylesheet rule")
 
 
 def _validate_svg(svg_data: bytes) -> None:
@@ -885,6 +939,16 @@ def _validate_svg(svg_data: bytes) -> None:
         raw_svg = svg_data.decode("utf-8")
     except UnicodeDecodeError as error:
         raise RenderError("SVG is not valid UTF-8 XML") from error
+    # Expat can autodetect BOM-less UTF-16/32 in the original bytes. Reject
+    # controls that are invalid in decoded UTF-8 XML so lexical checks and the
+    # XML parser cannot see different markup (notably stylesheet PIs).
+    if any(ord(character) < 0x20 and character not in "\t\r\n" for character in raw_svg):
+        raise RenderError("SVG contains invalid UTF-8 XML control characters")
+    declaration = re.match(r"\ufeff?<\?xml\s+([^?]*)\?>", raw_svg, re.IGNORECASE)
+    if declaration:
+        encoding = re.search(r"\bencoding\s*=\s*(['\"])(.*?)\1", declaration.group(1), re.IGNORECASE)
+        if encoding and encoding.group(2).lower() not in {"utf-8", "utf8"}:
+            raise RenderError("SVG must declare UTF-8 XML encoding")
     lowered = raw_svg.lower()
     if "<!doctype" in lowered or "<!entity" in lowered:
         raise RenderError("SVG must not contain a DTD or entity declaration")
@@ -903,7 +967,12 @@ def _validate_svg(svg_data: bytes) -> None:
         raise RenderError("Converted artifact is not an SVG document")
 
     forbidden_elements = {
+        "animate",
+        "animatecolor",
+        "animatemotion",
+        "animatetransform",
         "audio",
+        "discard",
         "embed",
         "font",
         "font-face",
@@ -911,6 +980,7 @@ def _validate_svg(svg_data: bytes) -> None:
         "iframe",
         "object",
         "script",
+        "set",
         "text",
         "tspan",
         "textpath",
@@ -922,9 +992,7 @@ def _validate_svg(svg_data: bytes) -> None:
             raise RenderError(f"SVG contains forbidden <{element_name}> content")
         if element_name == "style":
             style_text = "".join(element.itertext())
-            _validate_svg_url_functions(style_text, "<style>")
-            if "@import" in style_text.lower():
-                raise RenderError("SVG stylesheet imports external content")
+            _validate_svg_stylesheet(style_text)
 
         for attribute, value in element.attrib.items():
             attribute_name = _xml_local_name(attribute)
@@ -935,6 +1003,10 @@ def _validate_svg(svg_data: bytes) -> None:
                 raise RenderError("SVG contains an event-handler attribute")
             if attribute_name in {"data", "href", "src"}:
                 _validate_svg_uri(value, is_image=element_name == "image", context=context)
+            if attribute_name == "style":
+                _validate_svg_css_declarations(value, context)
+            elif attribute_name in _SVG_CSS_PROPERTIES or attribute_name in {"cursor", "color-profile"}:
+                _validate_svg_css_value(value, context)
             _validate_svg_url_functions(value, context)
             if "javascript:" in value.lower():
                 raise RenderError("SVG contains a JavaScript reference")

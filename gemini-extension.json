@@ -1,5 +1,5 @@
 {
-  "name": "theoretical-biophysics-modeling-skills",
-  "version": "1.0.0",
-  "description": "Eight skills for scientific modeling, documentation, notebooks, stability analysis, plots, schematics, clarification, and simple Slurm jobs."
+  "name": "computational-modeling-skills",
+  "version": "2.0.0",
+  "description": "Nine skills for scientific modeling, paper reproduction, documentation, notebooks, stability analysis, plots, schematics, clarification, and Slurm jobs."
 }

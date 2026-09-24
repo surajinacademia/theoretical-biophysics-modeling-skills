@@ -1,0 +1,51 @@
+{
+  "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
+  "name": "computational-modeling-skills",
+  "version": "2.0.0",
+  "description": "Nine skills for scientific modeling, paper reproduction, documentation, notebooks, stability analysis, plots, schematics, clarification, and Slurm jobs.",
+  "author": {
+    "name": "Computational Modeling Skills contributors"
+  },
+  "repository": "https://github.com/surajinacademia/theoretical-biophysics-modeling-skills",
+  "license": "SEE LICENSE IN LICENSE",
+  "keywords": [
+    "computational-modeling",
+    "biophysics",
+    "scientific-modeling",
+    "scientific-notebooks",
+    "linear-stability",
+    "scientific-figures",
+    "slurm",
+    "paper-reproduction"
+  ],
+  "extensions": {
+    "com.openai": {
+      "interface": {
+        "displayName": "Computational Modeling Skills",
+        "shortDescription": "Scientific models, paper reproduction, and research workflows",
+        "longDescription": "Nine skills for scientific modeling, paper reproduction, documentation, notebooks, stability analysis, plots, schematics, clarification, and Slurm jobs.",
+        "developerName": "Computational Modeling Skills contributors",
+        "category": "Productivity",
+        "capabilities": [
+          "Scientific modeling",
+          "Paper reproduction",
+          "Model documentation",
+          "Scientific notebooks",
+          "Linear stability analysis",
+          "Data visualization",
+          "Scientific schematics",
+          "Request clarification",
+          "Single-job Slurm workflows"
+        ],
+        "defaultPrompt": [
+          "Use $computational-modeling to address my modeling task.",
+          "Use $paper-reproduce to reproduce the specified paper result.",
+          "Use $scientific-notebook to create an editable research notebook."
+        ],
+        "websiteURL": "https://github.com/surajinacademia/theoretical-biophysics-modeling-skills",
+        "composerIcon": "./assets/icon.svg",
+        "logo": "./assets/logo.svg"
+      }
+    }
+  }
+}

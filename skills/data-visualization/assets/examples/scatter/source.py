@@ -9,6 +9,7 @@ import pandas as pd
 
 ROOT = Path(__file__).resolve().parent
 sys.path.insert(0, str(ROOT.parents[1] / "styles"))
+from pdf_output import save_pdf
 from publication import MARKERS, LAYOUT, paper_style
 
 GROUP_INDEX = {"Control": 0, "Perturbed": 1}
@@ -39,11 +40,10 @@ def main():
         parser.error("output must end in .pdf")
     if any(p.is_symlink() for p in (args.output, *args.output.parents)):
         parser.error("output paths must not contain symlinks")
-    args.output.parent.mkdir(parents=True, exist_ok=True)
     # Keep rendering inside the shared context for draw-time marker gaps.
     with paper_style():
         fig = scatter()
-        fig.savefig(args.output)
+        save_pdf(fig, args.output, create_parents=True)
         plt.close(fig)
 
 

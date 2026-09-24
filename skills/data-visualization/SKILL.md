@@ -1,6 +1,6 @@
 ---
 name: data-visualization
-description: Create, style, review, or simplify quantitative plots from completed biophysical simulation data, including ordinary paper-ready PDF figures. Use the visual gallery, a portable style adapter, and direct plotting templates while preserving scientific identity, weighting, and observable definitions. Do not use for simulation execution, generic data cleaning, inferential modeling, vasculogenesis media, or composite schematic design.
+description: Create, style, review, or simplify quantitative plots from completed scientific data, including notebook figures and ordinary paper-ready PDFs. Use the visual gallery, a portable style adapter, and direct plotting templates while preserving scientific identity, weighting, and observable definitions. Do not use for simulation execution, generic data cleaning, inferential modeling, vasculogenesis media, or composite schematic design.
 ---
 
 # Data Visualization Skill
@@ -27,6 +27,17 @@ completed values.
 
 If `code-simplifier` also applies, this skill owns scientific selections and
 data meaning; that skill owns the wider preservation boundary and code shape.
+
+When called by `scientific-notebook`, work within its existing notebook and
+requested cells. Accept its question, data path, observable definitions, units,
+selections, uncertainty, and output scope; resolve missing scientific information
+without inventing values. Return plotting changes and inspection findings to
+that workflow without invoking it again or creating a parallel deliverable.
+Notebook structure, execution authorization, and output preservation remain its
+responsibility. Preserve its configured project or user style instead of forcing
+the adapter below. A saved inline notebook figure satisfies the saved-artifact
+requirement for an inline-only request; inspect it at intended reading size.
+Create a separate export only when requested or needed for the agreed handoff.
 
 ## Route to the Needed Resource
 

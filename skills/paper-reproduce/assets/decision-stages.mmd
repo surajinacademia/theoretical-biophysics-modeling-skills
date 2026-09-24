@@ -1,0 +1,34 @@
+%%{init: {"htmlLabels": false, "flowchart": {"htmlLabels": false}, "theme": "base", "themeVariables": {"fontFamily": "Arial, sans-serif", "fontSize": "16px"}, "deterministicIds": true, "deterministicIDSeed": "paper-reproduce-stages"}}%%
+flowchart TB
+    subgraph S1["Stage 1 — What is my primary objective?"]
+        direction LR
+
+        R("`**Reproduction**
+Reproduce the paper's model, selected features, or reported results.`")
+        A("`**Assessment**
+Verify or validate a model, test a mechanism or hypothesis, or assess agreement with evidence.`")
+        P("`**Application**
+Use, adapt, or extend the paper's model, mechanism, or method for my own scientific question.`")
+
+        R ~~~ A ~~~ P
+    end
+
+    subgraph S2["Stage 2 — What depth of work do I need?"]
+        direction LR
+
+        M("`**Model Level**
+Implement, adapt, or check the required computational model or method.`")
+        C("`**Claim Level**
+Test a selected scientific claim, proposed mechanism, or hypothesis.`")
+        D("`**Result Level**
+Reproduce, compare, or generate specific curves, tables, or numerical results.`")
+
+        M ~~~ C ~~~ D
+    end
+
+    S1 --> S2
+
+    classDef box fill:#fff,stroke:#222,stroke-width:2px,color:#111;
+    class R,A,P,M,C,D box;
+    style S1 fill:#fff,stroke:#999,color:#111
+    style S2 fill:#fff,stroke:#999,color:#111

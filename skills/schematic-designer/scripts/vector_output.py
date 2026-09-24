@@ -100,6 +100,57 @@ def _validate_pdf_stream(stream: BinaryIO, name: str | Path) -> None:
         raise RuntimeError(f"Invalid PDF output: {name}")
 
 
+def publish_bytes_atomic(
+    payload: bytes, approved_directory: Path, destination_name: str
+) -> None:
+    """Publish bytes from private staging, anchored to the opened output directory.
+
+    The staging directory is owner-only, and all file operations use its retained
+    descriptor, so replacing its public name cannot substitute the staged bytes.
+    """
+    destination = Path(destination_name)
+    if (destination.is_absolute() or len(destination.parts) != 1
+            or destination.name in {"", ".", ".."}):
+        raise RuntimeError("Output destination must be one contained basename")
+    parent = _open_directory(approved_directory, create=False)
+    stage_name = f".publish-{secrets.token_hex(16)}"
+    stage = None
+    created = False
+    try:
+        _check_output_target(parent, destination.name)
+        os.mkdir(stage_name, mode=0o700, dir_fd=parent)
+        created = True
+        stage = os.open(stage_name, os.O_RDONLY | os.O_DIRECTORY | os.O_NOFOLLOW,
+                        dir_fd=parent)
+        info = os.fstat(stage)
+        if info.st_uid != os.geteuid() or stat.S_IMODE(info.st_mode) & 0o077:
+            raise RuntimeError("Unsafe publication staging directory")
+        descriptor = os.open("payload", os.O_WRONLY | os.O_CREAT | os.O_EXCL
+                             | os.O_NOFOLLOW, 0o600, dir_fd=stage)
+        with os.fdopen(descriptor, "wb") as stream:
+            stream.write(payload)
+            stream.flush()
+            os.fsync(stream.fileno())
+        _check_output_target(parent, destination.name)
+        os.replace("payload", destination.name, src_dir_fd=stage, dst_dir_fd=parent)
+    finally:
+        try:
+            if stage is not None:
+                try:
+                    os.unlink("payload", dir_fd=stage)
+                except FileNotFoundError:
+                    pass
+                finally:
+                    os.close(stage)
+            if created:
+                try:
+                    os.rmdir(stage_name, dir_fd=parent)
+                except (FileNotFoundError, NotADirectoryError):
+                    pass
+        finally:
+            os.close(parent)
+
+
 def _stage_figure(
     figure: Any,
     parent_descriptor: int,

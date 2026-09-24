@@ -1,0 +1,4 @@
+interface:
+  display_name: "Paper Reproduce"
+  short_description: "Reproduce, assess, or apply published models"
+  default_prompt: "Use $paper-reproduce to choose the objective and target depth for this paper, then plan and complete the requested work with appropriate evidence."

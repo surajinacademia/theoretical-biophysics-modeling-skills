@@ -96,6 +96,16 @@ restriction. The full license is retained
 Its attribution describes changes; this is not an MIT example. Commercial use
 requires a separate applicable permission from the rights holder.
 
+## Collection artwork and paper workflow diagram
+
+The collection logo, icon, collective-cell-model-classes illustration, and
+paper-reproduce decision-stages diagram are original maintainer artwork covered
+by the repository's MIT license. The logo uses original outlined lettering and
+has no font dependency. The paper workflow diagram's editable TikZ and Mermaid
+sources are included; its PDF embeds CMU Sans Serif subsets and its SVG contains
+outlined lettering. Preserve the CMU font notice below when redistributing the
+PDF. No paper figure or upstream gallery artwork was copied into that diagram.
+
 ## Software and fonts
 
 Python, NumPy, Matplotlib, TeX engines, and PDF-to-SVG converters are not

@@ -5,7 +5,9 @@ description: Plan, write, revise, or audit one physics-focused scientific model 
 
 # Model Documentation
 
-Make one scientific model understandable without reverse-engineering its code. Use short bullet points with enough physical explanation and mathematics to reproduce the model; omit results narratives and heavy prose. Scientific correctness is the priority: explain only what the inspected evidence supports, distinguish assumptions from established findings, and expose unresolved gaps. This skill owns scientific writing and review; the standard template governs format. It has no dependency on other skills.
+Make one scientific model understandable without reverse-engineering its code. Use short bullet points with enough physical explanation and mathematics to reproduce the model; omit results narratives and heavy prose. Scientific correctness is the priority: explain only what the inspected evidence supports, distinguish assumptions from established findings, and expose unresolved gaps. This skill owns scientific writing and review; the standard template governs format. It has no required outgoing skill dependency.
+
+When invoked by `computational-modeling` or `paper-reproduce`, reuse the supplied scientific scope, source locations, evidence, destination, and document plan, verifying them against the actual sources. A plan already presented and explicitly approved in this session satisfies the approval gate for the same scope; do not restart approval merely because control passed between skills. Missing or changed plan requirements still follow the gate below. Keep one document and return findings to the coordinating workflow. Do not invoke the caller again, change model code, or execute simulations to fill documentation gaps.
 
 ## Document Template
 
@@ -61,7 +63,7 @@ The two post-draft reviewers may work independently once the draft is stable. Do
 
 ## Post-Draft Completion Gate
 
-Review the document directly against the standard template and inspected evidence using the two distinct post-draft reviewers above. The custom `scripts/check_model_doc.py` is retained only for skill-development diagnostics; it is not part of the normal documentation workflow or a completion requirement. No checker or template plugin is required.
+Review the document directly against the standard template and inspected evidence using the two distinct post-draft reviewers above. No checker or template plugin is required.
 
 Reconcile each finding against evidence. Correct meaning-preserving defects within the approved scope; seek renewed approval before applying corrections that change scientific meaning. Both reviewers must assess the same final document version. After substantive corrections, return the corrected version to both reviewers; recheck later edits before handoff and do not rely on stale reviews or silently discard findings. Keep unresolved evidence gaps explicit.
 

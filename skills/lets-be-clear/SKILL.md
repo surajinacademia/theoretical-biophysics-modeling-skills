@@ -4,13 +4,19 @@ description: >-
   Restate a user's request clearly and ask for confirmation before acting. Use
   when the user invokes this skill or checks whether the agent understood them,
   with phrases such as "let's be clear," "am I clear?", "do you get me?", or a
-  semantic equivalent. Do not trigger from ambiguity alone or from an ordinary
-  retrieval or definition request.
+  semantic equivalent, or when schematic-designer explicitly delegates its
+  figure-brief confirmation. Do not trigger from ambiguity alone or from an
+  ordinary retrieval or definition request.
 metadata: 
   short-description: Restate a request and confirm it before action
 ---
 
 # Let's Be Clear
+
+For a delegated `schematic-designer` brief, reuse an explicitly confirmed matching
+brief from the current session and return control without a second confirmation.
+Otherwise apply the steps below to that brief before figure work starts. This
+delegation does not activate other skills or broaden the requested deliverables.
 
 1. Restate the user's goal, requested action, scope, constraints, and desired
    result in plain language. Preserve exact quotations and identifiers. Do not

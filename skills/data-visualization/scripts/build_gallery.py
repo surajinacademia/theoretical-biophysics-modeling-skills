@@ -13,6 +13,7 @@ from io import BytesIO
 from pathlib import Path
 import subprocess
 import sys
+import tempfile
 import textwrap
 
 import matplotlib.pyplot as plt
@@ -23,6 +24,7 @@ ROOT = Path(__file__).resolve().parent.parent
 EXAMPLES = ROOT / "assets" / "examples"
 sys.path.insert(0, str(ROOT / "assets" / "styles"))
 from publication import paper_style
+from pdf_output import pdf_output
 
 CASES = [
     ("timecourse", "Time courses", "Follow a quantity through time.",
@@ -60,7 +62,7 @@ CASES = [
 ]
 
 
-def assemble_gallery(output):
+def assemble_gallery(figure_pdfs):
     from pypdf import PdfReader, PdfWriter, Transformation
     from reportlab.lib.pagesizes import A4, landscape
     from reportlab.pdfbase import pdfmetrics
@@ -78,8 +80,7 @@ def assemble_gallery(output):
             FontProperties(family=family, weight="bold", stretch="expanded"))))
     width, height = landscape(A4)
     writer = PdfWriter()
-    figures = [PdfReader(output / "examples" / case[0] / "figure.pdf").pages[0]
-               for case in CASES]
+    figures = [PdfReader(BytesIO(pdf)).pages[0] for pdf in figure_pdfs]
 
     def text(canvas, x, y, value, size=10, color=ink, bold=False):
         canvas.setFillColor(color)
@@ -146,8 +147,9 @@ def assemble_gallery(output):
         writer.add_page(page)
     writer.add_metadata({"/Title": "Quantitative plots, with restraint", "/Author": "Local data-visualization skill",
                          "/Subject": "Original synthetic teaching examples for visual review"})
-    with (output / "gallery.pdf").open("wb") as stream:
-        writer.write(stream)
+    memory = BytesIO()
+    writer.write(memory)
+    return memory.getvalue()
 
 
 def main():
@@ -159,11 +161,24 @@ def main():
                  *(output / "examples" / case[0] / "figure.pdf" for case in CASES)]:
         if any(p.is_symlink() for p in (path, *path.parents)):
             parser.error("output paths must not contain symlinks")
-    output.mkdir(parents=True, exist_ok=True)
-    for case in CASES:
-        subprocess.run([sys.executable, str(EXAMPLES / case[0] / "source.py"),
-                        "--output", str(output / "examples" / case[0] / "figure.pdf")], check=True)
-    assemble_gallery(output)
+    # The output tree may be shared and replaceable. Never reopen its published
+    # PDFs as gallery inputs, even if they look like regular files. Build and
+    # assemble everything in a fresh mode-0700 temporary directory first.
+    with tempfile.TemporaryDirectory(prefix="data-gallery-") as temporary:
+        staging = Path(temporary).resolve()
+        figure_pdfs = []
+        for case in CASES:
+            figure = staging / f"{case[0]}.pdf"
+            subprocess.run([sys.executable, str(EXAMPLES / case[0] / "source.py"),
+                            "--output", str(figure)], check=True)
+            figure_pdfs.append(figure.read_bytes())
+        gallery_pdf = assemble_gallery(figure_pdfs)
+        for case, contents in zip(CASES, figure_pdfs):
+            with pdf_output(output / "examples" / case[0] / "figure.pdf",
+                            create_parents=True) as stream:
+                stream.write(contents)
+        with pdf_output(output / "gallery.pdf", create_parents=True) as stream:
+            stream.write(gallery_pdf)
     print(f"Rendered 8 example PDFs and {output / 'gallery.pdf'}")
 
 

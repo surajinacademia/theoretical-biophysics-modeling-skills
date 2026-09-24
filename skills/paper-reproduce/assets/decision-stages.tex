@@ -1,0 +1,63 @@
+% Original flowchart for the owner's paper-reproduce workflow.
+% Content: assets/decision-stages.mmd and the approved two-stage decisions.
+% Renderer: LuaLaTeX/TikZ. Profile: schematic-designer Minimalist.
+% Design lesson: aligned groups and reserved connector space, from the local
+% lab-curriculum-flow tutorial. No example or upstream artwork/code copied.
+% Palette: teal for objective; warm gold for depth. All alternatives within
+% a stage share one color; stage labels retain the distinction without color.
+% Geometry indicates choices and ordering only; there are no measured quantities.
+% Generate minimalist-profile.sty from schematic-designer's shared profile.
+\documentclass[tikz,border=2mm]{standalone}
+\usepackage{minimalist-profile}
+\usetikzlibrary{calc}
+\colorlet{objectiveStroke}{msColor5!75!msInk}
+\colorlet{objectiveText}{msColor6}
+\colorlet{objectiveCard}{msColor5!8!msPaper}
+\colorlet{objectiveGroup}{msColor5!3!msPaper}
+\colorlet{objectiveBorder}{msColor5!35!msPaper}
+\colorlet{depthStroke}{msColor3!60!msInk}
+\colorlet{depthText}{msColor3!40!msInk}
+\colorlet{depthCard}{msColor3!14!msPaper}
+\colorlet{depthGroup}{msColor3!4!msPaper}
+\colorlet{depthBorder}{msColor3!50!msPaper}
+\begin{document}
+\pagecolor{msPaper}
+\hyphenpenalty=10000
+\exhyphenpenalty=10000
+\begin{tikzpicture}[ms base,x=1mm,y=1mm,
+    stage/.style={draw=msMuted!60,fill=msPaper,line width=\msLineContext,rounded corners=1.5mm},
+    card/.style={draw=msInk,fill=msPaper,line width=\msLineStructure,rounded corners=1.4mm,minimum width=52mm,minimum height=24mm,inner sep=0mm,outer sep=0mm},
+    heading/.style={ms title,anchor=west,inner sep=0mm},
+    card title/.style={ms title,anchor=north,inner sep=0mm,text width=46mm,align=center},
+    description/.style={ms body,anchor=north,inner sep=0mm,text width=46mm,align=center}]
+
+% Each stage is one group. No connector joins individual alternatives.
+\draw[stage,draw=objectiveBorder,fill=objectiveGroup] (0,0) rectangle (176,-42);
+\node[heading,text=objectiveText] at (5,-6) {Stage 1: What is my primary objective?};
+\node[card,draw=objectiveStroke,fill=objectiveCard] (reproduction) at (30,-25) {};
+\node[card,draw=objectiveStroke,fill=objectiveCard] (assessment) at (88,-25) {};
+\node[card,draw=objectiveStroke,fill=objectiveCard] (application) at (146,-25) {};
+\node[card title,text=objectiveText] at (30,-16) {Reproduction};
+\node[card title,text=objectiveText] at (88,-16) {Assessment};
+\node[card title,text=objectiveText] at (146,-16) {Application};
+\node[description] at (30,-22) {Reproduce the paper's model, selected features, or reported results.};
+\node[description] at (88,-22) {Verify or validate a model, test a mechanism or hypothesis, or assess agreement with evidence.};
+\node[description] at (146,-22) {Use, adapt, or extend the paper's model, mechanism, or method for my own scientific question.};
+
+\draw[ms arrow] (88,-42) -- (88,-56);
+
+\draw[stage,draw=depthBorder,fill=depthGroup] (0,-56) rectangle (176,-98);
+\node[heading,text=depthText] at (5,-62) {Stage 2: What depth of work do I need?};
+\node[card,draw=depthStroke,fill=depthCard] (model) at (30,-81) {};
+\node[card,draw=depthStroke,fill=depthCard] (claim) at (88,-81) {};
+\node[card,draw=depthStroke,fill=depthCard] (result) at (146,-81) {};
+\node[card title,text=depthText] at (30,-72) {Model Level};
+\node[card title,text=depthText] at (88,-72) {Claim Level};
+\node[card title,text=depthText] at (146,-72) {Result Level};
+\node[description] at (30,-78) {Implement, adapt, or check the required computational model or method.};
+\node[description] at (88,-78) {Test a selected scientific claim, proposed mechanism, or hypothesis.};
+\node[description] at (146,-78) {Reproduce, compare, or generate specific curves, tables, or numerical results.};
+
+\node[ms small,anchor=north,inner sep=0mm,text=msMuted] at (88,-103) {Choose one objective and one depth; any combination is allowed.};
+\end{tikzpicture}
+\end{document}

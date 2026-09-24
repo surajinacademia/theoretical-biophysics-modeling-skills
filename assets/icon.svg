@@ -1,0 +1,12 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="512" height="512" viewBox="0 0 512 512" role="img" aria-labelledby="title description">
+  <title id="title">Computational Modeling Skills icon</title>
+  <desc id="description">An open charcoal C surrounds a teal curve ending in three dots.</desc>
+  <rect width="512" height="512" rx="48" fill="#ffffff"/>
+  <g transform="translate(0 16)"><g id="model-mark" fill="none" stroke-linecap="round" stroke-linejoin="round">
+    <path id="trajectory" d="M 108,321 C 149,336 169,274 211,219 C 239,182 265,181 290,214 C 315,247 322,266 350,268" stroke="#218c91" stroke-width="18"/>
+    <path id="open-c" d="M 387,151 A 170,170 0 1,0 387,329" stroke="#222d3b" stroke-width="22"/>
+    <circle cx="380" cy="269" r="14" fill="#218c91"/>
+    <circle cx="420" cy="269" r="11" fill="#469d9c"/>
+    <circle cx="458" cy="269" r="10" fill="#75b3a9"/>
+  </g></g>
+</svg>
