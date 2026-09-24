@@ -26,12 +26,12 @@ Use each skill on its own, or combine them when the task needs a handoff—for e
 
 ![Complementary modeling choices for collective cells: particle dynamics, cell states and rules, lattice representations, cell-shape or density fields, and coupled cells, chemical fields, and extracellular matrix.](skills/schematic-designer/assets/examples/matplotlib/collective-cell-model-classes/figures/collective-cell-model-classes.svg)
 
-Choices in what a collective-cell model represents explicitly, from individual cells to averaged fields and coupled environments. The panels can overlap and do not rank accuracy. Original illustration ([MIT](LICENSE)); illustrative geometry, not simulation output. [Editable source, scientific caption, and references](skills/schematic-designer/assets/examples/matplotlib/collective-cell-model-classes/README.md).
+Choices in what a collective-cell model represents explicitly, from individual cells to averaged fields and coupled environments. The panels can overlap and do not rank accuracy. Original illustration ([MIT](LICENSE)); illustrative geometry, not simulation output. [Modeling Approches](skills/schematic-designer/assets/examples/matplotlib/collective-cell-model-classes/README.md).
 
 **Paper reproduction decisions**
 
 ![Choose a primary objective—reproduction, assessment, or application—and a target depth—model, claim, or result.](skills/paper-reproduce/assets/decision-stages.svg)
 
-Choose one objective and one depth for each target; the depths are alternatives. [Workflow and editable diagram](skills/paper-reproduce/README.md).
+Choose one objective and one depth for each target; the depths are alternatives. [Workflow](skills/paper-reproduce/README.md).
 
 Original material uses the [MIT license](LICENSE). Attributed examples and fonts retain their own terms, including ShareAlike and the VIGIL example’s noncommercial restriction; see [third-party notices](THIRD_PARTY_NOTICES.md).
