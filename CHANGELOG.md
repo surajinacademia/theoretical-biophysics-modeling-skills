@@ -1,23 +1,30 @@
 # Changelog
 
-## 3.0.0 — 2026-09-23
+## 2.0.0 — 2026-09-24 (corrected release)
+
+At the maintainer's explicit request, this corrected `2.0.0` consolidates the
+initial `2.0.0` and the subsequently published `2.0.1` and `3.0.0`. The original
+`2.0.0` is archived as `archive/v2.0.0-original`, retaining its original sources,
+release assets, attribution, and licenses. The former `3.0.0` is archived as
+`archive/v3.0.0-before-correction` with its original contents. Both archived
+releases are marked as prereleases; their release IDs and asset hashes are
+preserved. The historical `v2.0.1` tag remains. These short-lived versions are
+superseded by this corrected release. This is a documented one-time version
+correction, not a claim that those versions were never published.
+
+This release also incorporates the previously unpublished `1.0.1` cleanup;
+there was no separate `1.0.1` release.
 
 - Removes the VIGIL visual example, editable sources, supporting files, and
   documentation from the current public package, along with its CC BY-NC 4.0
   license notice. The privately maintained example is outside this distribution.
-- Removes the documented `build_example.py vigil` case and bundled VIGIL paths.
-  This breaks the runtime-helper compatibility contract and requires a major
-  version. The nine skills and remaining examples are retained.
-- Preserves the licenses and attribution for all remaining material, including
+- Removes the previously documented `build_example.py vigil` case and bundled
+  VIGIL paths. Users of that example cannot use those paths or that command with
+  this corrected package. All nine skills and the remaining examples are retained.
+- Retains licenses and attribution for the remaining material, including
   ShareAlike examples and embedded fonts; the package remains mixed-license.
-- Applies the maintainer's minimal README wording, retaining the SVG examples
-  and links to their context and the third-party notices.
-- Leaves previously published tags and release assets unchanged. Their VIGIL
-  copies retain their original attribution and CC BY-NC 4.0 terms; this removal
-  does not relicense those copies.
-
-## 2.0.1 — 2026-09-23
-
+  Earlier distributed VIGIL copies retain their attribution and CC BY-NC 4.0
+  terms. This removal does not relicense them.
 - Redraws the collective-cell schematic around complementary modeling choices,
   retained detail, and coarse-graining. Removes the misleading resolution axis
   and clarifies the captions and primary-source context.
@@ -25,15 +32,9 @@
   and individual-cell phase fields from spatially averaged tissue density.
 - Computes physical vectors from the illustrated force law and chemical field;
   labels model-dependency links separately from forces.
-- Removes installation instructions from the public README; the example remains
-  an outlined SVG with its editable source and scientific context linked.
-- Retains the nine skill names, workflows, package interfaces, and licenses.
-
-## 2.0.0 — 2026-09-23
-
-This release incorporates the previously unpublished 1.0.1 cleanup; there is
-no separate 1.0.1 release.
-
+- Applies the maintainer's minimal README wording and removes installation
+  instructions. Retains SVG examples, editable sources, and links to their
+  scientific context and the third-party notices.
 - Renames the collection from **Theoretical Biophysics Modeling Skills** to
   **Computational Modeling Skills**, and the plugin/extension identifier from
   `theoretical-biophysics-modeling-skills` to `computational-modeling-skills`.
@@ -63,8 +64,7 @@ no separate 1.0.1 release.
   material, package metadata, and licensing information.
 - Removes development tests and evaluation suites, the development-only
   `check_model_doc.py` checker, and unused build files.
-- Routes five manual TikZ recipes through the private build workflow and keeps
-  VIGIL's generated compilation inputs private before publishing retained sources.
+- Routes five manual TikZ recipes through the private build workflow.
 - Publishes quantitative PDF outputs through private staging and opened output
   directories; assembles the gallery from private inputs before publishing it.
   File replacements are atomic individually, not as a multi-file transaction.
@@ -72,9 +72,9 @@ no separate 1.0.1 release.
   and functions, and SMIL animation; requires UTF-8 XML and rejects invalid XML
   control characters. Rejects nonregular TeX source/include files without
   blocking on FIFOs.
-- Preserves the eight skill names, runtime helper interfaces, diagram creator
-  credits, and third-party license terms. The published `v1.0.0` release and its
-  history remain unchanged.
+- Preserves the original eight skill names and remaining diagram creator credits
+  and third-party license terms. The published `v1.0.0` release and its history
+  remain unchanged.
 
 ## 1.0.0
 
