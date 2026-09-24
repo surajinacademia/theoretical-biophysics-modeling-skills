@@ -1,7 +1,7 @@
 # Matplotlib examples
 
 All maintained Python example sources live here: activator–inhibitor, computed
-learning dynamics, collective cell model classes, VIGIL, and the chemoattraction
+learning dynamics, collective cell modeling choices, VIGIL, and the chemoattraction
 panel helper. Use the [Matplotlib library](../../../references/library.md#matplotlib-examples)
 for sources, recipes, and the four final PDF/SVG pairs. Each recipe includes a
 **Design lesson** and scientific limitations.

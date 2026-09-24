@@ -1,5 +1,18 @@
 # Changelog
 
+## 2.0.1 — 2026-09-23
+
+- Redraws the collective-cell schematic around complementary modeling choices,
+  retained detail, and coarse-graining. Removes the misleading resolution axis
+  and clarifies the captions and primary-source context.
+- Separates single-site cellular automata from multisite Cellular Potts cells,
+  and individual-cell phase fields from spatially averaged tissue density.
+- Computes physical vectors from the illustrated force law and chemical field;
+  labels model-dependency links separately from forces.
+- Removes installation instructions from the public README; the example remains
+  an outlined SVG with its editable source and scientific context linked.
+- Retains the nine skill names, workflows, package interfaces, and licenses.
+
 ## 2.0.0 — 2026-09-23
 
 This release incorporates the previously unpublished 1.0.1 cleanup; there is

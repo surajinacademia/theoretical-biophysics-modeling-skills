@@ -24,34 +24,14 @@ Use each skill on its own, or combine them when the task needs a handoff—for e
 
 **Schematic designer example**
 
-![Conceptual comparison of particle, agent, lattice, continuum, and hybrid models for collective cell dynamics.](skills/schematic-designer/assets/examples/matplotlib/collective-cell-model-classes/figures/collective-cell-model-classes.svg)
+![Complementary modeling choices for collective cells: particle dynamics, cell states and rules, lattice representations, cell-shape or density fields, and coupled cells, chemical fields, and extracellular matrix.](skills/schematic-designer/assets/examples/matplotlib/collective-cell-model-classes/figures/collective-cell-model-classes.svg)
 
-Original illustration by the collection maintainer ([MIT](LICENSE)); conceptual, not simulation output. [Editable source and context](skills/schematic-designer/assets/examples/matplotlib/collective-cell-model-classes/README.md).
+Choices in what a collective-cell model represents explicitly, from individual cells to averaged fields and coupled environments. The panels can overlap and do not rank accuracy. Original illustration ([MIT](LICENSE)); illustrative geometry, not simulation output. [Editable source, scientific caption, and references](skills/schematic-designer/assets/examples/matplotlib/collective-cell-model-classes/README.md).
 
 **Paper reproduction decisions**
 
 ![Choose a primary objective—reproduction, assessment, or application—and a target depth—model, claim, or result.](skills/paper-reproduce/assets/decision-stages.svg)
 
 Choose one objective and one depth for each target; the depths are alternatives. [Workflow and editable diagram](skills/paper-reproduce/README.md).
-
-## Install
-
-Add this user-hosted marketplace, then install the plugin in your chosen client.
-
-**Claude Code**
-
-```bash
-claude plugin marketplace add surajinacademia/theoretical-biophysics-modeling-skills
-claude plugin install computational-modeling-skills@computational-modeling
-```
-
-**Codex**
-
-```bash
-codex plugin marketplace add surajinacademia/theoretical-biophysics-modeling-skills
-codex plugin add computational-modeling-skills@computational-modeling
-```
-
-Choose plugin installation or direct skill installation to avoid duplicate discovery. Python, TeX, and Slurm are external tools required only by workflows that use them.
 
 Original material uses the [MIT license](LICENSE). Attributed examples and fonts retain their own terms, including ShareAlike and the VIGIL example’s noncommercial restriction; see [third-party notices](THIRD_PARTY_NOTICES.md).
