@@ -51,6 +51,19 @@ and profile, and exactly one final PDF and one outlined-text SVG per figure.
 
 ## Route, build, and inspect
 
+Before starting figure work, read and apply
+[lets-be-clear](../lets-be-clear/SKILL.md) to confirm the figure brief. Restate the
+scientific message, supplied sources, figure scope, constraints, and intended
+editable source plus PDF/SVG pair using the conversation; surface consequential
+ambiguities without inventing requirements. Wait for confirmation before source
+inspection, authoring, or rendering. Reuse an already confirmed matching brief
+from this session rather than asking again. A corrected brief explicitly
+authorized in the same reply is confirmed. After confirmation, continue here;
+the clarification skill owns only that brief, not figure construction. Renew
+confirmation only for a material change to the confirmed scope, not routine
+layout decisions. Confirmation does not authorize new simulations or installing
+dependencies.
+
 1. Inventory entities, relations, equations, units, provenance, scales, panels,
    and ambiguities. For image inputs, distinguish faithful reconstruction,
    scientific redesign, and aesthetic-only reference.

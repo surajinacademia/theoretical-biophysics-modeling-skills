@@ -12,16 +12,12 @@ Active Minimalist adaptation. See [attribution](ATTRIBUTION.md) for provenance a
 From the skill root, the supported entry point is:
 
 ```sh
-python3 scripts/build_example.py tikz-lab-curriculum-flow --output-dir /tmp/tikz-lab-curriculum-flow
+python3 scripts/build_example.py tikz-lab-curriculum-flow --output-dir ./output/tikz-lab-curriculum-flow
 ```
 
-The explicit recipe below runs from the repository root with a Python environment containing Minimalist and with LuaLaTeX/CMU fonts and the supported SVG converters available:
-
-```sh
-mkdir -p /tmp/schematic-minimalist
-python3 skills/schematic-designer/assets/styles/minimalist_profile.py --tikz > /tmp/schematic-minimalist/minimalist-profile.sty
-python3 skills/schematic-designer/scripts/render_tikz.py skills/schematic-designer/assets/examples/tikz/lab-curriculum-flow/source.tex --include /tmp/schematic-minimalist/minimalist-profile.sty --engine lualatex --output-dir /tmp/tikz-lab-curriculum-flow --basename figure
-```
+The builder generates its style and compiler inputs in a fresh private temporary
+directory. Use a Python environment with the plotting dependencies and available
+LuaLaTeX/CMU fonts and supported SVG converters.
 
 This is a construction example, not new scientific evidence. Preserve its directed relations and formulas when changing visual layout.
 

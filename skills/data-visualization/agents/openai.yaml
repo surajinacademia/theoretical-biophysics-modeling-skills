@@ -1,4 +1,4 @@
 interface:
   display_name: "Data Visualization Skill"
   short_description: "Make clear quantitative figures from completed data"
-  default_prompt: "Use $data-visualization to create, improve, review, or simplify quantitative figures from completed biophysical data. Choose a suitable plot using the visual gallery and the bundled paper_style() adapter with its disclosed portable fallback; preserve scientific units, identity, weighting, and observable definitions. Keep the analysis-to-plot path direct, disclose result changes, and inspect the saved PDF at its intended size."
+  default_prompt: "Use $data-visualization to create, improve, review, or simplify quantitative figures from completed scientific data, preserving units, identity, weighting, observable definitions, and the configured style; keep notebook figures in their existing cells and inspect each agreed saved artifact."

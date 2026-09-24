@@ -1,0 +1,104 @@
+# Retained optional schema-v1 helper for the former routing rules.
+# Read README.md#legacy-target-card-helper before use; the current two-stage
+# workflow also supports targets that this schema cannot represent.
+# Replace target-relevant null placeholders before freezing; the validator
+# intentionally rejects an unsigned or incomplete scientific card.
+schema_version: 1
+id: target-001
+route: paper_method # paper_method | user_model
+depth: model_or_method # model_or_method | claim | result
+comparison_strength: not_applicable # qualitative | quantitative | not_applicable
+variant: baseline # baseline | extension | not_applicable
+
+sources:
+  - id: source-001
+    kind: paper # paper | supplement | erratum | repository | dataset | figure | cited_method
+    identifier: null
+    version: null
+    local_hash: null
+    license: null
+
+target:
+  kind: method # method | claim
+  statement: null
+  observable: null
+  conditions: {}
+  source_refs:
+    - source_id: source-001
+      locator: null
+
+source_audit:
+  items:
+    - item: null
+      value: null
+      status: missing # reported | inherited | ambiguous | conflicting | missing | not_applicable
+      source_refs:
+        - source_id: source-001
+          locator: null
+      materiality: blocking # blocking | sensitivity_required | nonmaterial | not_applicable
+      affects_exact_reproduction: null
+      alternatives: []
+      resolution: null
+
+variant_specification:
+  baseline_specification: null
+  authorized_changes: []
+  isolated_output_root: null
+
+protocol:
+  parameters: {}
+  sampling_unit: null
+  # Positive integer, or {count: <positive integer>, description: <nonblank>};
+  # a legacy concise sentence is accepted only when it states a concrete count.
+  required_runs: null
+  evaluation_mode: not_applicable # prediction | fit | not_applicable
+  calibration_conditions: null
+  evaluation_conditions: null
+  analysis: null
+  acceptance_rule: null
+  # Required for new exact_agreement cards. Exact agreement requires a
+  # deterministic exact representation or tolerance: 0; digitized/stochastic
+  # evidence must use a non-exact verdict.
+  exactness:
+    deterministic: null
+    representation: not_applicable # deterministic_exact | finite_precision | digitized | stochastic | not_applicable
+    tolerance: null
+  # Required only when source_audit contains sensitivity_required gaps.
+  # execution_coverage has one entry per such audit item: audit_item,
+  # alternatives, required_runs, raw_data_path. Terminal cards also require
+  # conclusion: {robustness: robust|sensitive|inconclusive, statement: ...}.
+  sensitivity: null
+
+specification_revision:
+  revision_id: rev-001
+  supersedes_revision_id: null
+  # When supersedes_revision_id is set, archive the predecessor card under the
+  # current card directory and bind its relative path and canonical hash here.
+  predecessor_card: null
+  predecessor_specification_hash: null
+  change_reason: initial specification
+  frozen_at: null
+  # Generated and checked by scripts/validate_target_card.py; includes the
+  # immutable revision fields above, but excludes this hash and run metadata.
+  specification_hash: null
+
+execution:
+  governing_revision_id: null
+  governing_specification_hash: null
+  code_path: null
+  code_version_or_hash: null
+  configuration: null
+  command: null
+  environment_summary: null
+  raw_data_path: null
+  status: not_started # not_started | diagnostic | valid | partial | failed
+
+evaluation:
+  governing_revision_id: null
+  local_result: null
+  uncertainty: null
+  methodology_fidelity: not_evaluated # exact | source_backed_reconstruction | known_deviation | incomplete_unknown | not_evaluated
+  execution_integrity: not_started # not_started | valid | partial | failed
+  # paper_method: exact_agreement | quantitative_agreement | qualitative_agreement | disagreement | inconclusive | not_evaluated
+  # user_model: quantitatively_consistent | qualitatively_consistent | fit_consistent | disagreement | inconclusive | not_evaluated
+  verdict: not_evaluated

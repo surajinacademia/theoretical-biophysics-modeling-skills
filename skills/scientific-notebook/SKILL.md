@@ -74,6 +74,19 @@ user removed or treat interpretation metadata as permission to add prose.
 
 ## Plotting style
 
+For ordinary quantitative plots from completed scientific values, read and apply
+[data-visualization](../data-visualization/SKILL.md). Pass the scientific question,
+plot-ready data or their existing load path, observable definitions, units,
+selections and uncertainty, target cells, and requested formats. That skill owns
+plot encoding, data-to-plot checks, and visual inspection; this skill retains
+ownership of the notebook, cell preservation, execution scope, and inline outputs.
+Keep plotting code editable in the same notebook or an existing project module;
+do not create a second notebook or plotting application for the handoff. Model
+fitting, inferential statistics, or other excluded analyses stay with their
+appropriate workflow; only a separately defined descriptive plot of completed
+values enters data-visualization. The handoff does not authorize simulation
+execution, full-notebook reruns, or dependency installation.
+
 Use the project's configured plotting style. When the owner's separately
 installed `minimalist` package is available, preserve its `use_style('white')`
 setup and `figsize()` API; do not copy its defaults into cells. The portable
@@ -81,6 +94,12 @@ scaffold uses Matplotlib's built-in default when that optional package is absent
 The fallback uses DejaVu Sans and Matplotlib's default color cycle and does not
 reproduce the owner's theme. Do not install a PyPI package merely because it has
 the same name. Preserve an explicit user style choice.
+
+These notebook and project style choices take precedence over data-visualization's
+default adapter; use its adapter only when establishing a new shared style is
+needed. For an inline-only request, inspect the saved inline figure output in
+the notebook; do not add a standalone PDF solely to satisfy a plotting default.
+Apply its saved-artifact checks to any separately requested exports.
 
 Use `plt.subplots()` for one panel and an explicit `(width, height)` in inches for
 portable multi-panel layouts. With `minimalist`, `aspect_ratio` in `figsize()`

@@ -17,6 +17,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "styles"))
+from pdf_output import save_pdf
 from publication import get_cmap, paper_style, LAYOUT
 
 
@@ -75,7 +76,7 @@ def main():
             ax.legend(handles=[Line2D([], [], color="0.35", marker="x", linestyle="none", label="Missing")],
                       loc="upper center", bbox_to_anchor=(0.5, 1.16), labelcolor="0.35")
         fig.tight_layout(pad=LAYOUT["pad"])
-        fig.savefig(args.output)
+        save_pdf(fig, args.output)
         plt.close(fig)
 
 

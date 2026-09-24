@@ -19,7 +19,7 @@ data-visualization/
 ├── agents/openai.yaml               # discovery prompt
 ├── references/                      # analysis, design, tutorials, API, gallery index
 ├── assets/
-│   ├── styles/                      # publication.py and paper.mplstyle
+│   ├── styles/                      # publication.py, pdf_output.py, paper.mplstyle
 │   ├── templates/                   # three reusable CSV-to-PDF programs
 │   ├── gallery.pdf                  # overview and eight teaching pages
 │   └── examples/
@@ -58,8 +58,9 @@ Both routes apply neighboring `paper.mplstyle` and restore caller rcParams and
 `Axes.errorbar`/`Axes.draw` even after an exception. These methods are temporarily
 patched process-wide; avoid concurrent plotting threads. **Create, render, and
 save inside the context.** The adapter does not call `minimalist.use_style()`.
-Keep `../styles/publication.py` and its neighboring `paper.mplstyle` together
-when moving a template. No external owner package is required for the fallback.
+When moving a template, preserve the neighboring `../styles/` directory with
+`publication.py`, `pdf_output.py`, and `paper.mplstyle`. No external owner package
+is required for the fallback.
 
 ## Three CSV-to-PDF Templates
 

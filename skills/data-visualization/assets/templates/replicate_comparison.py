@@ -14,6 +14,7 @@ import numpy as np
 import pandas as pd
 
 sys.path.insert(0, str(Path(__file__).resolve().parents[1] / "styles"))
+from pdf_output import save_pdf
 from publication import paper_style, FONT_PT, MARK_PT, LAYOUT, MARKERS
 
 
@@ -86,7 +87,7 @@ def main():
             note += "; SD undefined if n < 2" if has_missing else "\nSD undefined if n < 2"
         fig.text(0.5, LAYOUT["note_y"], note, ha="center", fontsize=FONT_PT["note"])
         fig.tight_layout(rect=(0, LAYOUT["note_top"], 1, 1), pad=LAYOUT["pad"])
-        fig.savefig(args.output)
+        save_pdf(fig, args.output)
         plt.close(fig)
 
 

@@ -1,28 +1,31 @@
 {
-  "name": "theoretical-biophysics-modeling-skills",
-  "version": "1.0.0",
-  "description": "Eight skills for scientific modeling, documentation, notebooks, stability analysis, plots, schematics, clarification, and simple Slurm jobs.",
+  "name": "computational-modeling-skills",
+  "version": "2.0.0",
+  "description": "Nine skills for scientific modeling, paper reproduction, documentation, notebooks, stability analysis, plots, schematics, clarification, and Slurm jobs.",
   "author": {
-    "name": "Theoretical Biophysics Modeling Skills contributors"
+    "name": "Computational Modeling Skills contributors"
   },
   "license": "SEE LICENSE IN LICENSE",
   "keywords": [
-    "theoretical-biophysics",
+    "computational-modeling",
+    "biophysics",
     "scientific-modeling",
     "scientific-notebooks",
     "linear-stability",
     "scientific-figures",
-    "slurm"
+    "slurm",
+    "paper-reproduction"
   ],
   "skills": "./skills/",
   "interface": {
-    "displayName": "Theoretical Biophysics Modeling Skills",
-    "shortDescription": "Scientific models, notebooks, figures, and Slurm jobs",
-    "longDescription": "Eight skills for scientific modeling, documentation, notebooks, stability analysis, plots, schematics, clarification, and simple Slurm jobs.",
-    "developerName": "Theoretical Biophysics Modeling Skills contributors",
+    "displayName": "Computational Modeling Skills",
+    "shortDescription": "Scientific models, paper reproduction, and research workflows",
+    "longDescription": "Nine skills for scientific modeling, paper reproduction, documentation, notebooks, stability analysis, plots, schematics, clarification, and Slurm jobs.",
+    "developerName": "Computational Modeling Skills contributors",
     "category": "Productivity",
     "capabilities": [
       "Scientific modeling",
+      "Paper reproduction",
       "Model documentation",
       "Scientific notebooks",
       "Linear stability analysis",
@@ -32,14 +35,13 @@
       "Single-job Slurm workflows"
     ],
     "defaultPrompt": [
-      "Use $computational-modeling to address my scientific modeling task.",
-      "Use $model-documentation to plan a physics-focused model document.",
-      "Use $scientific-notebook to create an editable research notebook.",
-      "Use $linear-stability-analysis to analyze the specified stationary state.",
-      "Use $data-visualization to plot my completed simulation data.",
-      "Use $schematic-designer to design a scientific diagram.",
-      "Use $lets-be-clear to confirm my request before acting.",
-      "Use $slurm to prepare a CPU batch script for my specified command."
-    ]
-  }
+      "Use $computational-modeling to address my modeling task.",
+      "Use $paper-reproduce to reproduce the specified paper result.",
+      "Use $scientific-notebook to create an editable research notebook."
+    ],
+    "websiteURL": "https://github.com/surajinacademia/theoretical-biophysics-modeling-skills",
+    "composerIcon": "./assets/icon.svg",
+    "logo": "./assets/logo.svg"
+  },
+  "repository": "https://github.com/surajinacademia/theoretical-biophysics-modeling-skills"
 }
