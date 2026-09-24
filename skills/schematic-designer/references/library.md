@@ -1,7 +1,7 @@
 # Figure library
 
-The 23 maintained figures are grouped by authoring source: 19 under
-[TikZ](../assets/examples/tikz/README.md) and four under
+The 22 maintained figures are grouped by authoring source: 19 under
+[TikZ](../assets/examples/tikz/README.md) and three under
 [Matplotlib](../assets/examples/matplotlib/README.md). Use this index for sources
 and final pairs, the [lesson selector](tutorials.md#choose-the-relevant-lesson)
 for a communication problem, and each case's **Design lesson** for the useful
@@ -14,12 +14,10 @@ choice, reader benefit, transfer limits, and adaptation check.
 | Activator–inhibitor: mechanism, analytic profiles, signed field | [Python](../assets/examples/matplotlib/activator-inhibitor/matplotlib-figure.py) | [Build and science](../assets/examples/matplotlib/activator-inhibitor/README.md) | [PDF](../assets/examples/matplotlib/activator-inhibitor/figures/activator-inhibitor.pdf) · [SVG](../assets/examples/matplotlib/activator-inhibitor/figures/activator-inhibitor.svg) |
 | Learning dynamics: numerical learning and retrieval | [Python](../assets/examples/matplotlib/learning-dynamics/matplotlib-figure.py) | [Computed variant](../assets/examples/matplotlib/learning-dynamics/README.md) | [PDF](../assets/examples/matplotlib/learning-dynamics/figures/learning-dynamics-2406.pdf) · [SVG](../assets/examples/matplotlib/learning-dynamics/figures/learning-dynamics-2406.svg) |
 | Collective cell modeling choices: representations and coarse-graining | [Python](../assets/examples/matplotlib/collective-cell-model-classes/matplotlib-figure.py) | [Build and science](../assets/examples/matplotlib/collective-cell-model-classes/README.md) | [PDF](../assets/examples/matplotlib/collective-cell-model-classes/figures/collective-cell-model-classes.pdf) · [SVG](../assets/examples/matplotlib/collective-cell-model-classes/figures/collective-cell-model-classes.svg) |
-| VIGIL: source-backed conceptual reconstruction | [Builder](../assets/examples/matplotlib/vigil/build_figure.py) · [Geometry](../assets/examples/matplotlib/vigil/vigil_geometry.py) | [Build and attribution](../assets/examples/matplotlib/vigil/README.md) | [PDF](../assets/examples/matplotlib/vigil/figures/vigil-minimalist.pdf) · [SVG](../assets/examples/matplotlib/vigil/figures/vigil-minimalist.svg) |
 
 [Chemoattraction panel helper](../assets/examples/matplotlib/chemoattraction/README.md)
-generates inputs for the TikZ figure below. VIGIL is Python-authored; its builder
-generates TikZ composition, labels, and heads in build output. These coupled
-workflows do not create a third source group or duplicate the final pairs.
+generates inputs for the TikZ figure below. This coupled workflow does not
+create a third source group or duplicate the final pair.
 
 ## TikZ examples
 
@@ -79,8 +77,6 @@ style templates. See the [archive boundary](../archives/README.md).
 
 The source-adjacent figure organization was informed by the inspected
 [figures4papers revision](https://github.com/ChenLiu-1996/figures4papers/tree/3c181f85e82c6f24948fcaaf3be6696102b41d8d).
-VIGIL has separate [attribution](../assets/examples/matplotlib/vigil/ATTRIBUTION.md)
-and a [CC BY-NC 4.0 license](../assets/examples/matplotlib/vigil/LICENSE).
 A public URL or visual similarity does not establish reuse rights. The owner
 authorized this skill's reviewed public export for the eight-skill 1.0.0 release.
 Keep attribution, change notices, and the applicable license with each borrowed

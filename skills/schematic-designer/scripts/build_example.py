@@ -24,7 +24,7 @@ IMPORTED_TIKZ_CASES = (
 )
 TIKZ_CASES = (*IMPORTED_TIKZ_CASES, "learning-dynamics", "chemoattraction")
 CASES = ("activator-inhibitor", "collective-cell-model-classes",
-         "learning-dynamics", "learning-tikz", "chemoattraction", "vigil",
+         "learning-dynamics", "learning-tikz", "chemoattraction",
          *(f"tikz-{slug}" for slug in IMPORTED_TIKZ_CASES))
 
 
@@ -39,9 +39,6 @@ def main():
         return subprocess.run([sys.executable, str(script), *map(str, options)],
                               check=True, **kwargs)
 
-    if args.case == "vigil":
-        run(EXAMPLES / "matplotlib/vigil/build_figure.py", "--output-dir", output)
-        return
     gallery_slug = args.case.removeprefix("tikz-") if args.case.startswith("tikz-") else None
     if not gallery_slug and args.case not in {"learning-tikz", "chemoattraction"}:
         run(EXAMPLES / "matplotlib" / args.case / "matplotlib-figure.py", "--output-dir", output)

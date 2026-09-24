@@ -84,18 +84,6 @@ The imported archive's `PACKAGE-LICENSE.txt` preserves the historical
 `tkz-linknodes` LPPL/GPL provenance notice; the package's `.sty` implementation
 is excluded from this release. This notice does not grant MIT rights to it.
 
-## VIGIL diagram
-
-The [VIGIL example](skills/schematic-designer/assets/examples/matplotlib/vigil/ATTRIBUTION.md)
-adapts Chen Liu's `figures4papers` construction at pinned commit
-`3c181f85e82c6f24948fcaaf3be6696102b41d8d`:
-[original source](https://github.com/ChenLiu-1996/figures4papers/blob/3c181f85e82c6f24948fcaaf3be6696102b41d8d/figure_VIGIL/plot_concept.py).
-The source and adaptation retain **CC BY-NC 4.0**, including its noncommercial
-restriction. The full license is retained
-[beside the example](skills/schematic-designer/assets/examples/matplotlib/vigil/LICENSE).
-Its attribution describes changes; this is not an MIT example. Commercial use
-requires a separate applicable permission from the rights holder.
-
 ## Collection artwork and paper workflow diagram
 
 The collection logo, icon, collective-cell-model-classes illustration, and

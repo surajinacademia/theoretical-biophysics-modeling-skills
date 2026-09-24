@@ -31,6 +31,13 @@ breaking identity change requires a major version.
 It includes the earlier unpublished `1.0.1` cleanup; no `1.0.1` release is implied.
 The published `1.0.0` release remains unchanged.
 
+Version `3.0.0` removes the VIGIL example from the public package, including the
+previously documented `build_example.py vigil` case and its bundled source and
+figure paths. Removing this runtime-helper case breaks the stable contract and
+requires a major version, even though all nine skills remain available. Earlier
+tags and release assets remain unchanged, with the attribution and license terms
+that apply to their VIGIL copies.
+
 A material license or reuse-permission change must be reviewed before release,
 called out in the changelog, and treated as a major change if it restricts a
 previously supported use. A version number cannot retroactively relicense an
