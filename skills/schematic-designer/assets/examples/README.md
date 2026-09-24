@@ -1,7 +1,7 @@
 # Examples by renderer
 
 - [TikZ](tikz/README.md): 19 final figures, including the chemoattraction compositor.
-- [Matplotlib](matplotlib/README.md): four final figures and the chemoattraction panel helper.
+- [Matplotlib](matplotlib/README.md): three final figures and the chemoattraction panel helper.
 
 Use the [figure library](../../references/library.md) for the complete source,
 recipe, and PDF/SVG index, or the

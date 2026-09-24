@@ -5,14 +5,14 @@
   },
   "metadata": {
     "description": "Nine skills for scientific modeling, paper reproduction, documentation, notebooks, stability analysis, plots, schematics, clarification, and Slurm jobs.",
-    "version": "2.0.1"
+    "version": "3.0.0"
   },
   "plugins": [
     {
       "name": "computational-modeling-skills",
       "source": "./",
       "description": "Nine skills for scientific modeling, paper reproduction, documentation, notebooks, stability analysis, plots, schematics, clarification, and Slurm jobs.",
-      "version": "2.0.1"
+      "version": "3.0.0"
     }
   ]
 }

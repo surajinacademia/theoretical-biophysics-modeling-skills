@@ -1,5 +1,21 @@
 # Changelog
 
+## 3.0.0 — 2026-09-23
+
+- Removes the VIGIL visual example, editable sources, supporting files, and
+  documentation from the current public package, along with its CC BY-NC 4.0
+  license notice. The privately maintained example is outside this distribution.
+- Removes the documented `build_example.py vigil` case and bundled VIGIL paths.
+  This breaks the runtime-helper compatibility contract and requires a major
+  version. The nine skills and remaining examples are retained.
+- Preserves the licenses and attribution for all remaining material, including
+  ShareAlike examples and embedded fonts; the package remains mixed-license.
+- Applies the maintainer's minimal README wording, retaining the SVG examples
+  and links to their context and the third-party notices.
+- Leaves previously published tags and release assets unchanged. Their VIGIL
+  copies retain their original attribution and CC BY-NC 4.0 terms; this removal
+  does not relicense those copies.
+
 ## 2.0.1 — 2026-09-23
 
 - Redraws the collective-cell schematic around complementary modeling choices,

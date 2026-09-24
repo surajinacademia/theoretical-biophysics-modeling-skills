@@ -20,13 +20,12 @@ My goal for making these skills is **not** to replace the scientist but only to 
 | [lets-be-clear](skills/lets-be-clear/SKILL.md) | Restate a request and confirm shared understanding before acting |
 | [slurm](skills/slurm/SKILL.md) | Prepare, submit, inspect, and cancel one CPU batch job with native Slurm |
 
-Use each skill on its own, or combine them when the task needs a handoff—for example, from model development to a notebook, analysis, figures, and documentation.
 
 **Schematic designer example**
 
 ![Complementary modeling choices for collective cells: particle dynamics, cell states and rules, lattice representations, cell-shape or density fields, and coupled cells, chemical fields, and extracellular matrix.](skills/schematic-designer/assets/examples/matplotlib/collective-cell-model-classes/figures/collective-cell-model-classes.svg)
 
-Choices in what a collective-cell model represents explicitly, from individual cells to averaged fields and coupled environments. The panels can overlap and do not rank accuracy. Original illustration ([MIT](LICENSE)); illustrative geometry, not simulation output. [Modeling Approches](skills/schematic-designer/assets/examples/matplotlib/collective-cell-model-classes/README.md).
+[Modeling Approaches](skills/schematic-designer/assets/examples/matplotlib/collective-cell-model-classes/README.md).
 
 **Paper reproduction decisions**
 
@@ -34,4 +33,4 @@ Choices in what a collective-cell model represents explicitly, from individual c
 
 Choose one objective and one depth for each target; the depths are alternatives. [Workflow](skills/paper-reproduce/README.md).
 
-Original material uses the [MIT license](LICENSE). Attributed examples and fonts retain their own terms, including ShareAlike and the VIGIL example’s noncommercial restriction; see [third-party notices](THIRD_PARTY_NOTICES.md).
+Original material uses the [MIT license](LICENSE). See [third-party notices](THIRD_PARTY_NOTICES.md).

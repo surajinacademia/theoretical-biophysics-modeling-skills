@@ -13,7 +13,7 @@ meaning and apply the case's adaptation check.
 | Compare many entities or representations | [Particle cards](../assets/examples/tikz/model-physics/README.md#design-lesson) repeat a property schema; [collective cell models](../assets/examples/matplotlib/collective-cell-model-classes/README.md#design-lesson) repeat a comparison frame while preserving distinctive geometry. |
 | Trace dependencies, decisions, or state changes | [Curriculum](../assets/examples/tikz/lab-curriculum-flow/README.md#design-lesson) separates streams; [optimization](../assets/examples/tikz/optimization-decision-flowchart/README.md#design-lesson) repeats action/test grammar; [EPC](../assets/examples/tikz/epc-flow-charts/README.md#design-lesson) separates state contents from edge conditions; [MESIF](../assets/examples/tikz/mesif/README.md#design-lesson) separates routes sharing endpoints. |
 | Relate local geometry to a spatial frame | [Spherical grids](../assets/examples/tikz/spherical-and-cartesian-grids/README.md#design-lesson), [dome](../assets/examples/tikz/dome/README.md#design-lesson), and [seismic mechanism](../assets/examples/tikz/seismic-focal-mechanism-in-3d-view/README.md#design-lesson) retain shading, translucent layers, and shared coordinates as depth cues. [SWAN](../assets/examples/tikz/swan-wave-model/README.md#design-lesson) compares grid extents in one projection; [orbital geometry](../assets/examples/tikz/orbital-elements-3d-trajectory/README.md#design-lesson) relates a path to reference planes. |
-| Preserve geometry while improving annotation | [VIGIL](../assets/examples/matplotlib/vigil/README.md#design-lesson) separates dense geometry from labels; [polarizing microscope](../assets/examples/tikz/polarizing-microscope/README.md#design-lesson) tracks components through materials; [electron microscope](../assets/examples/tikz/transmission-electron-microscope/README.md#design-lesson) uses a cutaway with clear apertures and exterior labels. |
+| Preserve geometry while improving annotation | [polarizing microscope](../assets/examples/tikz/polarizing-microscope/README.md#design-lesson) tracks components through materials; [electron microscope](../assets/examples/tikz/transmission-electron-microscope/README.md#design-lesson) uses a cutaway with clear apertures and exterior labels. |
 | Explain equations and formal constraints | [Secant geometry](../assets/examples/tikz/secant-regression-geometry/README.md#design-lesson) derives marks from the equation; [global nodes](../assets/examples/tikz/global-nodes/README.md#design-lesson) names terms without breaking the baseline; [linked equations](../assets/examples/tikz/tkz-linknodes-examples/README.md#design-lesson) exposes transformations; [object-role notation](../assets/examples/tikz/tkz-orm-example/README.md#design-lesson) preserves meaningful dots, bars, and boundaries. |
 | Combine scopes or renderers | [Behavioral timescales](../assets/examples/tikz/behavioral-timescale-buckets/README.md#design-lesson) shows overlapping qualitative scopes without blended category colors. [Chemoattraction](../assets/examples/tikz/chemoattraction/README.md#design-lesson) composes computed panels at native physical size with one heading per panel and distinct categorical/scalar color roles. |
 
@@ -31,7 +31,7 @@ python3 scripts/build_example.py <case> --output-dir <approved-directory>
 
 | Example | Case name |
 |---|---|
-| Four Python-authored figures | `activator-inhibitor`, `learning-dynamics`, `collective-cell-model-classes`, `vigil` |
+| Three Python-authored figures | `activator-inhibitor`, `learning-dynamics`, `collective-cell-model-classes` |
 | Native learning; hybrid chemoattraction | `learning-tikz`; `chemoattraction` |
 | Other 17 TikZ constructions | `tikz-<slug>`, using the case's directory name |
 
@@ -45,8 +45,7 @@ a recipe does not authorize executing unknown raw TeX.
 The builder generates shared styles in fresh temporary storage. Native TikZ
 builds declare their source and support files to `render_tikz.py`. Chemoattraction
 also regenerates four Matplotlib panel PDFs; its final pair belongs to the TikZ
-compositor. VIGIL's Python builder generates TikZ composition and retains it in
-build provenance. Archives and existing figure outputs are never panel inputs.
+compositor. Archives and existing figure outputs are never panel inputs.
 See [renderer workflows](renderer-workflows.md) for custom authoring and native
 arrow integration.
 
